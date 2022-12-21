@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "sequelize": "^6.28.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
