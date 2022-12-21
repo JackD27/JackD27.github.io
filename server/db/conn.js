@@ -1,21 +1,13 @@
-// const mongoose = require('mongoose');
-// const db = process.env.ATLAS_URI;
+const { Sequelize } = require("sequelize");
 
-// const connectDB = async () => {
-//   try {
-//     await mongoose.connect(
-//       db,
-//       {
-//         useNewUrlParser: true
-//       }
-//     );
+require("dotenv").config();
 
-//     console.log('MongoDB is Connected...');
-//     console.log('Using Mongoose.');
-//   } catch (err) {
-//     console.error(err.message);
-//     process.exit(1);
-//   }
-// };
-
-// module.exports = connectDB; Add MYSQL DB
+module.exports = new Sequelize(
+  process.env.DATABASE_NAME,
+  process.env.DATABASE_USERNAME,
+  process.env.DATABASE_PASSWORD,
+  {
+    host: process.env.DATABASE_HOST,
+    dialect: "mysql",
+  }
+);
