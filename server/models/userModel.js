@@ -11,6 +11,8 @@ const User = db.define("User", {
   username: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
+    len: [5,15],
     validate: {
       notEmpty: true,
     },
@@ -18,7 +20,9 @@ const User = db.define("User", {
   email: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
     validate: {
+      isEmail: true,
       notEmpty: true,
     },
   },
@@ -29,11 +33,25 @@ const User = db.define("User", {
       notEmpty: true,
     },
   },
-  income: {
-    type: Sequelize.INTEGER,
+  tradingType: {
+    type: Sequelize.TINYINT,
     allowNull: false,
+    defaultValue: 0,
     validate: {
       notEmpty: true,
+    },
+  },
+  income: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    isFloat: true,
+    validate: {
+      notEmpty: true,
+      isNegative(value){
+        if(value < 0){
+          throw new Error("Hopefully you don't have a negative income.")
+        }
+      }
     },
   },
 });
