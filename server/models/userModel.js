@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db/conn");
 
 const User = db.define("User", {
-  uid: {
+  user_id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     autoIncrement: true,
@@ -12,9 +12,12 @@ const User = db.define("User", {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true,
-    len: [5,15],
     validate: {
       notEmpty: true,
+      len: {
+        args: [5, 15],
+        msg: 'Username is too short or either too long.'
+      }
     },
   },
   email: {
@@ -22,7 +25,10 @@ const User = db.define("User", {
     allowNull: false,
     unique: true,
     validate: {
-      isEmail: true,
+      isEmail: {
+        args: true,
+        msg: 'Please use a correct email.'
+      },
       notEmpty: true,
     },
   },
@@ -39,6 +45,11 @@ const User = db.define("User", {
     defaultValue: 0,
     validate: {
       notEmpty: true,
+      isTrader(value){
+        if(value > 2 || value < 0){
+          throw new Error("Error picking type of trading.")
+        }
+      }
     },
   },
   income: {

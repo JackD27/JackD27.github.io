@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db/conn");
 
 const PortfolioItem = db.define("PortfolioItem", {
-  pitemid: {
+  portfolioitem_id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     autoIncrement: true,

@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db/conn");
 
 const WatchlistItem = db.define("WatchlistItem", {
-  witemid: {
+  watchlistitem_id: {
     type: Sequelize.INTEGER,
     allowNull: false,
     autoIncrement: true,
