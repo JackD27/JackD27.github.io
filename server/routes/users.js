@@ -1,156 +1,157 @@
-const express = require('express');
+const express = require("express");
 const userRoutes = express.Router();
-const userModel = require('../models/userModel');
+const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
-const { createTokens, validateToken } = require('../utilities/generateToken')
+const { createTokens, validateToken } = require("../utilities/generateToken");
 
 // Retrieves a list of all users and their followers.
 userRoutes.get("/users", async (req, res) => {
-    await userModel.findAll().then(users =>{
-        return res.status(200).send(users)
+  await userModel
+    .findAll()
+    .then((users) => {
+      return res.status(200).send(users);
     })
-    .catch(err => res.status(409).send(err));
+    .catch((err) => res.status(409).send(err));
 });
 
 userRoutes.get("/user/:userId", async (req, res) => {
-    await userModel.findOne({ where: { user_id: req.params.userId }}).then( user => {
-      if(user == null){
-          return res.status(409).send({ message: "User doesn't exist." })
-      }else{
-          return res.status(200).send(user);
+  await userModel
+    .findOne({ where: { user_id: req.params.userId } })
+    .then((user) => {
+      if (user == null) {
+        return res.status(409).send({ message: "User doesn't exist." });
+      } else {
+        return res.status(200).send(user);
       }
-    }).catch(err => res.status(400).send({ message: "Error Occurred." }));
-  });
+    })
+    .catch((err) => res.status(400).send({ message: "Error Occurred." }));
+});
 
 userRoutes.delete("/deleteUser", async (req, res) => {
-
   const { userId } = req.body;
 
   await userModel
-    .destroy({ where: { user_id: userId } }).then(user =>{
-        if(!user){
-            return res.status(404).send({error: "User doesn't exist"});
-        }
-        else{
-            return res.status(200).send({message: `User ID ${userId} was deleted.`})
-        }
+    .destroy({ where: { user_id: userId } })
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send({ error: "User doesn't exist" });
+      } else {
+        return res
+          .status(200)
+          .send({ message: `User ID ${userId} was deleted.` });
+      }
     })
     .catch((err) => console.log(err));
 });
 
 userRoutes.delete("/deleteAll", async (req, res) => {
+  userModel.destroy({ where: {} }).then(function () {});
+  return res.status(200).send({ message: "All Users have been deleted." });
+});
 
-    userModel.destroy({where: {}}).then(function () {});
-    return res.status(200).send({message: "All Users have been deleted."})
+userRoutes.post("/signup", async (req, res) => {
+  const { username, email, password, income } = req.body;
+
+  //check if username already exists
+  const user = await userModel.findOne({ where: { username: username } });
+  if (user)
+    return res.status(409).send({ message: "Username is taken, pick another" });
+
+  //check if email already exists
+  const emailTaken = await userModel.findOne({ where: { email: email } });
+
+  if (emailTaken)
+    return res.status(409).send({ message: "Email is already used." });
+
+  //generates the hash
+  const generateHash = await bcrypt.genSalt(Number(10));
+
+  //parse the generated hash into the password
+  const hashPassword = await bcrypt.hash(password, generateHash);
+
+  //creates a new user
+  const createUser = new userModel({
+    username: username,
+    email: email,
+    password: hashPassword,
+    income: income,
   });
 
-userRoutes.post('/signup', async (req, res) => {
+  try {
+    const saveNewUser = await createUser.save();
+    return res.status(200).send(saveNewUser);
+  } catch (err) {
+    return res.status(400).send({ message: err.errors[0].message });
+  }
+});
 
-    const { username, email, password, income } = req.body
+userRoutes.post("/login", async (req, res) => {
+  const { username, password } = req.body;
 
-    //check if username already exists
-    const user = await userModel.findOne({ where: { username: username } })
-    if (user)
-        return res.status(409).send({ message: "Username is taken, pick another" })
+  const user = await userModel.findOne({ where: { username: username } });
 
+  //checks if the user exists
+  if (!user)
+    return res
+      .status(401)
+      .send({ message: "Username or Password does not exist, try again." });
 
-    //check if email already exists
-    const emailTaken = await userModel.findOne({ where: { email: email } })
+  //check if the password is correct or not
+  const checkPasswordValidity = await bcrypt.compare(password, user.password);
 
-    if (emailTaken)
-        return res.status(409).send({ message: "Email is already used." })
+  if (!checkPasswordValidity)
+    return res
+      .status(401)
+      .send({ message: "Username or Password does not exist, try again." });
 
-    //generates the hash
-    const generateHash = await bcrypt.genSalt(Number(10))
+  //create json web token if authenticated and send it back to client in header where it is stored in localStorage ( might not be best practice )
+  const accessToken = createTokens(user);
 
-    //parse the generated hash into the password
-    const hashPassword = await bcrypt.hash(password, generateHash)
+  res
+    .cookie("access-token", accessToken, {
+      maxAge: 60 * 60 * 24 * 30 * 1000,
+      httpOnly: true,
+    })
+    .send(accessToken);
+});
 
-    //creates a new user
-    const createUser = new userModel({
+userRoutes.put("/editUser", async (req, res) => {
+  // store new user information
+  const { userId, username, email, password, tradingType, income } = req.body;
+
+  // check if username is available
+
+  // generates the hash
+  const generateHash = await bcrypt.genSalt(Number(10));
+
+  // parse the generated hash into the password
+  const hashPassword = await bcrypt.hash(password, generateHash);
+
+  // find and update user using stored information
+  const newUser = userModel
+    .update(
+      {
+        user_id: userId,
         username: username,
         email: email,
         password: hashPassword,
-        income: income
-    });
+        tradingType: tradingType,
+        income: income,
+      },
+      { where: { user_id: userId } }
+    )
+    .then((result) => {
+      const accessToken = createTokens(newUser);
 
-   
-    try {
-        const saveNewUser = await createUser.save();
-        return res.status(200).send(saveNewUser);
-    } catch (err) {
-        return res.status(400).send({ message: err.errors[0].message });
-    }
-
-})
-
-userRoutes.post('/login', async (req, res) => {
-  
-    const { username, password } = req.body
-  
-    const user = await userModel.findOne({ where: { username: username } });
-  
-    //checks if the user exists
-    if (!user)
-      return res
-        .status(401)
-        .send({ message: "Username or Password does not exist, try again." });
-  
-    //check if the password is correct or not
-    const checkPasswordValidity = await bcrypt.compare(
-      password,
-      user.password
-    );
-  
-    if (!checkPasswordValidity)
-      return res
-        .status(401)
-        .send({ message: "Username or Password does not exist, try again." });
-  
-    //create json web token if authenticated and send it back to client in header where it is stored in localStorage ( might not be best practice )
-    const accessToken = createTokens(user)
-
-    res.cookie("access-token", accessToken, {
-      maxAge: 60 * 60 * 24 * 30 * 1000,
-      httpOnly: true,
-    }).send(accessToken);
-  
-  })
-
-userRoutes.put('/editUser', async (req, res) => {
-
-    // store new user information
-    const {userId, username, email, password, tradingType, income} = req.body
-
-    // check if username is available
-
-
-    // generates the hash
-    const generateHash = await bcrypt.genSalt(Number(10))
-
-    // parse the generated hash into the password
-    const hashPassword = await bcrypt.hash(password, generateHash)
-
-    // find and update user using stored information
-    const newUser = userModel.update({
-        user_id: userId,
-        username : username, 
-        email : email, 
-        password : hashPassword,
-        tradingType : tradingType,
-        income : income,
-    },{where: {user_id: userId}}).then( result => {
-        const accessToken = createTokens(newUser)
-
-        res.cookie("access-token", accessToken, {
-            maxAge: 60 * 60 * 24 * 30 * 1000,
-            httpOnly: true,
-        }).status(200).send(accessToken);
-      })
-      .catch(err => res.status(409).send(err)) 
-        
-})
-
-
+      res
+        .cookie("access-token", accessToken, {
+          maxAge: 60 * 60 * 24 * 30 * 1000,
+          httpOnly: true,
+        })
+        .status(200)
+        .send(accessToken);
+    })
+    .catch((err) => res.status(409).send(err));
+});
 
 module.exports = userRoutes;
