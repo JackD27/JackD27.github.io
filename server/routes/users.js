@@ -2,7 +2,7 @@ const express = require("express");
 const userRoutes = express.Router();
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
-const { createTokens, validateToken } = require("../utilities/generateToken");
+const { generateAccessToken} = require("../utilities/generateToken");
 
 // Retrieves a list of all users and their followers.
 userRoutes.get("/users", async (req, res) => {
@@ -105,14 +105,9 @@ userRoutes.post("/login", async (req, res) => {
       .send({ message: "Username or Password does not exist, try again." });
 
   //create json web token if authenticated and send it back to client in header where it is stored in localStorage ( might not be best practice )
-  const accessToken = createTokens(user);
+  const accessToken = generateAccessToken(user)
 
-  res
-    .cookie("access-token", accessToken, {
-      maxAge: 60 * 60 * 24 * 30 * 1000,
-      httpOnly: true,
-    })
-    .send(accessToken);
+  res.header('Authorization', accessToken).send({ accessToken: accessToken })
 });
 
 userRoutes.put("/editUser", async (req, res) => {

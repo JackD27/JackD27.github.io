@@ -1,36 +1,24 @@
-const { sign, verify } = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 require("dotenv").config();
 
-const createTokens = (user) => {
-  const accessToken = sign({
-    user_id: user.user_id,
-    username: user.username,
-    email: user.email,
-    password: user.password,
-    tradingType: user.tradingType,
-    income: user.income,
-  }, process.env.ACCESS_TOKEN_SECRET);
 
-  return accessToken;
+const generateAccessToken = (user) => {
+  return jwt.sign(
+    {
+      user_id: user.user_id,
+      username: user.username,
+      email: user.email,
+      password: user.password,
+      tradingType: user.tradingType,
+      income: user.income,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "1m",
+    }
+  );
 };
 
-const validateToken = (req, res, next) => {
-    const accessToken = req.cookies["access-token"]
+module.exports.generateAccessToken = generateAccessToken
 
-    if (!accessToken) {
-        return res.status(400).json({error: "User not Authenticated."});
-    }
 
-    try{
-        const validToken = verify(accessToken, process.env.ACCESS_TOKEN_SECRET)
-        if (validToken) {
-            req.authenticated = true
-            return next();
-        }
-    }
-    catch(err){
-        return res.status(400).json({error: err});
-    }
-  };
-
-module.exports = { createTokens, validateToken }

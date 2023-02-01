@@ -57,9 +57,9 @@ POST http://localhost:8085/signup
 Content-Type: application/json 
 
 {
-    "username" : "JackD44",
-    "email" : "jdaviskid27@gmail.com",
-    "password" : "idk1234",
+    "username" : "JackD27",
+    "email" : "jdaviskid27@yahoo.com",
+    "password" : "Tyjack44",
     "income" : "70000"
 }
 
@@ -69,7 +69,7 @@ Content-Type: application/json
 
 {
     "username" : "JackD27",
-    "password" : "yayeet"
+    "password" : "Tyjack44"
 }
 
 ###

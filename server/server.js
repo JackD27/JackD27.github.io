@@ -41,7 +41,7 @@ watchlistModel.belongsTo(userModel);
 db.sync()
   .then((result) => {
     app.listen(SERVER_PORT, (req, res) => {
-      console.log(`The following server is running on port ${SERVER_PORT}`);
+      console.log(`The Moneypad Server is running on port ${SERVER_PORT}`);
     });
   })
   .catch((err) => {
