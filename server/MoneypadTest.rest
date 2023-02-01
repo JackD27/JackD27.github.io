@@ -78,10 +78,10 @@ Content-Type: application/json
 
 {
 
-    "userId" : "94",
-    "username" : "JackD30",
+    "userId" : "114",
+    "username" : "JackD27",
     "email" : "jdaviskid27@yahoo.com",
-    "password" : "tyjack44",
+    "password" : "Tyjack44",
     "tradingType" : "1",
     "income" : "80000"
 }

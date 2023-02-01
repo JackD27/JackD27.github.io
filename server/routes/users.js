@@ -136,15 +136,9 @@ userRoutes.put("/editUser", async (req, res) => {
       { where: { user_id: userId } }
     )
     .then((result) => {
-      const accessToken = createTokens(newUser);
+      const accessToken = generateAccessToken(newUser)
 
-      res
-        .cookie("access-token", accessToken, {
-          maxAge: 60 * 60 * 24 * 30 * 1000,
-          httpOnly: true,
-        })
-        .status(200)
-        .send(accessToken);
+  res.header('Authorization', accessToken).send({ accessToken: accessToken })
     })
     .catch((err) => res.status(409).send(err));
 });
