@@ -19,28 +19,28 @@ const HomePage = () => {
             <div>
                 <h2>
                     Welcome
-                    <span className='username'> @{username}</span>
+                    <a className='username'> @{username}</a>
                 </h2>
 
                 <h2>
                     Your userId is
-                    <span className='userId'> {user_id}</span>
+                    <a className='userId'> {user_id}</a>
                 </h2>
                 <h2>
                     Your email is
-                    <span className='email'> {email}</span>
+                    <a className='email'> {email}</a>
                 </h2>
                 <h2>
                     Your password is
-                    <span className='password'> {password} ( hashed )</span>
+                    <a className='password'> {password} ( hashed )</a>
                 </h2>
                 <h2>
                     Your income is
-                    <span className='income'> {income}</span>
+                    <a className='income'> {income}</a>
                 </h2>
                 <h2>
                     Your Trading Type is
-                    <span className='tradingType'> {tradingType}</span>
+                    <a className='tradingType'> {tradingType}</a>
                 </h2>
             </div>
         </>

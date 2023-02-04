@@ -14,6 +14,7 @@ const User = db.define("User", {
     unique: true,
     validate: {
       notEmpty: true,
+      isAlphanumeric: true,
       len: {
         args: [5, 15],
         msg: 'Username is too short or either too long.'

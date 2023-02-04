@@ -5,10 +5,10 @@ import { createContext, useState, useEffect } from "react";
 
 import Navbar from "./components/navbar";
 import Home from "./components/homepage/HomePage";
-import LandingPage from "./components/users/Landingpage";
-import Login from "./components/users/Login";
-import Signup from "./components/register/Register";
+import Login from "./components/register/loginPage";
+import Register from "./components/register/registerPage";
 import getUserInfo from "./utilities/decodeJwt";
+
 
 export const UserContext = createContext();
 
@@ -24,10 +24,9 @@ const App = () => {
       <Navbar/>
       <UserContext.Provider value={user}>
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/register" element={<Register />} />
         </Routes>
       </UserContext.Provider>
     </>

@@ -10,8 +10,6 @@ const Landingpage = () => {
           <Card.Subtitle className="mb-2 text-muted">A Finance App with some Money Management included.</Card.Subtitle>
           <Card.Text>
           </Card.Text>
-          <Card.Link href="/signup">Sign Up</Card.Link>
-          <Card.Link href="/login">Login</Card.Link>
         </Card.Body>
       </Card>
     )

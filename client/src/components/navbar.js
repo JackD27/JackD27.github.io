@@ -8,37 +8,31 @@ export default function NavbarFunction() {
   const navigate = useNavigate()
   const [user, setUser] = useState({})
 
-  const handleLogout = (async) => {
+  const handleLogout = async () => {
     localStorage.clear();
-    window.location.reload();
     navigate("/");
+    window.location.reload();
   };
 
   const authButton = () => {
-    if (!user) {
+    if (user) {
         return (
-            <ButtonGroup>
-                <Button variant="primary" as={Link} to="/login">Login</Button>
-                <Button variant="secondary" as={Link} to="/signup">Signup</Button>
-            </ButtonGroup>
-        )
-            
-    } else {
-        return <Button variant="danger" onClick={handleLogout}>Logout</Button>
-    }
-}
+          <Button variant="danger" onClick={handleLogout}>Logout</Button>
+        )       
+}}
 
   useEffect(() => {
     setUser(getUserInfo())
   }, [])
 
+  if(user){
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="mb-3">
             <Navbar.Brand as={Link} to="/" className="mx-3">MoneyPad</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/">Home</Nav.Link>
                     <Nav.Link as={Link} to="/">Main</Nav.Link>
                     <NavDropdown title="Stocks" id="collasible-nav-dropdown">
                         <NavDropdown.Item as={Link} to="/portfolio">Portfolio</NavDropdown.Item>
@@ -52,4 +46,4 @@ export default function NavbarFunction() {
         </Navbar>
 
   );
-}
+}}
