@@ -1,6 +1,6 @@
 import React from "react";
 // We use Route in order to define the different routes of our application
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Link } from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
 
 import Navbar from "./components/navbar";
@@ -12,7 +12,11 @@ import getUserInfo from "./utilities/decodeJwt";
 
 export const UserContext = createContext();
 
+document.body.style = 'background: rgb(234,237,242)';
+
+
 const App = () => {
+
   const [user, setUser] = useState();
 
   useEffect(() => {

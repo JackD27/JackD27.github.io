@@ -6,8 +6,13 @@ import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
 import {Col, Row, Button, Card} from 'react-bootstrap';
 import LandingPage from "./Landingpage";
+import AlertFunction from './AlertMessage';
+import "./loginPage.css"
 
 const url = "http://localhost:8085/login";
+
+
+
 
 const Login2 = () => {
 
@@ -18,6 +23,7 @@ const Login2 = () => {
 
   const navigate = useNavigate();
   const [user, setUser] = useState(null)
+  const [alert, setAlert] = useState(false)
   const [error, setError] = useState("");
   const [modalShow, setModalShow] = useState(false);
 
@@ -33,9 +39,11 @@ const Login2 = () => {
     return
   }
 
+  
+
   const footMessage = () => {
     if (error) {
-      return <p class="text-danger">{error}</p>;
+      return <AlertFunction variant="danger" show={true} message={error}/>
     } 
   };
 
@@ -93,14 +101,14 @@ const Login2 = () => {
   };
 
   return (
-    <Container style={{ marginTop: 150 }}>
+    <Container style={{ marginTop: 150}}>
       <Row>
         <Col>
         <LandingPage></LandingPage>
       </Col>
       <Col>
-    <Card>
-      <Card.Header><h2>Log In</h2></Card.Header>
+    <Card className="loginCard">
+      <Card.Header><h2 class="text-white">Log In</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput
@@ -112,15 +120,14 @@ const Login2 = () => {
         ))}
         </Card.Body>
         <Card.Footer>
-        <Button onClick={handleSubmit}>Log In</Button>
-        <Button variant="outline-primary" style={{marginLeft: 250}} onClick={() => navigate("/register")}>Create Account?</Button>
+        <Button variant="success" onClick={handleSubmit}>Log In</Button>
+        <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/register")}>Create Account?</Button>
         {footMessage()}
         </Card.Footer>
     </Card>
     </Col>
       </Row>
     </Container>
-    
   );
 };
 

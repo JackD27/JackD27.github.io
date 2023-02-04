@@ -7,7 +7,7 @@ import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
 import {Col, Row, Button, Alert, Card} from 'react-bootstrap';
 import LandingPage from "./Landingpage";
-import Modal from 'react-bootstrap/Modal';
+import AlertFunction from './AlertMessage';
 
 const url = "http://localhost:8085/signup";
 const url2 = "http://localhost:8085/login";
@@ -129,16 +129,14 @@ export default function Home() {
   };
 
   const footMessage = () => {
-    if (isSuccess == 1 && error) {
-      return <p class="text-danger">{error}</p>;
-    } else if (isSuccess == 2) {
+    if (isSuccess === 1 && error) {
+      return <AlertFunction variant="danger" message={error}/>
+    } else if (isSuccess === 2) {
       return (
-        <p class="text-success">
-          Account Successfully Created. You will now login shortly.
-        </p>
+        <AlertFunction variant="success" message="Account Successfully Created. You will now login shortly."/>
       );
-    } else if (isSuccess == 1 && !error) {
-      return <p class="text-danger">{error} Please Input Correct Data.</p>;
+    } else if (isSuccess === 1 && !error) {
+      return <AlertFunction variant="danger" message="Registration failed. Please input correct data."/>
     } else {
       return null;
     }
@@ -152,8 +150,8 @@ export default function Home() {
         <LandingPage></LandingPage>
       </Col>
       <Col>
-    <Card>
-      <Card.Header><h2>Register</h2></Card.Header>
+    <Card className="loginCard">
+      <Card.Header><h2 class="text-white">Register</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput
@@ -165,8 +163,8 @@ export default function Home() {
         ))}
         </Card.Body>
         <Card.Footer>
-        <Button onClick={handleSubmit}>Register</Button>
-        <Button variant="outline-primary" style={{marginLeft: 250}} onClick={() => navigate("/login")}>Already have an account?</Button>
+        <Button variant="success"onClick={handleSubmit}>Register</Button>
+        <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/login")}>Already have an account?</Button>
         {footMessage()}
         </Card.Footer>
     </Card>

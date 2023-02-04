@@ -4,12 +4,11 @@ import Card from 'react-bootstrap/Card';
 const Landingpage = () => {
     
     return (
-        <Card style={{ width: '30rem' }} className="mx-2 my-2">
+        <Card border="success" style={{ width: '35rem', height: "28rem", backgroundColor: "rgb(234,237,242)"}} className="mx-2 my-2">
         <Card.Body>
-          <Card.Title>MoneyPad</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">A Finance App with some Money Management included.</Card.Subtitle>
-          <Card.Text>
-          </Card.Text>
+          <Card.Title><h2 style={{fontSize:"85px", color: "#14A44D"}}>MoneyPad</h2></Card.Title>
+          <Card.Subtitle style={{fontSize: "45px"}} className="mb-2 text-muted">A Finance App to help with Budgeting, Investing, and Money Management.</Card.Subtitle>
+          <Card.Text> <a style={{fontSize:"30px", color: "#14A44D"}}>By: Jackson Davis</a></Card.Text>
         </Card.Body>
       </Card>
     )

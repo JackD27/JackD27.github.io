@@ -11,10 +11,14 @@ input{
     border: 1px solid gray;
 }
 
+body{
+    background: green;
+}
+
 
 label{
     font-size: 12px;
-    color: gray;
+    color: rgb(151, 151, 151);
 }
 
 span{
