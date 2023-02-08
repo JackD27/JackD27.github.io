@@ -24,7 +24,7 @@ Content-Type: application/json
 {
     "username" : "JackD27",
     "email" : "jdaviskid27@yahoo.com",
-    "password" : "Tyjack",
+    "password" : "cpclare",
     "income" : "70000"
 }
 
@@ -50,3 +50,22 @@ Content-Type: application/json
     "tradingType" : "1",
     "income" : "80000"
 }
+
+###
+
+POST http://localhost:8085/createTransaction
+Content-Type: application/json 
+
+{
+    "name" : "Chipotle",
+    "description" : "Chicken bowl from Chipotle",
+    "date" : "2023-02-07",
+    "price" : 19.99,
+    "category" : "Needs",
+    "category2" : "Food",
+    "recurring" : 0
+}
+
+###
+GET http://localhost:8085/allTransactions
+Accept: application/json 
