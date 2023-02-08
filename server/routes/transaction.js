@@ -13,6 +13,19 @@ transactionRoutes.get("/allTransactions", async (req, res) => {
     .catch((err) => res.status(409).send(err));
 });
 
+transactionRoutes.get("/transaction/:transactionId", async (req, res) => {
+  await transactionModel
+    .findOne({ where: { transaction_id: req.params.transactionId } })
+    .then((transaction) => {
+      if (transaction == null) {
+        return res.status(409).send({ message: "Transaction doesn't exist." });
+      } else {
+        return res.status(200).send(transaction);
+      }
+    })
+    .catch((err) => res.status(400).send({ message: "Error Occurred." }));
+});
+
 
 // Finish this
 transactionRoutes.post("/createTransaction", async (req, res) => {
@@ -40,6 +53,28 @@ transactionRoutes.post("/createTransaction", async (req, res) => {
         return res.status(400).send({ message: err.errors[0].message });
       }
 
+});
+
+transactionRoutes.delete("/deleteAllTransactions", async (req, res) => {
+  transactionModel.destroy({ where: {} }).then(function () {});
+  return res.status(200).send({ message: "All Transactions have been deleted." });
+});
+
+transactionRoutes.delete("/deleteTransaction", async (req, res) => {
+  const { transactionId } = req.body;
+
+  await transactionModel
+    .destroy({ where: { transaction_id: transactionId } })
+    .then((transaction) => {
+      if (!transaction) {
+        return res.status(404).send({ error: "Transaction doesn't exist" });
+      } else {
+        return res
+          .status(200)
+          .send({ message: `Transaction ID ${transactionId} was deleted.` });
+      }
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = transactionRoutes;
