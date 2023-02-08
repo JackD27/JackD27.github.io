@@ -6,42 +6,31 @@ const { generateAccessToken} = require("../utilities/generateToken");
 
 // Retrieves a list of all users and their followers.
 userRoutes.get("/users", async (req, res) => {
-  await userModel
-    .findAll()
-    .then((users) => {
+  await userModel.findAll().then((users) => {
       return res.status(200).send(users);
-    })
-    .catch((err) => res.status(409).send(err));
+    }).catch((err) => res.status(409).send(err));
 });
 
 userRoutes.get("/user/:userId", async (req, res) => {
-  await userModel
-    .findOne({ where: { user_id: req.params.userId } })
-    .then((user) => {
+  await userModel.findOne({ where: { user_id: req.params.userId } }).then((user) => {
       if (user == null) {
         return res.status(409).send({ message: "User doesn't exist." });
       } else {
         return res.status(200).send(user);
       }
-    })
-    .catch((err) => res.status(400).send({ message: "Error Occurred." }));
+    }).catch((err) => res.status(400).send({ message: "Error Occurred." }));
 });
 
 userRoutes.delete("/deleteUser", async (req, res) => {
   const { userId } = req.body;
 
-  await userModel
-    .destroy({ where: { user_id: userId } })
-    .then((user) => {
+  await userModel.destroy({ where: { user_id: userId } }).then((user) => {
       if (!user) {
         return res.status(404).send({ error: "User doesn't exist" });
       } else {
-        return res
-          .status(200)
-          .send({ message: `User ID ${userId} was deleted.` });
+        return res.status(200).send({ message: `User ID ${userId} was deleted.` });
       }
-    })
-    .catch((err) => console.log(err));
+    }).catch((err) => console.log(err));
 });
 
 userRoutes.delete("/deleteAll", async (req, res) => {
@@ -91,18 +80,15 @@ userRoutes.post("/login", async (req, res) => {
   const user = await userModel.findOne({ where: { username: username } });
 
   //checks if the user exists
-  if (!user)
-    return res
-      .status(401)
-      .send({ message: "Username or Password does not exist, try again." });
+  if (!user){
+    return res.status(401).send({ message: "Username or Password does not exist, try again." });
+  }
 
   //check if the password is correct or not
   const checkPasswordValidity = await bcrypt.compare(password, user.password);
 
   if (!checkPasswordValidity)
-    return res
-      .status(401)
-      .send({ message: "Username or Password does not exist, try again." });
+    return res.status(401).send({ message: "Username or Password does not exist, try again." });
 
   //create json web token if authenticated and send it back to client in header where it is stored in localStorage ( might not be best practice )
   const accessToken = generateAccessToken(user)
@@ -123,9 +109,7 @@ userRoutes.put("/editUser", async (req, res) => {
   const hashPassword = await bcrypt.hash(password, generateHash);
 
   // find and update user using stored information
-  const newUser = userModel
-    .update(
-      {
+  const newUser = userModel.update({
         user_id: userId,
         username: username,
         email: email,
@@ -134,13 +118,11 @@ userRoutes.put("/editUser", async (req, res) => {
         income: income,
       },
       { where: { user_id: userId } }
-    )
-    .then((result) => {
+    ).then((result) => {
       const accessToken = generateAccessToken(newUser)
 
-  res.header('Authorization', accessToken).send({ accessToken: accessToken })
-    })
-    .catch((err) => res.status(409).send(err));
+      res.header('Authorization', accessToken).send({ accessToken: accessToken })
+    }).catch((err) => res.status(409).send(err));
 });
 
 module.exports = userRoutes;

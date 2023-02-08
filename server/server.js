@@ -30,13 +30,11 @@ app.use("/", transactionRoutes);
 app.use("/", watchlistRoutes);
 
 // Associations
-userModel.hasMany(portfolioModel);
-userModel.hasMany(transactionModel);
-userModel.hasMany(watchlistModel);
+userModel.hasMany(portfolioModel, {foreignKey: 'userId'});
+userModel.hasMany(transactionModel, {foreignKey: 'userId'});
+userModel.hasMany(watchlistModel, {foreignKey: 'userId'});
 
-portfolioModel.belongsTo(userModel);
-transactionModel.belongsTo(userModel);
-watchlistModel.belongsTo(userModel);
+
 
 db.sync()
   .then((result) => {
