@@ -1,38 +1,3 @@
-###
-GET http://localhost:8085/following
-Content-Type: application/json
-
-###
-GET http://localhost:8085/followers
-Content-Type: application/json
-
-###
-POST http://localhost:8085/followers/follow
-Content-Type: application/json 
-
-{
-    "userId" : "viky11",
-    "targetUserId" : "p_kaur"
-}
-
-###
-POST http://localhost:8085/followers/unfollow
-Content-Type: application/json 
-
-{
-    "userId" : "John",
-    "targetUserId" : "Jerry"
-}
-
-###
-GET http://localhost:8085/followers/Bryan
-Accept: application/json 
-
-###
-GET http://localhost:8085/following/Jackson
-Accept: application/json 
-
-###
 GET http://localhost:8085/user/4
 Accept: application/json 
 
@@ -59,7 +24,7 @@ Content-Type: application/json
 {
     "username" : "JackD27",
     "email" : "jdaviskid27@yahoo.com",
-    "password" : "Tyjack44",
+    "password" : "Tyjack",
     "income" : "70000"
 }
 
@@ -69,7 +34,7 @@ Content-Type: application/json
 
 {
     "username" : "JackD27",
-    "password" : "Tyjack44"
+    "password" : "Tyjack"
 }
 
 ###
@@ -81,7 +46,7 @@ Content-Type: application/json
     "userId" : "114",
     "username" : "JackD27",
     "email" : "jdaviskid27@yahoo.com",
-    "password" : "Tyjack44",
+    "password" : "Tyjack",
     "tradingType" : "1",
     "income" : "80000"
 }

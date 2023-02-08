@@ -1,11 +1,11 @@
 
 import FormInput from "./FormInput";
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
-import {Col, Row, Button, Alert, Card} from 'react-bootstrap';
+import {Col, Row, Button, Card} from 'react-bootstrap';
 import LandingPage from "./Landingpage";
 import AlertFunction from './AlertMessage';
 
@@ -15,16 +15,8 @@ const url2 = "http://localhost:8085/login";
 // Edit Component
 export default function Home() {
 
-  const [show, setShow] = useState(false);
   const [isSuccess, setSuccess] = useState(0);
   
-
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  
-
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -48,6 +40,12 @@ export default function Home() {
   if(user) {
     navigate('/')
     return
+  }
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      handleSubmit()
+    }
   }
 
   const inputs = [
@@ -93,7 +91,6 @@ export default function Home() {
   ];
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
     if (values.password.length > 0){
       const { data: res } = await axios.post(url, values);
@@ -159,6 +156,7 @@ export default function Home() {
             {...input}
             value={values[input.name]}
             onChange={onChange}
+            onKeyPress={handleKeyPress}
           />
         ))}
         </Card.Body>

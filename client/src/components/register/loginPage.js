@@ -1,6 +1,6 @@
 import FormInput from "./FormInput";
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
@@ -23,9 +23,7 @@ const Login2 = () => {
 
   const navigate = useNavigate();
   const [user, setUser] = useState(null)
-  const [alert, setAlert] = useState(false)
   const [error, setError] = useState("");
-  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
 
@@ -46,6 +44,12 @@ const Login2 = () => {
       return <AlertFunction variant="danger" show={true} message={error}/>
     } 
   };
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      handleSubmit()
+    }
+  }
 
   const inputs = [
     {
@@ -71,7 +75,6 @@ const Login2 = () => {
   ];
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     try {
       const { data: res } = await axios.post(url, values);
       console.log(res)
@@ -116,6 +119,7 @@ const Login2 = () => {
             {...input}
             value={values[input.name]}
             onChange={onChange}
+            onKeyPress={handleKeyPress}
           />
         ))}
         </Card.Body>
