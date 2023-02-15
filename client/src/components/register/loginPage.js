@@ -94,11 +94,6 @@ const Login2 = () => {
     }
   };
 
-  if(user) {
-    navigate('/home')
-    return
-  }
-
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
