@@ -41,7 +41,7 @@ const Login2 = () => {
 
   const footMessage = () => {
     if (error) {
-      return <AlertFunction variant="danger" show={true} message={error}/>
+      return <AlertFunction variant="danger" isVisible={true} message={error}/>
     } 
   };
 
@@ -57,8 +57,6 @@ const Login2 = () => {
       name: "username",
       type: "text",
       placeholder: "Username",
-      errorMessage:
-        "Incorrect characters.",
       label: "Username",
       pattern: "^[A-Za-z0-9]{5,15}$",
       required: true,
@@ -69,7 +67,6 @@ const Login2 = () => {
       type: "password",
       label: "Password",
       placeholder: "Password",
-      errorMessage: "Invalid password.",
       required: true,
     },
   ];

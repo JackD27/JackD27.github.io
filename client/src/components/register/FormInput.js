@@ -13,7 +13,7 @@ const FormInput = (props) => {
   return (
     <div className="">
     <Form>
-      <Form.Label>{label}</Form.Label>
+      <Form.Label id="formLabel">{label}</Form.Label>
       <Form.Control
         {...inputProps}
         onChange={onChange}

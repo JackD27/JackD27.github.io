@@ -54,8 +54,6 @@ export default function Home() {
       name: "username",
       type: "text",
       placeholder: "Username",
-      errorMessage:
-        "Username should be 5-15 characters and shouldn't include any special character!",
       label: "Enter a Username",
       pattern: "^[A-Za-z0-9]{5,15}$",
       required: true,
@@ -65,7 +63,6 @@ export default function Home() {
       name: "email",
       type: "email",
       placeholder: "Email",
-      errorMessage: "It should be a valid email address!",
       label: "What's your Email?",
       required: true,
     },
@@ -76,7 +73,6 @@ export default function Home() {
       placeholder: "Income",
       label: "What's your Income?",
       min: "0",
-      errorMessage: "It should be a valid income above 0.",
       required: true,
     },
     {
@@ -85,7 +81,6 @@ export default function Home() {
       type: "password",
       label: "Enter a Password",
       placeholder: "Password",
-      errorMessage: "Enter a password.",
       required: true,
     },
   ];
@@ -133,7 +128,7 @@ export default function Home() {
         <AlertFunction variant="success" message="Account Successfully Created. You will now login shortly."/>
       );
     } else if (isSuccess === 1 && !error) {
-      return <AlertFunction variant="danger" message="Registration failed. Please input correct data."/>
+      return <AlertFunction variant="danger" message="Registration failed. Please input correct data. Password is short."/>
     } else {
       return null;
     }

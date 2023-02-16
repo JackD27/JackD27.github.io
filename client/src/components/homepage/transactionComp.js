@@ -1,26 +1,21 @@
 import FormInput from "../register/FormInput";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
-import {Col, Row, Button, Card} from 'react-bootstrap';
+import {Col, Row, Button, Card, Form} from 'react-bootstrap';
 import LandingPage from "../register/Landingpage";
 import AlertFunction from '../register/AlertMessage';
 import "../register/loginPage.css"
 
 const url = "http://localhost:8085/createTransaction";
 
-
-
-
 const TransactionComp = () => {
 
-  
-
-  const navigate = useNavigate();
   const [user, setUser] = useState(null)
   const [error, setError] = useState("");
+  const [isRecurring, setRecurring] = useState(null);
+  const [isSuccess, setSuccess] = useState(null);
 
   useEffect(() => {
 
@@ -28,6 +23,26 @@ const TransactionComp = () => {
     console.log(getUserInfo().user_id)
 
   }, []);
+
+
+
+  
+
+  const footMessage = () => {
+    if (error) {
+      return <AlertFunction variant="danger" show={true} message={error}/>
+    } 
+    if(isSuccess){
+      return <AlertFunction variant="success" show={true} message="Submitted transaction."/>
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      handleSubmit()
+    }
+  }
+
 
   const [values, setValues] = useState({
     name: "",
@@ -37,25 +52,22 @@ const TransactionComp = () => {
     category: "",
     category2: "",
     description: "",
-    recurring: 0,
+    recurring: false,
     userId: getUserInfo().user_id,
   });
 
-  
+  const handleChange= async (e)=>{
+    let updatedValue = {};
+    updatedValue = {recurring:e.target.checked};
+    setValues(values => ({
+      ...values,
+      ...updatedValue
+    }))};
+
+
+  console.log(values.recurring)
 
   
-
-  const footMessage = () => {
-    if (error) {
-      return <AlertFunction variant="danger" show={true} message={error}/>
-    } 
-  };
-
-  const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      handleSubmit()
-    }
-  }
 
   const inputs = [
     {
@@ -63,8 +75,6 @@ const TransactionComp = () => {
       name: "name",
       type: "text",
       placeholder: "Name",
-      errorMessage:
-        "Input name of transaction.",
       label: "Name",
       required: true,
     },
@@ -74,7 +84,6 @@ const TransactionComp = () => {
       type: "text",
       label: "Description",
       placeholder: "Description",
-      errorMessage: "Input a description(You can leave this empty.)",
       required: false,
     },
     {
@@ -83,7 +92,6 @@ const TransactionComp = () => {
         type: "date",
         label: "Date",
         placeholder: "Date",
-        errorMessage: "Input the date of the transaction.",
         required: true,
     },
     {
@@ -92,8 +100,8 @@ const TransactionComp = () => {
         type: "number",
         min: "0",
         label: "Price",
+        step: "0.01",
         placeholder: "Price",
-        errorMessage: "Input price of the transaction.",
         required: true,
       },
       {
@@ -102,7 +110,6 @@ const TransactionComp = () => {
         type: "text",
         label: "Category",
         placeholder: "Category",
-        errorMessage: "Input Needs, Wants, or Savings.",
         required: true,
       },
       {
@@ -111,17 +118,6 @@ const TransactionComp = () => {
         type: "text",
         label: "Category2",
         placeholder: "Category2",
-        errorMessage: "Input other category.",
-        required: true,
-      },
-      {
-        id: 7,
-        name: "recurring",
-        type: "checkbox",
-        label: "Recurring?",
-        placeholder: "Is it recurring?",
-        value: "Recurring?",
-        errorMessage: "Click the checkbox or not.",
         required: true,
       },
   ];
@@ -130,6 +126,19 @@ const TransactionComp = () => {
     try {
       const { data: res } = await axios.post(url, values);
       console.log(res)
+
+      setValues({
+        name: "",
+        description: "",
+        date: "",
+        price: "",
+        category: "",
+        category2: "",
+        description: "",
+        recurring: false,
+        userId: getUserInfo().user_id,
+      });
+      setSuccess(true)
     } catch (error) {
       if (
         error.response &&
@@ -142,7 +151,7 @@ const TransactionComp = () => {
   };
 
 
-  const onChange = (e) => {
+  const onChange = async (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
@@ -165,6 +174,8 @@ const TransactionComp = () => {
             onKeyPress={handleKeyPress}
           />
         ))}
+        <Form.Check type="checkbox" name="recurring" defaultChecked={isRecurring} style={{fontSize: "30px", color:"rgb(151, 151, 151)"}} value={values.recurring}
+            onChange={handleChange} label="Recurring?"/>
         </Card.Body>
         <Card.Footer>
         <Button variant="success" onClick={handleSubmit}>Submit</Button>
