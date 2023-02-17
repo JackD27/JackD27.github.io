@@ -16,7 +16,7 @@ const PortfolioItem = db.define("PortfolioItem", {
     },
   },
   dateBoughtAt: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     allowNull: false,
   },
   priceWhenBought: {

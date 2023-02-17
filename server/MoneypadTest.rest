@@ -68,6 +68,23 @@ Content-Type: application/json
 }
 
 ###
+
+PUT http://localhost:8085/editTransaction
+Content-Type: application/json 
+
+{
+    "name" : "Car Loan",
+    "description" : "lol",
+    "date" : "2023-02-03",
+    "price" : 19.99,
+    "category" : "Needs",
+    "category2" : "Transportation",
+    "recurring" : 1,
+    "userId" : 374,
+    "transactionId" : 544
+}
+
+###
 GET http://localhost:8085/allTransactions
 Accept: application/json 
 
@@ -78,6 +95,11 @@ Accept: application/json
 ###
 GET http://localhost:8085/transactionUser/374
 Accept: application/json 
+
+###
+GET http://localhost:8085/recurringExpenses/374
+Accept: application/json 
+
 
 ###
 DELETE http://localhost:8085/deleteTransaction

@@ -1,190 +1,51 @@
-import FormInput from "../register/FormInput";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
-import Container from 'react-bootstrap/Container';
-import {Col, Row, Button, Card, Form} from 'react-bootstrap';
-import LandingPage from "../register/Landingpage";
-import AlertFunction from '../register/AlertMessage';
+import {Button, Table} from 'react-bootstrap';
 import "../register/loginPage.css"
 
-const url = "http://localhost:8085/createTransaction";
 
-const TransactionComp = () => {
+const TransactionComp = (props) => {
 
-  const [user, setUser] = useState(null)
-  const [error, setError] = useState("");
-  const [isRecurring, setRecurring] = useState(null);
-  const [isSuccess, setSuccess] = useState(null);
+   const canShow = props.show;
 
-  useEffect(() => {
-
-    setUser(getUserInfo())
-    console.log(getUserInfo().user_id)
-
-  }, []);
-
-
-
-  
-
-  const footMessage = () => {
-    if (error) {
-      return <AlertFunction variant="danger" show={true} message={error}/>
-    } 
-    if(isSuccess){
-      return <AlertFunction variant="success" show={true} message="Submitted transaction."/>
-    }
-  };
-
-  const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      handleSubmit()
-    }
+  const onDeleteClick = () => {
+    props.onDeleteClickHandler();
+      
   }
 
-
-  const [values, setValues] = useState({
-    name: "",
-    description: "",
-    date: "",
-    price: "",
-    category: "",
-    category2: "",
-    description: "",
-    recurring: false,
-    userId: getUserInfo().user_id,
-  });
-
-  const handleChange= async (e)=>{
-    let updatedValue = {};
-    updatedValue = {recurring:e.target.checked};
-    setValues(values => ({
-      ...values,
-      ...updatedValue
-    }))};
-
-
-  console.log(values.recurring)
-
   
+  const Transaction = ({name, date, description, price, recurring, category, category2}) => (
+    <tr style={{color: "white"}}>
+      <td>{name}</td>
+      <td>{date}</td>
+      {canShow && <td>{description}</td>}
+      <td>${price}</td>
+      <td>{recurring}</td>
+      <td>{category}</td>
+      <td>{category2}</td>
+      <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>
+    </tr>
+  );
 
-  const inputs = [
-    {
-      id: 1,
-      name: "name",
-      type: "text",
-      placeholder: "Name",
-      label: "Name",
-      required: true,
-    },
-    {
-      id: 2,
-      name: "description",
-      type: "text",
-      label: "Description",
-      placeholder: "Description",
-      required: false,
-    },
-    {
-        id: 3,
-        name: "date",
-        type: "date",
-        label: "Date",
-        placeholder: "Date",
-        required: true,
-    },
-    {
-        id: 4,
-        name: "price",
-        type: "number",
-        min: "0",
-        label: "Price",
-        step: "0.01",
-        placeholder: "Price",
-        required: true,
-      },
-      {
-        id: 5,
-        name: "category",
-        type: "text",
-        label: "Category",
-        placeholder: "Category",
-        required: true,
-      },
-      {
-        id: 6,
-        name: "category2",
-        type: "text",
-        label: "Category2",
-        placeholder: "Category2",
-        required: true,
-      },
-  ];
-
-  const handleSubmit = async (e) => {
-    try {
-      const { data: res } = await axios.post(url, values);
-      console.log(res)
-
-      setValues({
-        name: "",
-        description: "",
-        date: "",
-        price: "",
-        category: "",
-        category2: "",
-        description: "",
-        recurring: false,
-        userId: getUserInfo().user_id,
-      });
-      setSuccess(true)
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
+  function transactionList() {
+      return (
+        <Transaction
+          name={props.name}
+          date={props.date}
+          description={props.description}
+          price={props.price}
+          recurring={props.recurring}
+          category={props.category}
+          category2={props.category2}
+          onDelete={() => onDeleteClick(props.transaction_id)}
+          key={props.transaction_id}
+        />
+      );
     }
-  };
-
-
-  const onChange = async (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
 
   return (
-    <Container style={{ marginTop: 150}}>
-      <Row>
-        <Col>
-        <LandingPage></LandingPage>
-      </Col>
-      <Col>
-    <Card className="loginCard">
-      <Card.Header><h2 class="text-white">Transaction</h2></Card.Header>
-      <Card.Body>
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-            onKeyPress={handleKeyPress}
-          />
-        ))}
-        <Form.Check type="checkbox" name="recurring" defaultChecked={isRecurring} style={{fontSize: "30px", color:"rgb(151, 151, 151)"}} value={values.recurring}
-            onChange={handleChange} label="Recurring?"/>
-        </Card.Body>
-        <Card.Footer>
-        <Button variant="success" onClick={handleSubmit}>Submit</Button>
-        {footMessage()}
-        </Card.Footer>
-    </Card>
-    </Col>
-      </Row>
-    </Container>
+    <>{transactionList()}</>
   );
 };
 

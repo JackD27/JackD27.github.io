@@ -20,7 +20,7 @@ const Transaction = db.define("Transaction", {
     allowNull: true,
   },
   date: {
-    type: Sequelize.DATE,
+    type: Sequelize.DATEONLY,
     allowNull: false,
   },
   price: {

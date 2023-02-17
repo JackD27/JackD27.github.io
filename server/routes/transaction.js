@@ -22,13 +22,26 @@ transactionRoutes.get("/transaction/:transactionId", async (req, res) => {
 
 transactionRoutes.get("/transactionUser/:userId", async (req, res) => {
 
+  const user = await userModel.findOne({ where: { user_id: req.params.userId }});
+
+  if(!user){
+    return res.status(400).send({ message: "User doesn't exist" });
+  }
+
+  await transactionModel.findAll({ where: { userId: req.params.userId }, order: [['date', 'DESC']] }).then((transactions) => {
+      return res.status(200).send(transactions);
+    }).catch((err) => res.status(409).send(err));
+});
+
+transactionRoutes.get("/recurringExpenses/:userId", async (req, res) => {
+
   const user = await userModel.findOne({ where: { user_id: req.params.userId } });
 
   if(!user){
     return res.status(400).send({ message: "User doesn't exist" });
   }
 
-  await transactionModel.findAll({ where: { userId: req.params.userId } }).then((transactions) => {
+  await transactionModel.findAll({ where: { userId: req.params.userId, recurring: 1}, order: [['date', 'DESC']] }).then((transactions) => {
       return res.status(200).send(transactions);
     }).catch((err) => res.status(409).send(err));
 });
@@ -62,6 +75,35 @@ transactionRoutes.post("/createTransaction", async (req, res) => {
     } catch (err) {
       return res.status(400).send({ message: err.errors[0].message });
     }
+});
+
+transactionRoutes.put("/editTransaction", async (req, res) => {
+  // store new user information
+  const { name, description, date, price, category, category2, recurring, userId, transactionId } = req.body;
+
+  const user = await userModel.findOne({ where: { user_id: userId } });
+
+  if(!user){
+    return res.status(400).send({ message: "User doesn't exist" });
+  }
+
+
+  // find and update user using stored information
+  const newTransaction = transactionModel.update({
+    name: name,
+    description: description,
+    date: date,
+    price: price,
+    category: category,
+    category2: category2,
+    recurring: recurring,
+    transactionId: transactionId
+      },
+      { where: { transaction_id: transactionId } }
+    ).then((result) => {
+
+      res.status(200).send({message: "Successfully Edited Transaction"});
+    }).catch((err) => res.status(409).send(err));
 });
 
 transactionRoutes.delete("/deleteAllTransactions", async (req, res) => {
