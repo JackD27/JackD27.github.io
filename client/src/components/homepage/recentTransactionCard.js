@@ -21,7 +21,7 @@ const navigate = useNavigate();
 
 
   return (
-          <Card className="text-center"style={{ background: "rgb(50,58,69)" }}>
+          <Card className="text-center"style={{ background: "rgb(50,58,69)", marginTop: "15px"}}>
             <Card.Header>
               <h2 style={{ color: "#14A44D" }}>Recent Transactions</h2>
               <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/dashboard2")}>+</Button>

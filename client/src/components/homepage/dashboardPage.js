@@ -5,6 +5,7 @@ import {Col, Row} from 'react-bootstrap';
 import RecentTransactionCard from './recentTransactionCard';
 import MonthlyExpensesCard from './recurringExpensesCard';
 import RecommendationCard from './recommendationCard';
+import PieGraphCard from './pieGraphCard';
 import "../register/loginPage.css"
 
 const DashboardPage = () => {
@@ -22,7 +23,7 @@ const DashboardPage = () => {
     <Container>
       <Row>
         <Col>
-          <RecentTransactionCard />
+          <PieGraphCard />
         </Col>
         <Col>
           <MonthlyExpensesCard />
