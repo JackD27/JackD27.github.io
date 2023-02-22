@@ -15,6 +15,7 @@ const navigate = useNavigate();
   const [user, setUser] = useState(null)
   const [error, setError] = useState("")
   const [number, setNumber] = useState(0)
+  const [yearlyNumber, setYearlyNumber] = useState(0)
 
 
     useEffect(() => {
@@ -29,6 +30,7 @@ const navigate = useNavigate();
                     sum += parseFloat(transaction.price);
                 });
                 setNumber(sum.toFixed(2))
+                setYearlyNumber(number * 12)
             })
             .catch((err) => {});
         }
@@ -55,6 +57,7 @@ const navigate = useNavigate();
             <Card.Footer>
                 <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/recurringExpenses")}>View all recurring expenses and edit.</Button>
                 <h4 style={{marginTop: "5px", color:"white"}}>${number} Monthly</h4>
+                <h4 style={{marginTop: "5px", color:"white"}}>${yearlyNumber} Yearly</h4>
             </Card.Footer>
           </Card>
   );
