@@ -121,3 +121,36 @@ Content-Type: application/json
 ###
 DELETE http://localhost:8085/deleteAllTransactions
 Content-Type: application/json 
+
+
+###
+
+POST http://localhost:8085/addWatchlistItem
+Content-Type: application/json 
+
+{
+    "ticker" : "APPL",
+    "userId" : 374
+}
+
+### FIX DUPLICATE BUG
+GET http://localhost:8085/watchlistUser/374
+Accept: application/json 
+
+###
+
+POST http://localhost:8085/addPortfolioItem
+Content-Type: application/json 
+
+{
+    "ticker" : "APPL",
+    "dateBought" : "2020-11-07",
+    "price" : "45.67",
+    "shares" : "20",
+    "userId" : 374
+}
+
+### FIX DUPLICATE BUG
+GET http://localhost:8085/portfolio
+Accept: application/json 
+
