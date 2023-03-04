@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Button, Table} from 'react-bootstrap';
-import TransactionComp from './transactionComp'
+import ListComp from './listComp'
 import "../register/loginPage.css"
 
 const url = "http://localhost:8085/createTransaction";
 
-const TransactionListComp = (props) => {
+const WatchlistComp = (props) => {
   const [user, setUser] = useState(null)
   const [list, setList] = useState([])
   const [error, setError] = useState({});
@@ -35,13 +35,14 @@ const TransactionListComp = (props) => {
     
     getList();   
     setUser(getUserInfo())
+    console.log(list)
 
     return; 
   }, [list.length]);  
 
   async function deleteTransactionItem(targetId) {
     const deleteWatchlistItem = {
-        watchlistId: targetId,
+        watchlist_id: targetId,
       }
     const url = "http://localhost:8085/deleteWatchlistItem";
 
@@ -55,19 +56,16 @@ const TransactionListComp = (props) => {
 }
 
 
-  function transactionList() {
-    return list.slice(0, props.length).map((transaction) => {
+  function watchlistList() {
+    return list.slice(0, props.length).map((watchlistItem) => {
       return (
-        <TransactionComp show={props.show}
-          name={transaction.name}
-          date={transaction.date}
-          description={transaction.description}
-          price={transaction.price}
-          recurring={transaction.recurring}
-          category={transaction.category}
-          category2={transaction.category2}
-          onDeleteClickHandler={() => deleteTransactionItem(transaction.transaction_id)}
-          key={transaction.transaction_id}
+        <ListComp show={props.show}
+          ticker={watchlistItem.stockTicker}
+          date={watchlistItem.date}
+          price={watchlistItem.price}
+          shares={watchlistItem.shares}
+          onDeleteClickHandler={() => deleteTransactionItem(watchlistItem.watchlistitem_id)}
+          key={watchlistItem.id}
         />
       );
     });
@@ -78,21 +76,17 @@ const TransactionListComp = (props) => {
     <Table bordered hover style={{color: "white"}} size="sm">
         <thead>
         <tr>
-          <th>Name</th>
+          <th>Ticker</th>
           <th>Date</th>
-          {props.show && <th>Description</th>}
           <th>Price</th>
-          <th>Recurring</th>
-          <th>Category</th>
-          <th>Category2</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        {transactionList()}
+        {watchlistList()}
       </tbody>
     </Table>
   );
 };
 
-export default TransactionListComp;
+export default WatchlistComp;

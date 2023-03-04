@@ -11,6 +11,7 @@ import Dashboard2 from "./components/homepage/addTransactionComp";
 import TransactionList from "./components/homepage/transactionPage";
 import RecurringExpenses from "./components/homepage/recurringExpensesPage";
 import Dashboard from "./components/homepage/dashboardPage";
+import StockPage from "./components/stockpage/stockPage";
 import getUserInfo from "./utilities/decodeJwt";
 
 
@@ -38,6 +39,7 @@ const App = () => {
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/dashboard2" element={<Dashboard2 />} />
           <Route exact path="/transactions" element={<TransactionList />} />
+          <Route exact path="/stocks" element={<StockPage />} />
           <Route exact path="/recurringExpenses" element={<RecurringExpenses />} />
         </Routes>
       </UserContext.Provider>
