@@ -47,13 +47,13 @@ watchlistRoutes.post("/addWatchlistItem", async (req, res) => {
 });
 
 watchlistRoutes.delete("/deleteWatchlistItem", async (req, res) => {
-    const { watchlistId } = req.body;
+    const { watchlistitem_id } = req.body;
   
-    await watchlistModel.destroy({ where: { transaction_id: watchlistId } }).then((watchlistItem) => {
+    await watchlistModel.destroy({ where: { watchlistitem_id: watchlistitem_id } }).then((watchlistItem) => {
         if (!watchlistItem) {
           return res.status(404).send({ error: "Stock ticker doesn't exist in user's watchlist" });
         } else {
-          return res.status(200).send({ message: `Watchlist ID ${watchlistId} was deleted.` });
+          return res.status(200).send({ message: `Watchlist ID ${watchlistitem_id} was deleted.` });
         }
       }).catch((err) => console.log(err));
   });

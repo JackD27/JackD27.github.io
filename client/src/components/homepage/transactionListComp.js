@@ -14,6 +14,11 @@ const TransactionListComp = (props) => {
 
   useEffect(() => {
     async function getList() {
+      
+
+      setUser(getUserInfo())
+
+      console.log(user)
         
       const response = await fetch(`http://localhost:8085/transactionUser/${getUserInfo().user_id.toString()}`);
       
@@ -34,7 +39,7 @@ const TransactionListComp = (props) => {
     }
     
     getList();   
-    setUser(getUserInfo())
+    
 
     return; 
   }, [list.length]);  

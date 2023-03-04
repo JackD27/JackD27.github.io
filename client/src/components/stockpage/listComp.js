@@ -18,7 +18,7 @@ const ListComp = (props) => {
   const ListItem = ({ticker, date, price, shares}) => (
     <tr style={{color: "white"}}>
       <td>{ticker}</td>
-      <td>{date}</td>
+      {canShow && <td>{date}</td>}
       {canShow && <td>{price}</td>}
       {canShow && <td>{shares}</td>}
       <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>

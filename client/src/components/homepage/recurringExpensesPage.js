@@ -7,7 +7,7 @@ import "../register/loginPage.css"
 import axios from "axios";
 import "../register/loginPage.css"
 
-const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
+
 
 const RecurringExpensePage = () => {
 
@@ -18,6 +18,8 @@ const navigate = useNavigate();
   const [yearlyNumber, setYearlyNumber] = useState(0)
 
   useEffect(() => {
+
+    const url = `http://localhost:8085/recurringExpenses/${user.user_id.toString()}`;
 
     
 
@@ -44,6 +46,11 @@ const navigate = useNavigate();
       
       return; 
   }, [number.length]);  
+
+  if(!user) {
+    navigate('/login')
+    return
+  }
 
 
 

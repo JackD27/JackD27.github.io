@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../register/loginPage.css"
 
-const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
+
 
 const RecommendationCard = () => {
 
@@ -24,6 +24,8 @@ const navigate = useNavigate();
 
 
     useEffect(() => {
+
+      const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
 
         async function getNumber() {
           axios

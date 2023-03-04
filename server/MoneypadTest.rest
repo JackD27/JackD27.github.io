@@ -129,7 +129,7 @@ POST http://localhost:8085/addWatchlistItem
 Content-Type: application/json 
 
 {
-    "ticker" : "APPL",
+    "ticker" : "META",
     "userId" : 374
 }
 
@@ -153,4 +153,13 @@ Content-Type: application/json
 ### FIX DUPLICATE BUG
 GET http://localhost:8085/portfolio
 Accept: application/json 
+
+###
+DELETE http://localhost:8085/deleteWatchlistItem
+Content-Type: application/json 
+
+{
+    "watchlistitem_id" : 4
+}
+
 
