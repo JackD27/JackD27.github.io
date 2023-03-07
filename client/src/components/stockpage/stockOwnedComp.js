@@ -11,10 +11,9 @@ const KEY_URL = `&token=${key}`;
 
 
 
-const WatchlistComp = (props) => {
+const StockedOwnedComp = (props) => {
   const [user, setUser] = useState(null)
   const [list, setList] = useState([])
-  const [testData, setTestData] = useState([])
   const [error, setError] = useState({});
   const [stocksData, setStocksData] = useState([]);
 
@@ -32,7 +31,7 @@ const WatchlistComp = (props) => {
     let promises = []
 
         
-    const response = await fetch(`http://localhost:8085/watchlistUser/${getUserInfo().user_id.toString()}`);
+    const response = await fetch(`http://localhost:8085/portfolioUser/${getUserInfo().user_id.toString()}`);
     
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
@@ -46,9 +45,18 @@ const WatchlistComp = (props) => {
 
     setList(fetchedList);  // update state.  when state changes, we automatically re-render.
     list.map((item)=>{
-      promises.push(getStocksData(item.stockTicker).then(res =>{
-        tempData.push({name: item.stockTicker, info: res.data, id: item.watchlistitem_id})
-      }))
+      promises.push(
+        getStocksData(item.stockTicker).then((res) => {
+          tempData.push({
+            name: item.stockTicker,
+            date: item.dateBoughtAt,
+            priceWhenBought: item.priceWhenBought,
+            shares: item.shares,
+            info: res.data,
+            id: item.portfolioitem_id,
+          });
+        })
+      );
     })
     Promise.all(promises).then(()=>{
       setStocksData(tempData);
@@ -67,20 +75,17 @@ const WatchlistComp = (props) => {
 
     getList(); 
     
-    console.log(stocksData.info)
-
-    return;
 
   }, [list.length]);  
 
-  async function deleteWatchlistItem(targetId) {
-    const deleteWatchlistItem = {
-        watchlistitem_id: targetId,
+  async function deleteStockPortfolioItem(targetId) {
+    const deletePortfolioItem = {
+        portfolioitem_id: targetId,
       }
-    const url = "http://localhost:8085/deleteWatchlistItem";
+    const url = "http://localhost:8085/deletePortfolioItem";
 
     await axios.delete(url, {
-        data: deleteWatchlistItem,
+        data: deletePortfolioItem,
       })
       
     const newStockData = stocksData.filter((el) => el !== el); // This causes a re-render because we change state. Helps cause a re-render.
@@ -91,18 +96,20 @@ const WatchlistComp = (props) => {
 
 
 
-  function watchlistList() {
+  function stockPortfolioList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
       const percent = ((watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.c) * 100
+      const profit = (watchlistItem.info.c * watchlistItem.shares) - (watchlistItem.priceWhenBought * watchlistItem.shares)
       return (
         <ListComp show={props.show}
-        showPercent={props.showPercent}
           stockTicker={watchlistItem.name}
           date={watchlistItem.date}
-          price={watchlistItem.info.c}
-          percentage={Number(percent).toFixed(2)}
+          price={watchlistItem.priceWhenBought}
+          currPrice={watchlistItem.info.c}
+          //percentage={Number(percent).toFixed(2)}
           shares={watchlistItem.shares}
-          onDeleteClickHandler={() => deleteWatchlistItem(watchlistItem.id)}
+          profit={Number(profit).toFixed(2)}
+          onDeleteClickHandler={() => deleteStockPortfolioItem(watchlistItem.id)}
           key={watchlistItem.id}
         />
       );
@@ -115,16 +122,19 @@ const WatchlistComp = (props) => {
         <thead>
         <tr>
           <th>Ticker</th>
-          <th>Percentage Change of Day</th>
+          <th>Date Purchased</th>
+          <th>Price When Bought</th>
+          <th>Shares</th>
           <th>Current Price</th>
+          <th>Profit</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-        {watchlistList()}
+        {stockPortfolioList()}
       </tbody>
     </Table>
   );
 };
 
-export default WatchlistComp;
+export default StockedOwnedComp;

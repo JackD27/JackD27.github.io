@@ -143,15 +143,19 @@ POST http://localhost:8085/addPortfolioItem
 Content-Type: application/json 
 
 {
-    "ticker" : "APPL",
+    "ticker" : "META",
     "dateBought" : "2020-11-07",
-    "price" : "45.67",
-    "shares" : "20",
+    "price" : "90.67",
+    "shares" : "10",
     "userId" : 374
 }
 
 ### FIX DUPLICATE BUG
 GET http://localhost:8085/portfolio
+Accept: application/json 
+
+### FIX DUPLICATE BUG
+GET http://localhost:8085/portfolioUser/374
 Accept: application/json 
 
 ###
@@ -160,6 +164,18 @@ Content-Type: application/json
 
 {
     "watchlistitem_id" : 4
+}
+
+###
+GET http://localhost:8085/stockInfo/TSLA
+Accept: application/json 
+
+###
+DELETE http://localhost:8085/deletePortfolioItem
+Content-Type: application/json 
+
+{
+    "portfolioitem_id" : 4
 }
 
 

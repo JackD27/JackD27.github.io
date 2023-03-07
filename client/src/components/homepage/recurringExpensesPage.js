@@ -19,7 +19,7 @@ const navigate = useNavigate();
 
   useEffect(() => {
 
-    const url = `http://localhost:8085/recurringExpenses/${user.user_id.toString()}`;
+    const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
 
     
 
