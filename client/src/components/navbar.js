@@ -25,11 +25,11 @@ export default function NavbarFunction() {
   return (
     <Navbar collapseOnSelectexpand="lg"bg="dark"variant="dark"className="mb-4">
       <Container>
-      <Navbar.Brand as={Link} to="/dashboard" className="mx-3"> MoneyPad</Navbar.Brand>
+      <Navbar.Brand as={Link} to="/" className="mx-3"> MoneyPad</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/dashboard">Home</Nav.Link>
+          <Nav.Link as={Link} to="/">Home</Nav.Link>
           <Nav.Link as={Link} to="/stocks">Stocks</Nav.Link>
         </Nav>
         <Nav>

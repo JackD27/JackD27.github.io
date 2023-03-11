@@ -27,8 +27,8 @@ const Login2 = () => {
 
   useEffect(() => {
 
-    const obj = getUserInfo(user)
-    setUser(obj)
+    setUser(getUserInfo())
+    
 
   }, []);
 

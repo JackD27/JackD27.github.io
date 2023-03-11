@@ -7,6 +7,7 @@ import "../register/loginPage.css"
 
 const InvestingPage = () => {
 
+
   return (
     <Container>
       <Row>
