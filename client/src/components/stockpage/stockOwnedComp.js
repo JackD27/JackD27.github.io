@@ -88,8 +88,9 @@ const StockedOwnedComp = (props) => {
         data: deletePortfolioItem,
       })
       
-    const newStockData = stocksData.filter((el) => el !== el); // This causes a re-render because we change state. Helps cause a re-render.
-    setStocksData(newStockData);  // This causes a re-render because we change state.
+    
+    const newList = list.filter((el) => el.id !== el.id); // This causes a re-render because we change state. Helps cause a re-render.
+    setList(newList);  // This causes a re-render because we change state.
     
 }
 
@@ -98,7 +99,7 @@ const StockedOwnedComp = (props) => {
 
   function stockPortfolioList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
-      const percent = ((watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.c) * 100
+      const percent = ((watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.o) * 100
       const profit = (watchlistItem.info.c * watchlistItem.shares) - (watchlistItem.priceWhenBought * watchlistItem.shares)
       return (
         <ListComp show={props.show}

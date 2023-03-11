@@ -66,11 +66,6 @@ const WatchlistComp = (props) => {
 
 
     getList(); 
-    
-    console.log(stocksData.info)
-
-    return;
-
   }, [list.length]);  
 
   async function deleteWatchlistItem(targetId) {
@@ -82,10 +77,11 @@ const WatchlistComp = (props) => {
     await axios.delete(url, {
         data: deleteWatchlistItem,
       })
+
+      const newList = list.filter((el) => el.id !== el.id); // This causes a re-render because we change state. Helps cause a re-render.
+      setList(newList);  // This causes a re-render because we change state.
       
-    const newStockData = stocksData.filter((el) => el !== el); // This causes a re-render because we change state. Helps cause a re-render.
-    setStocksData(newStockData);  // This causes a re-render because we change state.
-    
+
 }
 
 
@@ -93,7 +89,7 @@ const WatchlistComp = (props) => {
 
   function watchlistList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
-      const percent = ((watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.c) * 100
+      const percent = (watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.o * 100
       return (
         <ListComp show={props.show}
         showPercent={props.showPercent}

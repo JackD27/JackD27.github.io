@@ -143,7 +143,7 @@ POST http://localhost:8085/addPortfolioItem
 Content-Type: application/json 
 
 {
-    "ticker" : "META",
+    "ticker" : "AAPL",
     "dateBought" : "2020-11-07",
     "price" : "90.67",
     "shares" : "10",

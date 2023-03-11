@@ -17,11 +17,11 @@ const ListComp = (props) => {
   const ListItem = ({ticker, date, price, shares, percentage, currPrice, profit}) => (
     <tr style={{color: "white"}}>
       <td>{ticker}</td>
-      {canShowPercent && <td style={{color: percentage < 0 ? "red" : "green"}}>{percentage}%</td>}
+      {canShowPercent && <td style={{color: percentage < 0 ? "orangered" : "lightgreen"}}>{percentage}%</td>}
       {canShow && <td>{date}</td>}
-      <td>${price}</td>
+      <td>${Number(price).toFixed(2)}</td>
       {canShow && <td>{shares}</td>}
-      {canShow && <td>${currPrice}</td>}
+      {canShow && <td>${Number(currPrice).toFixed(2)}</td>}
       {canShow && <td>${profit}</td>}
       <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>
     </tr>

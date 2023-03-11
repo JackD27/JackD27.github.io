@@ -12,10 +12,10 @@ const navigate = useNavigate();
           <Card className="text-center"style={{ background: "rgb(50,58,69)" }}>
             <Card.Header>
               <h2 style={{ color: "#14A44D" }}>Watchlist</h2>
-              <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/dashboard2")}>+</Button>
+              <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/addWatchlist")}>+</Button>
             </Card.Header>
             <Card.Body>
-              <WatchListComp length="10" show={false} showPercent={true}/>
+              <WatchListComp length="7" show={false} showPercent={true}/>
             </Card.Body>
             <Card.Footer>
                 <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/allWatchlist")}>View whole watchlist</Button>
