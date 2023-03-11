@@ -1,5 +1,5 @@
 import FormInput from "../register/FormInput";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Button, Card, Form} from 'react-bootstrap';
@@ -9,20 +9,9 @@ import "../register/loginPage.css"
 const url = "http://localhost:8085/addPortfolioItem";
 
 const AddPortfolioComp = () => {
-
-  const [user, setUser] = useState(null)
   const [error, setError] = useState("");
   const [isSuccess, setSuccess] = useState(null);
 
-  useEffect(() => {
-
-    setUser(getUserInfo())
-
-  }, []);
-
-
-
-  
 
   const footMessage = () => {
     if (error) {
@@ -47,11 +36,6 @@ const AddPortfolioComp = () => {
     shares: "",
     userId: getUserInfo().user_id,
   });
-
-  const handleChange= async (e)=>{
-    setValues(values => ({
-      ...values
-    }))};
   
   const inputs = [
     {
@@ -103,6 +87,7 @@ const AddPortfolioComp = () => {
         shares: "",
         userId: getUserInfo().user_id,
       });
+      setError(false);
       setSuccess(true)
     } catch (error) {
       if (

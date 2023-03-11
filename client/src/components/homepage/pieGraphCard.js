@@ -1,21 +1,11 @@
-import {Button, Card} from 'react-bootstrap';
+import {Card} from 'react-bootstrap';
 import { PieChart, Pie, Legend, Tooltip } from 'recharts';
 import React, { useState, useEffect } from "react";
 import getUserInfo from '../../utilities/decodeJwt';
-import axios from "axios";
 import "../register/loginPage.css"
 
 function PieGraphCard() {
-
-  const [user, setUser] = useState(null)
-  const [error, setError] = useState("")
-  const [number, setNumber] = useState(0)
-  const [yearlyNumber, setYearlyNumber] = useState(0)
   const [taxedPercent, setTaxedPercent] = useState(0)
-
-  
-
-  
 
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -23,7 +13,6 @@ function PieGraphCard() {
     maximumFractionDigits: "0",
   });
 
-  const url = `http://localhost:8085/transactionUser/${getUserInfo().user_id.toString()}`;
 
     
   function taxCalculation(person) {
@@ -52,50 +41,15 @@ function PieGraphCard() {
   } 
 
 
+
     useEffect(() => {
 
-      setUser(getUserInfo())
-
-
-        async function getNumber() {
-          axios
-            .get(url)
-            .then(({ data }) => {
-                var sum = 0;
-                data.forEach(transaction => {
-                    
-                    sum += parseFloat(transaction.price);
-                });
-                setNumber(sum.toFixed(2))
-                setYearlyNumber(number * 12)
-            })
-            .catch((err) => {});
-        }
         
-        getNumber()
-        console.log(number);   
 
         setTaxedPercent(taxCalculation(getUserInfo().income))
-
-        
-        
-    
-        
         
         return; 
-    }, [number.length]); 
-
-    
-
-     
-
-       
-
-  
-
-   
-
-    
+    }, [taxedPercent.length]); 
 
   const data = [
     { name: `Needs (${getUserInfo().income * .5})`, value: getUserInfo().income * .5 },

@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import getUserInfo from '../../utilities/decodeJwt';
+import React from "react";
 import Container from 'react-bootstrap/Container';
 import {Col, Row} from 'react-bootstrap';
 import RecentTransactionCard from './recentTransactionCard';
@@ -9,15 +8,6 @@ import PieGraphCard from './pieGraphCard';
 import "../register/loginPage.css"
 
 const DashboardPage = () => {
-
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-
-    setUser(getUserInfo())
-
-  }, []);
-
 
   return (
     <Container>

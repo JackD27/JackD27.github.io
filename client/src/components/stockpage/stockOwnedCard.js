@@ -1,10 +1,8 @@
 
-import React, { useState, useEffect } from "react";
-import getUserInfo from '../../utilities/decodeJwt';
+import React from "react";
 import {Button, Card} from 'react-bootstrap';
 import StockListComp from './stockOwnedComp';
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "../register/loginPage.css"
 
 const WatchlistCard = () => {

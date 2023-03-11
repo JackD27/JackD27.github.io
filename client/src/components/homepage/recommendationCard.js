@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import getUserInfo from '../../utilities/decodeJwt';
-import {Button, Card} from 'react-bootstrap';
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import {Card} from 'react-bootstrap';
 import "../register/loginPage.css"
 
 
@@ -14,43 +12,6 @@ const RecommendationCard = () => {
         currency: 'USD',
         maximumFractionDigits: "0",
       });
-
-const navigate = useNavigate();
-
-  const [user, setUser] = useState(null)
-  const [error, setError] = useState("")
-  const [number, setNumber] = useState(0)
-  const [yearlyNumber, setYearlyNumber] = useState(0)
-
-
-    useEffect(() => {
-
-      const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
-
-        async function getNumber() {
-          axios
-            .get(url)
-            .then(({ data }) => {
-                var sum = 0;
-                data.forEach(transaction => {
-                    
-                    sum += parseFloat(transaction.price);
-                });
-                setNumber(sum.toFixed(2))
-                setYearlyNumber(number * 12)
-            })
-            .catch((err) => {});
-        }
-        
-        getNumber()
-        console.log(number);   
-        setUser(getUserInfo())
-    
-        
-        
-        return; 
-    }, [number.length]);  
-
 
   return (
           <Card className="text-center"style={{ background: "rgb(50,58,69)", marginTop: "15px"}}>

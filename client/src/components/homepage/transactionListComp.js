@@ -1,42 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
-import {Button, Table} from 'react-bootstrap';
+import {Table} from 'react-bootstrap';
 import TransactionComp from './transactionComp'
 import "../register/loginPage.css"
 
-const url = "http://localhost:8085/createTransaction";
-
 const TransactionListComp = (props) => {
-  const [user, setUser] = useState(null)
   const [list, setList] = useState([])
-  const [error, setError] = useState({});
 
-  useEffect(() => {
-    async function getList() {
+  async function getList() {
       
+    const response = await fetch(`http://localhost:8085/transactionUser/${getUserInfo().user_id.toString()}`);
+    
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+    
+    try{
+    const fetchedList = await response.json();
 
-      setUser(getUserInfo())
-
-      console.log(user)
-        
-      const response = await fetch(`http://localhost:8085/transactionUser/${getUserInfo().user_id.toString()}`);
-      
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-      
-      try{
-      const fetchedList = await response.json();
-
-      setList(fetchedList);  // update state.  when state changes, we automatically re-render.
-      }catch(error){
-        setError(error)
-      }
+    setList(fetchedList);  // update state.  when state changes, we automatically re-render.
+    }catch(error){
       
     }
+    
+  }
+
+  useEffect(() => {
     
     getList();   
     

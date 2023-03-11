@@ -12,9 +12,7 @@ const KEY_URL = `&token=${key}`;
 
 
 const StockedOwnedComp = (props) => {
-  const [user, setUser] = useState(null)
   const [list, setList] = useState([])
-  const [error, setError] = useState({});
   const [stocksData, setStocksData] = useState([]);
 
   const getStocksData = (stock) => {
@@ -63,16 +61,13 @@ const StockedOwnedComp = (props) => {
     })
     
     }catch(error){
-      setError(error)
+      
     }
     
   }
 
 
   useEffect(() => {
-    setUser(getUserInfo())
-
-
     getList(); 
     
 
@@ -93,10 +88,6 @@ const StockedOwnedComp = (props) => {
     setList(newList);  // This causes a re-render because we change state.
     
 }
-
-
-
-
   function stockPortfolioList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
       const percent = ((watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.o) * 100

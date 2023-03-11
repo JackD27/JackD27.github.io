@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import getUserInfo from '../../utilities/decodeJwt';
+import React from "react";
 import Container from 'react-bootstrap/Container';
 import {Col, Row} from 'react-bootstrap';
 import WatchlistCard from './watchListCard';

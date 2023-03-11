@@ -13,44 +13,31 @@ const RecurringExpensePage = () => {
 
 const navigate = useNavigate();
 
-  const [user, setUser] = useState(null)
   const [number, setNumber] = useState(0)
   const [yearlyNumber, setYearlyNumber] = useState(0)
 
+  const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
+
+  async function getNumber() {
+    axios
+      .get(url)
+      .then(({ data }) => {
+          var sum = 0;
+          data.forEach(transaction => {
+              
+              sum += parseFloat(transaction.price);
+          });
+          setNumber(sum.toFixed(2))
+          setYearlyNumber(number * 12)
+      })
+      .catch((err) => {});
+  }
+
   useEffect(() => {
 
-    const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
-
-    
-
-      async function getNumber() {
-        axios
-          .get(url)
-          .then(({ data }) => {
-              var sum = 0;
-              data.forEach(transaction => {
-                  
-                  sum += parseFloat(transaction.price);
-              });
-              setNumber(sum.toFixed(2))
-              setYearlyNumber(number * 12)
-          })
-          .catch((err) => {});
-      }
-      
-      getNumber()
-      console.log(number);   
-      setUser(getUserInfo())
+      getNumber()   
   
-      
-      
-      return; 
-  }, [number.length]);  
-
-  if(!user) {
-    navigate('/login')
-    return
-  }
+  }, [number]);  
 
 
 

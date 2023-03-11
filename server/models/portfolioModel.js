@@ -35,6 +35,14 @@ const PortfolioItem = db.define("PortfolioItem", {
   shares: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    validate: {
+      notEmpty: true,
+      isLow(value){
+        if(value <= 0){
+          throw new Error("Please enter a reasonable share price.")
+        }
+      }
+    },
   },
 });
 

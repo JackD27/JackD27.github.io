@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import getUserInfo from '../../utilities/decodeJwt';
-import {Col, Row, Button, Card, Form} from 'react-bootstrap';
+import React from "react";
+import {Button, Card} from 'react-bootstrap';
 import WatchlistComp from './watchListComp';
 import { useNavigate } from "react-router-dom";
 import "../register/loginPage.css"
@@ -8,15 +7,6 @@ import "../register/loginPage.css"
 const WatchlistPage = () => {
 
 const navigate = useNavigate();
-
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-
-    setUser(getUserInfo())
-
-  }, []);
-
 
   return (
           <Card className="text-center"style={{ background: "rgb(50,58,69)", paddingBottom:"600px"}}>

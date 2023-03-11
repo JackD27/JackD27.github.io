@@ -1,5 +1,5 @@
 import FormInput from "../register/FormInput";
-import React, { useState, useEffect } from "react";
+import React, { useState, } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Button, Card, Form} from 'react-bootstrap';
@@ -10,20 +10,10 @@ const url = "http://localhost:8085/createTransaction";
 
 const TransactionComp = () => {
 
-  const [user, setUser] = useState(null)
   const [error, setError] = useState("");
   const [isRecurring, setRecurring] = useState(null);
   const [isSuccess, setSuccess] = useState(null);
 
-  useEffect(() => {
-
-    setUser(getUserInfo())
-
-  }, []);
-
-
-
-  
 
   const footMessage = () => {
     if (error) {
@@ -60,7 +50,7 @@ const TransactionComp = () => {
       ...values,
       ...updatedValue
     }))};
-  
+
   const inputs = [
     {
       id: 1,
@@ -96,25 +86,56 @@ const TransactionComp = () => {
         placeholder: "Price",
         required: true,
       },
-      {
-        id: 5,
-        name: "category",
-        type: "text",
-        label: "Category",
-        placeholder: "Category",
-        required: true,
-      },
-      {
-        id: 6,
-        name: "category2",
-        type: "text",
-        label: "Category2",
-        placeholder: "Category2",
-        required: true,
-      },
+  ];
+
+  const category1 = [
+    {
+      id: 1,
+      value: "",
+    },
+    {
+      id: 2,
+      value: "Wants",
+    },
+    {
+      id: 3,
+      value: "Needs",
+    },
+    {
+      id: 4,
+      value: "Savings",
+    },
+  ];
+
+  const category2 = [
+    {
+      id: 1,
+      value: "",
+    },
+    {
+      id: 2,
+      value: "Entertainment",
+    },
+    {
+      id: 3,
+      value: "Transportation",
+    },
+    {
+      id: 4,
+      value: "Food",
+    },
+    {
+      id: 5,
+      value: "Housing",
+    },
+    {
+      id: 6,
+      value: "Misc",
+    },
   ];
 
   const handleSubmit = async (e) => {
+    console.log(values)
     try {
       const { data: res } = await axios.post(url, values);
       
@@ -129,6 +150,7 @@ const TransactionComp = () => {
         recurring: false,
         userId: getUserInfo().user_id,
       });
+      setError(false);
       setSuccess(true)
     } catch (error) {
       if (
@@ -159,6 +181,18 @@ const TransactionComp = () => {
             onKeyPress={handleKeyPress}
           />
         ))}
+        <div style={{color: "rgb(151, 151, 151)", fontSize: "12px", marginTop: "5px"}}>Main Category</div>
+        <select style={{marginTop: "5px"}} name="category"onChange={onChange}>
+          {category1.map((input) =>(
+            <option>{input.value}</option>
+          ))}
+        </select>
+        <div style={{color: "rgb(151, 151, 151)", fontSize: "12px", marginTop: "5px"}}>Secondary Category</div>
+        <select style={{marginTop: "5px"}} name="category2" onChange={onChange}>
+        {category2.map((input) =>(
+            <option>{input.value}</option>
+          ))}
+        </select>
         <Form.Check type="checkbox" name="recurring" defaultChecked={isRecurring} style={{fontSize: "30px", color:"rgb(151, 151, 151)"}} value={values.recurring}
             onChange={handleChange} label="Recurring?"/>
         </Card.Body>

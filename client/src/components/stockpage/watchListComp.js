@@ -12,10 +12,7 @@ const KEY_URL = `&token=${key}`;
 
 
 const WatchlistComp = (props) => {
-  const [user, setUser] = useState(null)
   const [list, setList] = useState([])
-  const [testData, setTestData] = useState([])
-  const [error, setError] = useState({});
   const [stocksData, setStocksData] = useState([]);
 
   const getStocksData = (stock) => {
@@ -55,17 +52,17 @@ const WatchlistComp = (props) => {
     })
     
     }catch(error){
-      setError(error)
+      
     }
     
   }
 
 
   useEffect(() => {
-    setUser(getUserInfo())
-
 
     getList(); 
+
+
   }, [list.length]);  
 
   async function deleteWatchlistItem(targetId) {
@@ -89,7 +86,7 @@ const WatchlistComp = (props) => {
 
   function watchlistList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
-      const percent = (watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.o * 100
+      const percent = ((watchlistItem.info.c - watchlistItem.info.pc) / watchlistItem.info.pc) * 100
       return (
         <ListComp show={props.show}
         showPercent={props.showPercent}

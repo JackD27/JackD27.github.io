@@ -34,7 +34,7 @@ portfolioRoutes.post("/addPortfolioItem", async (req, res) => {
 
     //creates a new user
     const createPortfolioItem = new portfolioModel({
-      stockTicker: ticker,
+      stockTicker: ticker.toUpperCase(),
       dateBoughtAt: dateBought,
       priceWhenBought: price,
       shares: shares,

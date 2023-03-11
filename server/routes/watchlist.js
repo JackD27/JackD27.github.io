@@ -34,7 +34,7 @@ watchlistRoutes.post("/addWatchlistItem", async (req, res) => {
 
     //creates a new user
     const createWatchlistItem = new watchlistModel({
-      stockTicker: ticker,
+      stockTicker: ticker.toUpperCase(),
       userId: userId
     });
 
