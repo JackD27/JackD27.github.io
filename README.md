@@ -9,6 +9,7 @@ keep you up to date on any payments you need to do. The user or investor will be
 able to access this app from a website. They will have to create an account and use 
 it to log in, to see their dashboard of investments, spending, transactions, 
 budgeting, and recommendations from the developer.
+
 When registering an account, the user will be asked their monthly 
 income/yearly income. The user will be able to set and see recent transactions to 
 keep everything up to date. They can set budgets for the month and see 
@@ -16,6 +17,7 @@ recommendations of budgeting from the developer. They can set bills that are to 
 paid every two weeks, monthly, yearly etc. So they can keep up to track on that 
 and receive notifications when the date is near of the bill being due. You can also 
 see what you’re spending your money on, which is similar to recent transactions. 
+
 The user will be able to see all the stuff to do with investing. The user can 
 see the prices of certain stocks that they input. They can set their stock portfolio, so 
 they can keep track of it and see how much it has grown since they bought a 
@@ -23,6 +25,7 @@ certain stock from awhile ago. They will get recommendations from the developer
 based on their type of stock trading. If they’re conservative, they will get safe 
 stocks to invest in. If they’re risk-takers, they will get risky stocks to invest in, but 
 can provide a big return. It can also provide a huge loss as well. 
+
 This app is good for anyone to keep track of their finances, to receive 
 notifications for upcoming bills and get an insight of what to spend based on your 
 income so you don’t have to go into debt. While investors can also get notifications 
