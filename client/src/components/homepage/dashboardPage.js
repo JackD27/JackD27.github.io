@@ -1,7 +1,6 @@
 import React from "react";
 import Container from 'react-bootstrap/Container';
 import {Col, Row} from 'react-bootstrap';
-import RecentTransactionCard from './recentTransactionCard';
 import MonthlyExpensesCard from './recurringExpensesCard';
 import RecommendationCard from './recommendationCard';
 import PieGraphCard from './pieGraphCard';
@@ -16,16 +15,11 @@ const DashboardPage = () => {
           <PieGraphCard />
         </Col>
         <Col>
-          <MonthlyExpensesCard />
+        <RecommendationCard />
         </Col>
       </Row>
-      <Row>
-      <Col>
-          <RecentTransactionCard />
-        </Col>
-        <Col>
-          <RecommendationCard />
-        </Col>
+      <Row style={{marginTop:"15px"}}>
+          <MonthlyExpensesCard/>
       </Row>
     </Container>
   );

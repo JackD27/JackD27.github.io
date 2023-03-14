@@ -11,7 +11,6 @@ import Register from "./components/register/registerPage";
 import Dashboard2 from "./components/homepage/addTransactionComp";
 import AddStockItem from "./components/stockpage/addPortfolioComp";
 import AddWatchlistItem from "./components/stockpage/addWatchlistComp";
-import TransactionList from "./components/homepage/transactionPage";
 import RecurringExpenses from "./components/homepage/recurringExpensesPage";
 import Dashboard from "./components/homepage/dashboardPage";
 import InvestingPage from "./components/stockpage/investingPage";
@@ -65,11 +64,10 @@ const App = () => {
           <Route exact path="/dashboard2" element={<Dashboard2 />} />
           <Route exact path="/addStock" element={<AddStockItem />} />
           <Route exact path="/addWatchlist" element={<AddWatchlistItem />} />
-          <Route exact path="/transactions" element={<TransactionList />} />
           <Route exact path="/stocks" element={<InvestingPage />} />
           <Route exact path="/allStocks" element={<StockPage />} />
           <Route exact path="/allWatchlist" element={<WatchlistPage />} />
-          <Route exact path="/recurringExpenses" element={<RecurringExpenses />} /></>}
+          <Route exact path="/transactions" element={<RecurringExpenses />} /></>}
         </Routes>
       </UserContext.Provider>
     </>

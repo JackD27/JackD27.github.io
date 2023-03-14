@@ -81,7 +81,7 @@ function PieGraphCard() {
       </Card.Body>
       <Card.Footer>
                 <h4 style={{marginTop: "5px", color:"white"}}>Yearly Income: {formatter.format(getUserInfo().income)}</h4>
-                <h4 style={{marginTop: "5px", color:"white"}}>Filed as Single ... Income after Taxes: {formatter.format(getUserInfo().income * taxedPercent)}</h4>
+                <h4 style={{marginTop: "5px", color:"white"}}>Income after Taxes (Single): {formatter.format(getUserInfo().income * taxedPercent)}</h4>
             </Card.Footer>
     </Card>
   );

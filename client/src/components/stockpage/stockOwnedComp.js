@@ -12,8 +12,10 @@ const KEY_URL = `&token=${key}`;
 
 
 const StockedOwnedComp = (props) => {
+  
   const [list, setList] = useState([])
   const [stocksData, setStocksData] = useState([]);
+  const [totalProfit, setTotalprofit] = useState(0);
 
   const getStocksData = (stock) => {
     return axios
@@ -66,12 +68,29 @@ const StockedOwnedComp = (props) => {
     
   }
 
+  async function getNumber() {
+    let sum = 0
+
+    stocksData.slice(0, props.length).map((watchlistItem) => {
+      const profit = (watchlistItem.info.c * watchlistItem.shares) - (watchlistItem.priceWhenBought * watchlistItem.shares)
+      sum += parseFloat(profit);
+      setTotalprofit(Number(sum).toFixed(2))
+    })};
+  
+
 
   useEffect(() => {
-    getList(); 
+    
+    getList();
+
+     
     
 
   }, [list.length]);  
+
+  useEffect(() => {
+    getNumber();
+}, [stocksData.length]);
 
   async function deleteStockPortfolioItem(targetId) {
     const deletePortfolioItem = {
@@ -90,7 +109,6 @@ const StockedOwnedComp = (props) => {
 }
   function stockPortfolioList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
-      const percent = ((watchlistItem.info.c - watchlistItem.info.o) / watchlistItem.info.o) * 100
       const profit = (watchlistItem.info.c * watchlistItem.shares) - (watchlistItem.priceWhenBought * watchlistItem.shares)
       return (
         <ListComp show={props.show}
@@ -103,6 +121,7 @@ const StockedOwnedComp = (props) => {
           profit={Number(profit).toFixed(2)}
           onDeleteClickHandler={() => deleteStockPortfolioItem(watchlistItem.id)}
           key={watchlistItem.id}
+          
         />
       );
     });
@@ -110,6 +129,8 @@ const StockedOwnedComp = (props) => {
 
 
   return (
+    <>
+    <h4 style={{marginTop: "5px", color:"white"}}>Total Profit: ${totalProfit}</h4>
     <Table bordered hover style={{color: "white"}} size="sm">
         <thead>
         <tr>
@@ -126,6 +147,7 @@ const StockedOwnedComp = (props) => {
         {stockPortfolioList()}
       </tbody>
     </Table>
+  </>
   );
 };
 

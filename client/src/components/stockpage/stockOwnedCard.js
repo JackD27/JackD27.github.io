@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, {useState} from "react";
 import {Button, Card} from 'react-bootstrap';
 import StockListComp from './stockOwnedComp';
 import { useNavigate } from "react-router-dom";
