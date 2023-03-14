@@ -22,7 +22,7 @@ export default function NavbarFunction() {
 
   if(!user){
   return (<div style={{textAlign: "center", position:"flex", marginTop:"300px", fontSize: "60px"}}>
-    <h3>You are not authorized to view this page, Please Login or Register with the buttons below.</h3>
+    <h3>You are not authorized to view this page, or an error has occurred. Please try to Login or Register with the buttons below.</h3>
     <Button variant="success" size="lg" style={{marginRight:"10px"}} onClick={handleLogin}>Login</Button>
     <Button variant="success" size="lg" style={{marginLeft:"10px"}}onClick={handleRegister}>Register</Button>
     
