@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Card} from 'react-bootstrap';
 import StockOwnedComp from './stockOwnedComp';
 import { useNavigate } from "react-router-dom";
+
 import "../register/loginPage.css"
 
 const StockPage = () => {
