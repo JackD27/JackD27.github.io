@@ -52,9 +52,9 @@ function PieGraphCard() {
     }, [taxedPercent.length]); 
 
   const data = [
-    { name: `Needs (${getUserInfo().income * .5})`, value: getUserInfo().income * .5 },
-    { name: `Savings (${getUserInfo().income * .2})`, value: getUserInfo().income * .2},
-    { name: `Wants (${getUserInfo().income * .3})`, value: getUserInfo().income * .3 },
+    { name: `Needs (${getUserInfo().income * .5 * taxedPercent})`, value: getUserInfo().income * .5 * taxedPercent },
+    { name: `Savings (${getUserInfo().income * .2 * taxedPercent})`, value: getUserInfo().income * .2 * taxedPercent},
+    { name: `Wants (${getUserInfo().income * .3 * taxedPercent})`, value: getUserInfo().income * .3 * taxedPercent },
   ];
 
   

@@ -74,7 +74,6 @@ const Login2 = () => {
   const handleSubmit = async (e) => {
     try {
       const { data: res } = await axios.post(url, values);
-      console.log(res)
       const { accessToken } = res;
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);

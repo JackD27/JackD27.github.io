@@ -58,9 +58,8 @@ const RecurringTransactionListComp = (props) => {
   }, [list2.length]); 
 
   const [number, setNumber] = useState(0)
-  const [yearlyNumber, setYearlyNumber] = useState(0)
 
-  const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`;
+  const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id}`;
 
   async function getNumber() {
     axios
@@ -72,7 +71,6 @@ const RecurringTransactionListComp = (props) => {
               sum += parseFloat(transaction.price);
           });
           setNumber(sum.toFixed(2))
-          setYearlyNumber(number * 12)
       })
       .catch((err) => {});
   }
@@ -106,6 +104,7 @@ const RecurringTransactionListComp = (props) => {
     // eslint-disable-next-line 
     const newList2 = list2.filter((el) => el !== el); // This causes a re-render because we change state. Helps cause a re-render.
     setList2(newList2);  // This causes a re-render because we change state.
+    getNumber()
   }
 
 
@@ -147,7 +146,7 @@ const RecurringTransactionListComp = (props) => {
 
 
   return (
-    <>{props.switch ? <h4 style={{marginTop: "5px", color:"white"}}>${number} Monthly | ${yearlyNumber} Yearly</h4>: null}
+    <>{props.switch ? <h4 style={{marginTop: "5px", color:"white"}}>${number} Monthly | ${number * 12} Yearly</h4>: null}
     <Table bordered hover style={{color: "white"}} size="sm">
         <thead>
         <tr>

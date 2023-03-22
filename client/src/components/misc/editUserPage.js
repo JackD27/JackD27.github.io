@@ -3,24 +3,23 @@ import React, { useState} from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Button, Card } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom'
 import AlertFunction from '../register/AlertMessage';
 import "../register/loginPage.css"
 
 const url = "http://localhost:8085/editUser";
+const loginUrl = "http://localhost:8085/login";
 
 const ChangeSettingsComp = () => {
 
   const [error, setError] = useState("");
   const [isSuccess, setSuccess] = useState(null);
-  const navigate = useNavigate()
 
   const footMessage = () => {
     if (error) {
       return <AlertFunction variant="danger" show={true} message={error}/>
     } 
     if(isSuccess){
-      return <AlertFunction variant="success" show={true} message="Successfully updated your account. You will be redirected shortly."/>
+      return <AlertFunction variant="success" show={true} message="Successfully updated your account. Page will refresh shortly."/>
     }
   };
 
@@ -32,11 +31,11 @@ const ChangeSettingsComp = () => {
 
 
   const [values, setValues] = useState({
-    username: "",
+    username: getUserInfo().username,
     password: "",
     email: getUserInfo().email,
     tradingType: getUserInfo().tradingType,
-    income: "",
+    income: getUserInfo().income,
     userId: getUserInfo().user_id,
   });
   
@@ -45,7 +44,7 @@ const ChangeSettingsComp = () => {
       id: 1,
       name: "username",
       type: "text",
-      placeholder: getUserInfo().username,
+      placeholder: "Enter new username",
       label: "Change Username",
       required: true,
     },
@@ -61,7 +60,7 @@ const ChangeSettingsComp = () => {
       id: 3,
       name: "income",
       type: "number",
-      placeholder: getUserInfo().income,
+      placeholder: "Enter new income",
       label: "Change Income",
       required: true,
     },
@@ -69,16 +68,20 @@ const ChangeSettingsComp = () => {
 
   const handleSubmit = async (e) => {
     try {
-      const { data: res } = await axios.put(url, values);
-      const { accessToken } = res;
-      //store token in localStorage
-      localStorage.setItem("accessToken", accessToken);
-
+      await axios.post(url, values);   
+      
       setError(false);
       setSuccess(true)
+
+      localStorage.clear()
+
+      const { data: res2 } = await axios.post(loginUrl, values);
+
+      const { accessToken } = res2;
+      localStorage.setItem("accessToken", accessToken);
       
       setTimeout(function(){
-        navigate('/dashboard');
+        window.location.reload();;
      }, 3600);
 
     } catch (error) {
