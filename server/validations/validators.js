@@ -7,7 +7,7 @@ const newUserValidation = (data) => {
         email: zod.string().email('Please Input a valid email'),
         password: zod.string().min(5, 'Password must be 5 or more characters').trim(),
         //tradingType: zod.number().int().gte(0).lte(1).optional(),
-        income: zod.number("Enter a valid income.").int("Must be a whole number.").nonnegative("Hopefully you don't have a negative income.")
+        //income: zod.number("Enter a valid income.").int("Must be a whole number.").nonnegative("Hopefully you don't have a negative income.")
     })
 
     return registerValidationSchema.safeParse(data)

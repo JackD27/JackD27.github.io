@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getUserInfo from '../utilities/decodeJwt';
+import getUserInfo from '../../utilities/decodeJwt';
 import { Button} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 

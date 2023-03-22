@@ -1,6 +1,7 @@
 const userModel = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const { generateAccessToken} = require("../utilities/generateToken");
+const { userLoginValidation } = require('../validations/validators')
 
 const getAllUsers = async (req, res) => {
     try {
@@ -49,6 +50,12 @@ const deleteAllUsers = async (req, res) => {
 const editUser = async (req, res) => {
     // store new user information
   const { userId, username, email, password, tradingType, income } = req.body;
+
+  const user = await userModel.findOne({where: { username: username, user_id: {$not: userId} }});
+  if(user) return res.status(409).send({ message: "Username already exists." });
+  
+  const { error } = userLoginValidation(req.body)
+  if (error) return res.status(400).send({ message: error.errors[0].message })
 
   // check if username is available
 

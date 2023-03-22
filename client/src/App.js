@@ -4,11 +4,12 @@ import { Route, Routes, useLocation} from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
 
 import Navbar from "./components/navbar";
-import ErrorPage from "./components/errorPage";
+import ErrorPage from "./components/misc/errorPage";
 
 import Login from "./components/register/loginPage";
 import Register from "./components/register/registerPage";
-import Dashboard2 from "./components/homepage/addTransactionComp";
+import Settings from "./components/misc/editUserPage";
+import AddTransaction from "./components/homepage/addTransactionComp";
 import AddStockItem from "./components/stockpage/addPortfolioComp";
 import AddWatchlistItem from "./components/stockpage/addWatchlistComp";
 import RecurringExpenses from "./components/homepage/recurringExpensesPage";
@@ -60,14 +61,17 @@ const App = () => {
         <Routes>
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
-          {user && <><Route exact path="/" element={<Dashboard />} />
-          <Route exact path="/dashboard2" element={<Dashboard2 />} />
+          {user && <>
+          <Route exact path="/" element={<Dashboard />} />
+          <Route exact path="/addTransaction" element={<AddTransaction />} />
           <Route exact path="/addStock" element={<AddStockItem />} />
           <Route exact path="/addWatchlist" element={<AddWatchlistItem />} />
           <Route exact path="/stocks" element={<InvestingPage />} />
           <Route exact path="/allStocks" element={<StockPage />} />
           <Route exact path="/allWatchlist" element={<WatchlistPage />} />
-          <Route exact path="/transactions" element={<RecurringExpenses />} /></>}
+          <Route exact path="/transactions" element={<RecurringExpenses />} />
+          <Route exact path="/settings" element={<Settings />} />
+          </>}
         </Routes>
       </UserContext.Provider>
     </>
