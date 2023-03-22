@@ -32,7 +32,7 @@ const navigate = useNavigate();
               <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/dashboard2")}>+</Button>
             </Card.Header>
             <Card.Body>
-              <RecurringList length="5" show={show} switch={switch1}/>
+              <RecurringList length={props.length} show={show} switch={switch1}/>
             </Card.Body>
             <Card.Footer>
                 {show ? null : <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/transactions")}>View All Transactions</Button>}

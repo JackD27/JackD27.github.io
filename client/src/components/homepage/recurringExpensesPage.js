@@ -5,7 +5,7 @@ import "../register/loginPage.css"
 const RecurringExpensePage = () => {
 
   return (
-  <ExpenseList padding={"600px"} show={true}></ExpenseList>
+  <ExpenseList padding={"600px"} show={true} length="20"></ExpenseList>
   );
 };
 

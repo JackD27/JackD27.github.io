@@ -20,7 +20,7 @@ export default function Home() {
   const [values, setValues] = useState({
     username: "",
     email: "",
-    income: "",
+    income: 0,
     password: "",
   });
 
@@ -87,7 +87,6 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     try {
-    if (values.password.length > 0){
       const { data: res } = await axios.post(url, values);
       setSuccess(2);
 
@@ -99,10 +98,8 @@ export default function Home() {
       setTimeout(function(){
         window.location.reload();
      }, 3600);
-    }
-    else{
-      setSuccess(1)
-    }
+    
+    
     } catch (error) {
       if (
         error.response &&

@@ -19,7 +19,7 @@ const DashboardPage = () => {
         </Col>
       </Row>
       <Row style={{marginTop:"15px"}}>
-          <MonthlyExpensesCard/>
+          <MonthlyExpensesCard length="5"/>
       </Row>
     </Container>
   );

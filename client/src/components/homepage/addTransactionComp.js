@@ -39,7 +39,7 @@ const TransactionComp = () => {
     category: "",
     category2: "",
     description: "",
-    recurring: false,
+    recurring: 0,
     userId: getUserInfo().user_id,
   });
 
@@ -147,10 +147,10 @@ const TransactionComp = () => {
         category: "",
         category2: "",
         description: "",
-        recurring: false,
+        recurring: 0,
         userId: getUserInfo().user_id,
       });
-      setError(false);
+      setError(false)
       setSuccess(true)
     } catch (error) {
       if (

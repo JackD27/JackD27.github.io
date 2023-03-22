@@ -30,14 +30,14 @@ const AddWatchlistComp = () => {
 
 
   const [values, setValues] = useState({
-    ticker: "",
+    stockTicker: "",
     userId: getUserInfo().user_id,
   });
   
   const inputs = [
     {
       id: 1,
-      name: "ticker",
+      name: "stockTicker",
       type: "text",
       placeholder: "Ticker",
       label: "Stock Ticker",
@@ -50,7 +50,7 @@ const AddWatchlistComp = () => {
       const { data: res } = await axios.post(url, values);
       
       setValues({
-        ticker: "",
+        stockTicker: "",
         userId: getUserInfo().user_id,
       });
       setError(false);

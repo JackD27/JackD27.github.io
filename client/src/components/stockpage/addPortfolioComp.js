@@ -30,17 +30,17 @@ const AddPortfolioComp = () => {
 
 
   const [values, setValues] = useState({
-    ticker: "",
-    dateBought: "",
-    price: "",
-    shares: "",
+    stockTicker: "",
+    dateBoughtAt: "",
+    price: 0,
+    shares: 0,
     userId: getUserInfo().user_id,
   });
   
   const inputs = [
     {
       id: 1,
-      name: "ticker",
+      name: "stockTicker",
       type: "text",
       placeholder: "Ticker",
       label: "Stock Ticker",
@@ -48,7 +48,7 @@ const AddPortfolioComp = () => {
     },
     {
         id: 2,
-        name: "dateBought",
+        name: "dateBoughtAt",
         type: "date",
         label: "Date of Purchase",
         placeholder: "Date",
@@ -81,10 +81,10 @@ const AddPortfolioComp = () => {
       const { data: res } = await axios.post(url, values);
       
       setValues({
-        ticker: "",
-        dateBought: "",
-        price: "",
-        shares: "",
+        stockTicker: "",
+        dateBoughtAt: "",
+        price: 0,
+        shares: 0,
         userId: getUserInfo().user_id,
       });
       setError(false);

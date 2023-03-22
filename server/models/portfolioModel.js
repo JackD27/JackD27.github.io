@@ -26,8 +26,8 @@ const PortfolioItem = db.define("PortfolioItem", {
     validate: {
       notEmpty: true,
       isNegative(value){
-        if(value < 0){
-          throw new Error("Can't buy a stock at negative price.")
+        if(value <= 0){
+          throw new Error("Can't buy a stock at negative price or stocks at 0")
         }
       }
     },
@@ -39,7 +39,7 @@ const PortfolioItem = db.define("PortfolioItem", {
       notEmpty: true,
       isLow(value){
         if(value <= 0){
-          throw new Error("Please enter a reasonable share price.")
+          throw new Error("Please enter a reasonable number of shares you purchased.")
         }
       }
     },

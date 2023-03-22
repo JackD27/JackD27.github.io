@@ -1,4 +1,4 @@
-GET http://localhost:8085/user/4
+GET http://localhost:8085/user/374
 Accept: application/json 
 
 ###
@@ -10,7 +10,7 @@ DELETE http://localhost:8085/deleteUser
 Content-Type: application/json 
 
 {
-    "userId" : "4"
+    "userId" : "384"
 }
 
 ###
@@ -22,10 +22,11 @@ POST http://localhost:8085/signup
 Content-Type: application/json 
 
 {
-    "username" : "JackD27",
-    "email" : "jdaviskid27@yahoo.com",
+    "username" : "JackD28",
+    "email" : "s0349740@salemstate.com",
     "password" : "cpclare",
-    "income" : "70000"
+    "tradingType" : 0,
+    "income" : 70000
 }
 
 ###
@@ -34,7 +35,7 @@ Content-Type: application/json
 
 {
     "username" : "JackD27",
-    "password" : "Tyjack"
+    "password" : "cpclare"
 }
 
 ###
@@ -43,11 +44,11 @@ Content-Type: application/json
 
 {
 
-    "userId" : "114",
+    "userId" : "374",
     "username" : "JackD27",
     "email" : "jdaviskid27@yahoo.com",
-    "password" : "Tyjack",
-    "tradingType" : "1",
+    "password" : "cpclare",
+    "tradingType" : "0",
     "income" : "80000"
 }
 
@@ -89,7 +90,7 @@ GET http://localhost:8085/allTransactions
 Accept: application/json 
 
 ###
-GET http://localhost:8085/transaction/4
+GET http://localhost:8085/transaction/614
 Accept: application/json 
 
 ###
@@ -106,7 +107,7 @@ DELETE http://localhost:8085/deleteTransaction
 Content-Type: application/json 
 
 {
-    "transactionId" : 64
+    "transactionId" : 734
 }
 
 ###
@@ -129,7 +130,7 @@ POST http://localhost:8085/addWatchlistItem
 Content-Type: application/json 
 
 {
-    "ticker" : "META",
+    "stockTicker" : "aapl",
     "userId" : 374
 }
 
@@ -139,14 +140,19 @@ Accept: application/json
 
 ###
 
+GET http://localhost:8085/watchlist
+Accept: application/json 
+
+###
+
 POST http://localhost:8085/addPortfolioItem
 Content-Type: application/json 
 
 {
-    "ticker" : "AAPL",
-    "dateBought" : "2020-11-07",
-    "price" : "90.67",
-    "shares" : "10",
+    "stockTicker" : "AAPL",
+    "dateBoughtAt" : "2020-11-07",
+    "price" : 90.67,
+    "shares" : 10,
     "userId" : 374
 }
 
@@ -163,19 +169,15 @@ DELETE http://localhost:8085/deleteWatchlistItem
 Content-Type: application/json 
 
 {
-    "watchlistitem_id" : 4
+    "watchlistitem_id" : 274
 }
-
-###
-GET http://localhost:8085/stockInfo/TSLA
-Accept: application/json 
 
 ###
 DELETE http://localhost:8085/deletePortfolioItem
 Content-Type: application/json 
 
 {
-    "portfolioitem_id" : 4
+    "portfolioitem_id" : 174
 }
 
 
