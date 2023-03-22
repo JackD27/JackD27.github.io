@@ -35,6 +35,12 @@ const addWatchlistItem = async (req, res) => {
       return res.status(400).send({ message: "User doesn't exist" });
     }
 
+    const stockTickerExists = await watchlistModel.findOne({ where: { userId: userId, stockTicker: stockTicker } });
+
+    if(stockTickerExists){
+      return res.status(400).send({ message: "Stock Ticker is already in your watchlist." });
+    }
+
     const createWatchlistItem = new watchlistModel({
       stockTicker: stockTicker.toUpperCase(),
       userId: userId
