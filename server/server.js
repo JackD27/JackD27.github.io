@@ -1,13 +1,6 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
-
-// Routes
-const userRoutes = require("./routes/users");
-const portfolioRoutes = require("./routes/portfolio");
-const transactionRoutes = require("./routes/transaction");
-const watchlistRoutes = require("./routes/watchlist");
 
 // Model
 const portfolioModel = require("./models/portfolioModel");
@@ -22,19 +15,16 @@ const SERVER_PORT = 8085;
 
 app.use(cors());
 app.use(express.json());
-app.use(cookieParser());
 
-app.use("/", userRoutes);
-app.use("/", portfolioRoutes);
-app.use("/", transactionRoutes);
-app.use("/", watchlistRoutes);
+app.use("/", require("./routes/usersRoutes"));
+app.use("/", require("./routes/portfolioRoutes"));
+app.use("/", require("./routes/transactionRoutes"));
+app.use("/", require("./routes/watchlistRoutes"));
 
 // Associations
 userModel.hasMany(portfolioModel, {foreignKey: 'userId'});
 userModel.hasMany(transactionModel, {foreignKey: 'userId'});
 userModel.hasMany(watchlistModel, {foreignKey: 'userId'});
-
-
 
 db.sync()
   .then((result) => {
