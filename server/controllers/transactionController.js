@@ -1,5 +1,6 @@
 const transactionModel = require('../models/transactionModel');
 const userModel = require("../models/userModel");
+const Sequelize = require("sequelize");
 const { transactionValidation } = require('../validations/validators')
 
 const allTransactions = async (req, res) => {
@@ -62,10 +63,13 @@ if(!user){
 }
 
 try {
-  const transactions = await transactionModel.findAll({attributes: [{user_id: req.params.userId},[sequelize.fn('sum', sequelize.col('price')), 'total_price']]});
-  return res.status(200).send(transactions);
+  const transactions = await transactionModel.findAll({where: { user_id: req.params.userId }, 
+    attributes: [[Sequelize.fn('sum', Sequelize.col('price')), 'total']]});
+
+  const totalDebits = transactions[0]; 
+  return res.status(200).send(totalDebits);
 } catch (err) {
-  return res.status(400).send({message: "Error Occurred getting reccurring experses by UserId."});
+  return res.status(400).send({message: "Error Occurred getting reccurring experses price by UserId."});
 }
 }
 
