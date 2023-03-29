@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import {Col, Row} from 'react-bootstrap';
 import MonthlyExpensesCard from './recurringExpensesCard';
 import RecommendationCard from './recommendationCard';
+import NotificationCard from './notificationCard';
 import PieGraphCard from './pieGraphCard';
 import "../register/loginPage.css"
 
@@ -15,7 +16,8 @@ const DashboardPage = () => {
           <PieGraphCard />
         </Col>
         <Col>
-        <RecommendationCard />
+          <NotificationCard />
+          <RecommendationCard />
         </Col>
       </Row>
       <Row style={{marginTop:"15px"}}>

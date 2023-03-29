@@ -5,6 +5,7 @@ transactionRoutes.route('/allTransactions').get(transactionController.allTransac
 transactionRoutes.route('/transaction/:transactionId').get(transactionController.transactionById)
 transactionRoutes.route('/transactionUser/:userId').get(transactionController.transactionByUserId)
 transactionRoutes.route('/recurringExpenses/:userId').get(transactionController.recurringExpensesByUserId)
+transactionRoutes.route('/getMonthlyRecurringPrice/:userId').get(transactionController.getMonthlyRecurringExpensesPrice)
 
 transactionRoutes.route('/createTransaction').post(transactionController.createTransaction)
 transactionRoutes.route('/editTransaction').put(transactionController.editTransaction)

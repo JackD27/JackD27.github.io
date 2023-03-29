@@ -101,6 +101,10 @@ Accept: application/json
 GET http://localhost:8085/recurringExpenses/374
 Accept: application/json 
 
+###
+GET http://localhost:8085/getMonthlyRecurringPrice/374
+Accept: application/json 
+
 
 ###
 DELETE http://localhost:8085/deleteTransaction

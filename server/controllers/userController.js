@@ -25,6 +25,8 @@ const getUserById = async (req, res) => {
     }
 }
 
+
+
 const deleteUserById = async (req, res) => {
 
     const { userId } = req.body;

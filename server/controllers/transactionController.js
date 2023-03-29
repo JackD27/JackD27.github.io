@@ -54,6 +54,21 @@ const recurringExpensesByUserId = async (req, res) => {
   }
 }
 
+const getMonthlyRecurringExpensesPrice = async (req, res) => {
+  const user = await userModel.findOne({ where: { user_id: req.params.userId } });
+
+if(!user){
+  return res.status(400).send({ message: "User doesn't exist" });
+}
+
+try {
+  const transactions = await transactionModel.findAll({attributes: [{user_id: req.params.userId},[sequelize.fn('sum', sequelize.col('price')), 'total_price']]});
+  return res.status(200).send(transactions);
+} catch (err) {
+  return res.status(400).send({message: "Error Occurred getting reccurring experses by UserId."});
+}
+}
+
 const createTransaction = async (req, res) => {
 
     const { error } = transactionValidation(req.body)
@@ -166,4 +181,5 @@ module.exports = {
     createTransaction,
     transactionById,
     transactionByUserId,
+    getMonthlyRecurringExpensesPrice,
 }
