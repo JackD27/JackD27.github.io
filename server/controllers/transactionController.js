@@ -63,8 +63,8 @@ if(!user){
 }
 
 try {
-  const transactions = await transactionModel.findAll({where: { user_id: req.params.userId }, 
-    attributes: [[Sequelize.fn('sum', Sequelize.col('price')), 'total']]});
+  const transactions = await transactionModel.findAll({where: { userId: req.params.userId }, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'total']]});
 
   const totalDebits = transactions[0]; 
   return res.status(200).send(totalDebits);
