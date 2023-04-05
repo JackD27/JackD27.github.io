@@ -16,7 +16,7 @@ const NotificationCard = () => {
   const [number, setNumber] = useState(0)
   const [notiArray, setNotiArray] = useState([])
 
-  const url = `http://localhost:8085/getMonthlyRecurringPrice/${getUserInfo().user_id}`;
+  const url = `http://localhost:8085/getCurrentYearTotals/${getUserInfo().user_id}`;
 
 
   async function getNumber(){

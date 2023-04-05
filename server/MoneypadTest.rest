@@ -60,11 +60,11 @@ Content-Type: application/json
 {
     "name" : "Chipotle",
     "description" : "Chicken bowl from Chipotle with rice and salsa and beans",
-    "date" : "2023-02-07",
-    "price" : "19.99",
+    "date" : "2020-02-07",
+    "price" : "99999",
     "category" : "Needs",
     "category2" : "Food",
-    "recurring" : 1,
+    "recurring" : 0,
     "userId" : 374
 }
 
@@ -102,7 +102,7 @@ GET http://localhost:8085/recurringExpenses/374
 Accept: application/json 
 
 ###
-GET http://localhost:8085/getMonthlyRecurringPrice/374
+GET http://localhost:8085/getCurrentYearTotals/374
 Accept: application/json 
 
 
@@ -111,7 +111,7 @@ DELETE http://localhost:8085/deleteTransaction
 Content-Type: application/json 
 
 {
-    "transactionId" : 734
+    "transactionId" : 934
 }
 
 ###
