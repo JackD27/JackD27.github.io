@@ -57,7 +57,6 @@ const recurringExpensesByUserId = async (req, res) => {
 
 const getCurrentYearTotals = async (req, res) => {
   const currYear = new Date().getFullYear()
-  var Op = Sequelize.Op
   const user = await userModel.findOne({ where: { user_id: req.params.userId } });
 
 if(!user){
@@ -66,7 +65,7 @@ if(!user){
 
 try {
   const transactions = await transactionModel.findAll({where: {userId: req.params.userId, 
-    [Op.and]:Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('date')), currYear)}, 
+    [Sequelize.Op.and]:Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('date')), currYear)}, 
     attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalDebits']]});
 
   const needTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Needs" }, 
