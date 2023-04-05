@@ -63,11 +63,20 @@ if(!user){
 }
 
 try {
-  const transactions = await transactionModel.findAll({where: { userId: req.params.userId }, 
-    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'total']]});
+  const transactions = await transactionModel.findAll({where: { userId: req.params.userId}, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalDebits']]});
 
-  const totalDebits = transactions[0]; 
-  return res.status(200).send(totalDebits);
+  const needTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Needs" }, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalNeeds']]});
+    
+  const wantTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Wants" }, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalWants']]});
+  
+
+  const total = {debitTotal: transactions[0], needTotal: needTransactions[0], wantTotal: wantTransactions[0]}; 
+ 
+
+  return res.status(200).send(total);
 } catch (err) {
   return res.status(400).send({message: "Error Occurred getting reccurring experses price by UserId."});
 }
