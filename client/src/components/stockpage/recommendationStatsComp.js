@@ -58,26 +58,26 @@ const RecommendationStatsComp = (props) => {
     getList(); 
 
     //setNameData(props.name)
-    
 
     console.log(stocksData)
+    
 
+    
+    
 
       
 
 
   }, [stocksData.length]);  
 
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "July", "Aug", "Sept", "Oct", "Nov", "Dec"
-];
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
   function dataGrabber(){
     let data = []
     if (stocksData.length > 0){
         data = [
             {
-              name: monthNames[new Date(stocksData[0].info[3].period).getMonth()] +" "+ new Date(stocksData[0].info[3].period).getFullYear(),
+              name: monthNames[new Date(stocksData[0].info[3].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[3].period).getFullYear(),
               StrongBuy: stocksData[0].info[3].strongBuy,
               Buy: stocksData[0].info[3].buy,
               Hold: stocksData[0].info[3].hold,
@@ -85,7 +85,7 @@ const RecommendationStatsComp = (props) => {
               StrongSell: stocksData[0].info[0].strongSell,
             },
             {
-              name: monthNames[new Date(stocksData[0].info[2].period).getMonth()] +" "+ new Date(stocksData[0].info[2].period).getFullYear(),
+              name: monthNames[new Date(stocksData[0].info[2].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[2].period).getFullYear(),
               StrongBuy: stocksData[0].info[2].strongBuy,
               Buy: stocksData[0].info[2].buy,
               Hold: stocksData[0].info[2].hold,
@@ -93,7 +93,7 @@ const RecommendationStatsComp = (props) => {
               StrongSell: stocksData[0].info[0].strongSell,
             },
             {
-              name: monthNames[new Date(stocksData[0].info[1].period).getMonth()] +" "+ new Date(stocksData[0].info[1].period).getFullYear(),
+              name: monthNames[new Date(stocksData[0].info[1].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[1].period).getFullYear(),
               StrongBuy: stocksData[0].info[1].strongBuy,
               Buy: stocksData[0].info[1].buy,
               Hold: stocksData[0].info[1].hold,  
@@ -101,7 +101,7 @@ const RecommendationStatsComp = (props) => {
               StrongSell: stocksData[0].info[0].strongSell,
             },
             {
-              name: monthNames[new Date(stocksData[0].info[0].period).getMonth()] +" "+ new Date(stocksData[0].info[0].period).getFullYear(),
+              name: monthNames[new Date(stocksData[0].info[0].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[0].period).getFullYear(),
               StrongBuy: stocksData[0].info[0].strongBuy,
               Buy: stocksData[0].info[0].buy,
               Hold: stocksData[0].info[0].hold,

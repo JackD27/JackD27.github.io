@@ -37,7 +37,7 @@ const RecommendationCard = () => {
       }, [list.length]);  
 
     const [values, setValues] = useState({
-        stockName: "A",
+        stockName: "AAPL",
       });
 
 
