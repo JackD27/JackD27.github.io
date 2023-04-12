@@ -82,7 +82,7 @@ const RecommendationStatsComp = (props) => {
               Buy: stocksData[0].info[3].buy,
               Hold: stocksData[0].info[3].hold,
               Sell: stocksData[0].info[3].sell,
-              StrongSell: stocksData[0].info[0].strongSell,
+              StrongSell: stocksData[0].info[3].strongSell,
             },
             {
               name: monthNames[new Date(stocksData[0].info[2].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[2].period).getFullYear(),
@@ -90,7 +90,7 @@ const RecommendationStatsComp = (props) => {
               Buy: stocksData[0].info[2].buy,
               Hold: stocksData[0].info[2].hold,
               Sell: stocksData[0].info[2].sell,
-              StrongSell: stocksData[0].info[0].strongSell,
+              StrongSell: stocksData[0].info[2].strongSell,
             },
             {
               name: monthNames[new Date(stocksData[0].info[1].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[1].period).getFullYear(),
@@ -98,7 +98,7 @@ const RecommendationStatsComp = (props) => {
               Buy: stocksData[0].info[1].buy,
               Hold: stocksData[0].info[1].hold,  
               Sell: stocksData[0].info[1].sell,
-              StrongSell: stocksData[0].info[0].strongSell,
+              StrongSell: stocksData[0].info[1].strongSell,
             },
             {
               name: monthNames[new Date(stocksData[0].info[0].period + 1).getMonth()] +" "+ new Date(stocksData[0].info[0].period).getFullYear(),
