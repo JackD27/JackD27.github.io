@@ -62,13 +62,8 @@ const RecommendationStatsComp = (props) => {
     console.log(stocksData)
     
 
-    
-    
 
-      
-
-
-  }, [stocksData.length]);  
+  }, [props.name]);  
 
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
