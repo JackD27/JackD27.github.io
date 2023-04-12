@@ -65,7 +65,7 @@ const NotificationCard = () => {
 
 
   return (
-    <Card className="text-center" style={{ background: "rgb(50,58,69)", marginTop: "15px" }}>
+    <Card className="text-center" style={{ background: "rgb(50,58,69)"}}>
       <Card.Header>
         <h2 style={{ color: "#14A44D" }}>Notifications {notiBadge()}</h2>
       </Card.Header>

@@ -80,7 +80,7 @@ try {
 
   return res.status(200).send(total);
 } catch (err) {
-  return res.status(400).send({message: "Error Occurred getting reccurring experses price by UserId."});
+  return res.status(400).send({message: "Error Occurred getting current year totals"});
 }
 }
 

@@ -135,7 +135,6 @@ const TransactionComp = () => {
   ];
 
   const handleSubmit = async (e) => {
-    console.log(values)
     try {
       const { data: res } = await axios.post(url, values);
       
