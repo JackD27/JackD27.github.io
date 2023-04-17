@@ -28,17 +28,29 @@ const NotificationCard = () => {
 
   async function showNotifications(data) {
     let notficationArray = []
+
+    var totalSpending = (data.debitRecurring.totalDebitsRecurring * 12) + data.debitNonRecurring.totalDebits
+    var totalNeeds = (data.needRecurring.totalNeedsRecurring * 12) + data.needNonRecurring.totalNonRecurringNeeds
+    var totalWants = (data.wantRecurring.totalWantsRecurring * 12)+ data.wantNonRecurring.totalNonRecurringWants
   
-    if (data.debitTotal.totalDebits > getUserInfo().income * taxCalculation(getUserInfo().income)) {
-      notficationArray.push("You're spending more than your income!");
+    if (totalSpending > (getUserInfo().income * .8) * taxCalculation(getUserInfo().income)) {
+      notficationArray.push("You're spending more than your income! Cut down on spending.");
     } 
 
-    if (data.needTotal.totalNeeds * 12 * .5 > getUserInfo().income * .5 * taxCalculation(getUserInfo().income)) {
-      notficationArray.push("Your monthly recurring NEEDs are too high, cut down on spending.");
+    if ((data.needRecurring.totalNeedsRecurring * 12) > (getUserInfo().income * .5) * taxCalculation(getUserInfo().income)) {
+      notficationArray.push("Your monthly recurring NEEDs are too high, cut down on subscriptions.");
     } 
     
-    if (data.wantTotal.totalWants * 12 * .3 > getUserInfo().income * .3 * taxCalculation(getUserInfo().income)) {
-      notficationArray.push("Your monthly recurring WANTs are too high, do you really need that much stuff when it's not useful?");
+    if ((data.wantRecurring.totalWantsRecurring * 12) > (getUserInfo().income * .3) * taxCalculation(getUserInfo().income)) {
+      notficationArray.push("Your monthly recurring WANTs are too high, do you really need that much stuff for subscriptions?");
+    }
+
+    if ((totalNeeds) > (getUserInfo().income * .5) * taxCalculation(getUserInfo().income)) {
+      notficationArray.push("Your NEEDs are too high, please look at the pie chart for recommendations.");
+    } 
+    
+    if ((totalWants) > (getUserInfo().income * .3) * taxCalculation(getUserInfo().income)) {
+      notficationArray.push("Your WANTs are too high, it's not important, check the pie chart for recommendations.");
     }
     setNotiArray(notficationArray);
   }

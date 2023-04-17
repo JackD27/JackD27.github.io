@@ -146,7 +146,7 @@ const RecurringTransactionListComp = (props) => {
 
 
   return (
-    <>{props.switch ? <h4 style={{marginTop: "5px", color:"white"}}>${number} Monthly | ${number * 12} Yearly</h4>: null}
+    <>{props.switch ? <h4 style={{marginTop: "5px", color:"white"}}>${Number(number).toFixed(2)} Monthly | ${Number(number * 12).toFixed(2)} Yearly</h4>: null}
     <Table bordered hover style={{color: "white"}} size="sm">
         <thead>
         <tr>

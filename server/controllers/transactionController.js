@@ -64,23 +64,45 @@ if(!user){
 }
 
 try {
-  const transactions = await transactionModel.findAll({where: {userId: req.params.userId, 
+  
+  // Recurring Function Querying, does not need current year, since it's a monthly subscription.
+  const transactionsRecurring = await transactionModel.findAll({where: {userId: req.params.userId, recurring: 1, category: {[Sequelize.Op.not]: "Savings"}}, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalDebitsRecurring']]});
+
+  const needTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Needs" }, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalNeedsRecurring']]});
+    
+  const wantTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Wants" }, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalWantsRecurring']]});
+
+
+  // Non Recurring Querying from Current Year
+  const transactions = await transactionModel.findAll({where: {userId: req.params.userId, recurring: 0, category: {[Sequelize.Op.not]: "Savings"},
     [Sequelize.Op.and]:Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('date')), currYear)}, 
     attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalDebits']]});
 
-  const needTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Needs" }, 
-    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalNeeds']]});
+  const needTransactionsNonRecurring = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 0, category: "Needs", 
+    [Sequelize.Op.and]:Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('date')), currYear)}, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalNonRecurringNeeds']]});
     
-  const wantTransactions = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 1, category: "Wants" }, 
-    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalWants']]});
-  
+  const wantTransactionsNonRecurring = await transactionModel.findAll({where: { userId: req.params.userId, recurring: 0, category: "Wants",
+    [Sequelize.Op.and]:Sequelize.where(Sequelize.fn('YEAR', Sequelize.col('date')), currYear) }, 
+    attributes: [[Sequelize.fn('ROUND', Sequelize.fn('sum', Sequelize.col('price')),2), 'totalNonRecurringWants']]});
 
-  const total = {debitTotal: transactions[0], needTotal: needTransactions[0], wantTotal: wantTransactions[0]}; 
+    
+  const total = {
+    debitRecurring: transactionsRecurring[0],
+    needRecurring: needTransactions[0],
+    wantRecurring: wantTransactions[0],
+    debitNonRecurring: transactions[0],
+    needNonRecurring: needTransactionsNonRecurring[0],
+    wantNonRecurring: wantTransactionsNonRecurring[0],
+  }; 
  
 
   return res.status(200).send(total);
 } catch (err) {
-  return res.status(400).send({message: "Error Occurred getting current year totals"});
+  return res.status(400).send({message: "Error Occurred getting current year totals" + err});
 }
 }
 

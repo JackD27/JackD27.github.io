@@ -58,10 +58,10 @@ POST http://localhost:8085/createTransaction
 Content-Type: application/json 
 
 {
-    "name" : "Chipotle",
-    "description" : "Chicken bowl from Chipotle with rice and salsa and beans",
-    "date" : "2020-02-07",
-    "price" : "99999",
+    "name" : "Groceries",
+    "description" : "Food",
+    "date" : "2023-02-07",
+    "price" : "89.99",
     "category" : "Needs",
     "category2" : "Food",
     "recurring" : 0,
