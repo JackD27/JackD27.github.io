@@ -16,7 +16,7 @@ const navigate = useNavigate();
               <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/addStock")}>+</Button>
             </Card.Header>
             <Card.Body>
-              <StockOwnedComp show="true"length="20"/>
+              <StockOwnedComp show="true"length="20" delete={true}/>
             </Card.Body>
             <Card.Footer></Card.Footer>
           </Card>

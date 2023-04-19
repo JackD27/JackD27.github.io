@@ -114,6 +114,7 @@ const StockedOwnedComp = (props) => {
         <ListComp show={props.show}
           stockTicker={watchlistItem.name}
           date={watchlistItem.date}
+          delete={props.delete}
           price={watchlistItem.priceWhenBought}
           currPrice={watchlistItem.info.c}
           //percentage={Number(percent).toFixed(2)}
@@ -140,7 +141,7 @@ const StockedOwnedComp = (props) => {
           <th>Shares</th>
           <th>Current Price</th>
           <th>Profit</th>
-          <th>Delete</th>
+          {props.delete && <th>Delete</th>}
         </tr>
       </thead>
       <tbody>

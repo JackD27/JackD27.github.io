@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Button, Card} from 'react-bootstrap';
 import StockListComp from './stockOwnedComp';
 import { useNavigate } from "react-router-dom";
@@ -15,10 +15,10 @@ const navigate = useNavigate();
               <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/addStock")}>+</Button>
             </Card.Header>
             <Card.Body>
-              <StockListComp length="7" show={true}/>
+              <StockListComp length="7" show={true} delete={false}/>
             </Card.Body>
             <Card.Footer>
-                <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/allStocks")}>View whole Portfolio</Button>
+                <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/allStocks")}>View and Edit Whole Portfolio</Button>
             </Card.Footer>
           </Card>
   );

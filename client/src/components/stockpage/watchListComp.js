@@ -91,6 +91,7 @@ const WatchlistComp = (props) => {
         <ListComp show={props.show}
         showPercent={props.showPercent}
           stockTicker={watchlistItem.name}
+          delete={props.delete}
           date={watchlistItem.date}
           price={watchlistItem.info.c}
           percentage={Number(percent).toFixed(2)}
@@ -110,7 +111,7 @@ const WatchlistComp = (props) => {
           <th>Ticker</th>
           <th>Percentage Change of Day</th>
           <th>Current Price</th>
-          <th>Delete</th>
+          {props.delete && <th>Delete</th>}
         </tr>
       </thead>
       <tbody>

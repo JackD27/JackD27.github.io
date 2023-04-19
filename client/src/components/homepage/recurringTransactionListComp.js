@@ -156,7 +156,7 @@ const RecurringTransactionListComp = (props) => {
           <th>Price</th>
           <th>Category</th>
           <th>Category2</th>
-          <th>Delete</th>
+          {props.show && <th>Delete</th>}
         </tr>
       </thead>
       <tbody>

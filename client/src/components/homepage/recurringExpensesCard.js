@@ -35,7 +35,7 @@ const navigate = useNavigate();
               <RecurringList length={props.length} show={show} switch={switch1}/>
             </Card.Body>
             <Card.Footer>
-                {show ? null : <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/transactions")}>View All Transactions</Button>}
+                {show ? null : <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/transactions")}>View and Edit All Transactions</Button>}
             </Card.Footer>
           </Card>
   );

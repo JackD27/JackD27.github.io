@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Card} from 'react-bootstrap';
-import WatchlistComp from './watchListComp';
+import WatchListComp from './watchListComp';
 import { useNavigate } from "react-router-dom";
 import "../register/loginPage.css"
 
@@ -15,7 +15,7 @@ const navigate = useNavigate();
               <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/addWatchlist")}>+</Button>
             </Card.Header>
             <Card.Body>
-              <WatchlistComp showPercent={true}show={false}length="20"/>
+              <WatchListComp  length="20" show={false} showPercent={true} delete={true}/>
             </Card.Body>
             <Card.Footer></Card.Footer>
           </Card>

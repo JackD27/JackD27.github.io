@@ -22,7 +22,7 @@ const TransactionComp = (props) => {
       {/* <td>{recurring}</td> */}
       <td>{category}</td>
       <td>{category2}</td>
-      <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>
+      {canShow && <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>}
     </tr>
   );
 

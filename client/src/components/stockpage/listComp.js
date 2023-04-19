@@ -6,6 +6,7 @@ import "../register/loginPage.css"
 const ListComp = (props) => {
 
    const canShow = props.show;
+   const canDelete = props.delete;
    const canShowPercent = props.showPercent;
 
   const onDeleteClick = () => {
@@ -23,7 +24,7 @@ const ListComp = (props) => {
       {canShow && <td>{shares}</td>}
       {canShow && <td>${Number(currPrice).toFixed(2)}</td>}
       {canShow && <td>${profit}</td>}
-      <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>
+      {canDelete && <td><Button size="sm" variant="danger" onClick={() => {onDeleteClick()}}>Delete</Button></td>}
     </tr>
   );
 

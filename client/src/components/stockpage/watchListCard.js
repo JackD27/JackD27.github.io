@@ -15,10 +15,10 @@ const navigate = useNavigate();
               <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/addWatchlist")}>+</Button>
             </Card.Header>
             <Card.Body>
-              <WatchListComp length="7" show={false} showPercent={true}/>
+              <WatchListComp length="7" show={false} showPercent={true} delete={false}/>
             </Card.Body>
             <Card.Footer>
-                <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/allWatchlist")}>View whole watchlist</Button>
+                <Button variant="outline-success" style={{color: "white"}} onClick={() => navigate("/allWatchlist")}>View and Edit Whole Watchlist</Button>
             </Card.Footer>
           </Card>
   );
