@@ -3,7 +3,9 @@ import React from "react";
 import { Route, Routes, useLocation} from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
 
+
 import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 import ErrorPage from "./components/misc/errorPage";
 
 import Login from "./components/register/loginPage";
@@ -74,6 +76,7 @@ const App = () => {
           </>}
         </Routes>
       </UserContext.Provider>
+      <Footer style={{paddingTop: '1rem'}}/>
     </>
   );
 };
