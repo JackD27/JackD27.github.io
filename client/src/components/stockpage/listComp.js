@@ -1,5 +1,6 @@
 import React from "react";
 import {Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import "../register/loginPage.css"
 
 
@@ -13,11 +14,10 @@ const ListComp = (props) => {
     props.onDeleteClickHandler();
       
   }
-
   
   const ListItem = ({ticker, date, price, shares, percentage, currPrice, profit}) => (
-    <tr style={{color: "white"}}>
-      <td>{ticker}</td>
+    <tr style={{color: "white"}} >
+      <td><Link to={`https://finance.yahoo.com/quote/${ticker}`} style={{ textDecoration: 'none', color: 'white'}}>{ticker}</Link></td>
       {canShowPercent && <td style={{color: percentage < 0 ? "orangered" : "lightgreen"}}>{percentage}%</td>}
       {canShow && <td>{date}</td>}
       <td>${Number(price).toFixed(2)}</td>
