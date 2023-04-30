@@ -20,7 +20,7 @@ const RecommendationCard = () => {
             </Card.Header>
             <Card.Body>
                 <h4 style={{ color: "white" }}>Max Car Price: {formatter.format(getUserInfo().income * .35)}</h4>
-                <h4 style={{ color: "white" }}>Max House Price: {formatter.format(getUserInfo().income * 5.4)}</h4>
+                <h4 style={{ color: "white" }}>Max House Price: {formatter.format(getUserInfo().income * 5)}</h4>
             </Card.Body>
             <Card.Footer>
             </Card.Footer>

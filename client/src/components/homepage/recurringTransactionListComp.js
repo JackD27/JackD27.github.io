@@ -75,12 +75,31 @@ const RecurringTransactionListComp = (props) => {
       .catch((err) => {});
   }
 
+  const [number2, setNumber2] = useState(0)
+
+  const url2 = `http://localhost:8085/getCurrentYearTotals/${getUserInfo().user_id}`;
+
+  async function getNumber2() {
+      const data = await axios.get(url2);
+      const info = data.data;
+      setNumber2(info);
+  }
+
 
     useEffect(() => {
 
         getNumber() 
+        getNumber2() 
         // eslint-disable-next-line 
+        console.log(Object.keys(number2).length)
     }, [number.length]);  
+
+  //   useEffect(() => {
+
+  //     getNumber2() 
+  //     // eslint-disable-next-line 
+  //     console.log(number2)
+  // }, [number2.length]); 
 
   useEffect(() => {
     
@@ -105,6 +124,7 @@ const RecurringTransactionListComp = (props) => {
     const newList2 = list2.filter((el) => el !== el); // This causes a re-render because we change state. Helps cause a re-render.
     setList2(newList2);  // This causes a re-render because we change state.
     getNumber()
+    getNumber2()
   }
 
 
@@ -144,9 +164,29 @@ const RecurringTransactionListComp = (props) => {
     });
   }
 
+  const YearlyTotals = () => {
+    if (Object.keys(number2).length > 5){
+    return <h4 style={{ color: "white" }}>
+      $
+      {Number(
+        number2.debitRecurring.totalDebitsRecurring * 12 +
+          number2.debitNonRecurring.totalDebits
+      ).toLocaleString()}{" "}
+      Total Spending | ${Number(number2.needRecurring.totalNeedsRecurring * 12 +
+          number2.needNonRecurring.totalNonRecurringNeeds).toLocaleString()} Total Needs
+      | ${Number(number2.wantRecurring.totalWantsRecurring * 12 +
+          number2.wantNonRecurring.totalNonRecurringWants).toLocaleString()} Total Wants
+    </h4>}
+    else{
+      return null
+    }
+  };
+
 
   return (
-    <>{props.switch ? <h4 style={{marginTop: "5px", color:"white"}}>${Number(number).toFixed(2)} Monthly | ${Number(number * 12).toFixed(2)} Yearly</h4>: null}
+    <>{<YearlyTotals></YearlyTotals>}
+    {props.switch ? <h5 style={{color:"white"}}>${Number(number).toLocaleString()} Recurring Monthly | ${Number(number * 12).toLocaleString()} Recurring Yearly</h5>: null}
+    {props.switch ? <h5 style={{color:"white"}}>${Number(number2.needRecurring.totalNeedsRecurring * 12).toLocaleString()} Recurring Yearly Needs | ${Number(number2.wantRecurring.totalWantsRecurring * 12).toLocaleString()} Recurring Yearly Wants</h5>: null}
     <Table bordered hover style={{color: "white"}} size="sm">
         <thead>
         <tr>
