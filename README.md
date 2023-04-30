@@ -38,7 +38,6 @@ on stocks and put them into based on the investor’s strategy.
 ```sh
     git clone https://github.com/JackD27/CapstoneProject.git
 ```
--   
 
 #### Server
 ```sh
@@ -53,5 +52,5 @@ on stocks and put them into based on the investor’s strategy.
     npm i
     npm start
 ```
-**Disclaimer:** I didn't push the .env file into the server folder. You will have to make your own database. I used PostgreSQL from heroku.
+**Disclaimer:** I didn't push the .env file into the server folder. You will have to make your own database. I used PostgreSQL from Heroku.
 You will also need a Secret Access Token in the .env as well for JWT.
