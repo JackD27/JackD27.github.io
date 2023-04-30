@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./formInput.css";
 import Form from "react-bootstrap/Form";
+import {Button} from 'react-bootstrap';
 
 const FormInput = (props) => {
   const [focused, setFocused] = useState(false);
@@ -19,6 +20,10 @@ const FormInput = (props) => {
         onChange={onChange}
         onBlur={handleFocus}
         focused={focused.toString()}
+        formMethod="POST"
+        method="POST"
+        formAction="POST"
+        action="POST"
       />
       <span>{errorMessage}</span>
     </Form>

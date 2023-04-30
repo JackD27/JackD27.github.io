@@ -169,7 +169,7 @@ const TransactionComp = () => {
 
   return (
     <Card className="loginCard">
-      <Card.Header><h2 class="text-white">Add Transaction</h2></Card.Header>
+      <Card.Header><h2 className="text-white">Add Transaction</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput
@@ -182,14 +182,14 @@ const TransactionComp = () => {
         ))}
         <div style={{color: "rgb(151, 151, 151)", fontSize: "12px", marginTop: "5px"}}>Main Category</div>
         <select style={{marginTop: "5px"}} name="category"onChange={onChange}>
-          {category1.map((input) =>(
-            <option>{input.value}</option>
+          {category1.map((input, i) =>(
+            <option key={i}>{input.value}</option>
           ))}
         </select>
         <div style={{color: "rgb(151, 151, 151)", fontSize: "12px", marginTop: "5px"}}>Secondary Category</div>
         <select style={{marginTop: "5px"}} name="category2" onChange={onChange}>
-        {category2.map((input) =>(
-            <option>{input.value}</option>
+        {category2.map((input, i) =>(
+            <option key={i}>{input.value}</option>
           ))}
         </select>
         <Form.Check type="checkbox" name="recurring" defaultChecked={isRecurring} style={{fontSize: "30px", color:"rgb(151, 151, 151)"}} value={values.recurring}

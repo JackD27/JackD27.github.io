@@ -107,7 +107,7 @@ const AddPortfolioComp = () => {
 
   return (
     <Card className="loginCard">
-      <Card.Header><h2 class="text-white">Add Stock to Portfolio</h2></Card.Header>
+      <Card.Header><h2 className="text-white">Add Stock to Portfolio</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput

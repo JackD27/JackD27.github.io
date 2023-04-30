@@ -10,11 +10,9 @@ const KEY_URL = `&token=${key}`;
 
 
 const RecommendationStatsComp = (props) => {
-
-
-    const [nameData, setNameData] = useState(props.name);
     
   const [stocksData, setStocksData] = useState({});
+  const [isError, setError] = useState(false);
 
   async function getStocksData(stock){
     return await axios
@@ -25,43 +23,44 @@ const RecommendationStatsComp = (props) => {
   };
 
   
+  async function getList() {
 
+    let tempData = []
+    let promises = []
+
+    
+        
+   try {
+
+    
+    promises.push(getStocksData(props.name).then(res =>{
+        tempData.push({name: props.name, info: res.data})
+    }))
+    
+    Promise.all(promises).then(()=>{
+      setStocksData(tempData);
+    })
+    
+
+    
+    }catch(error){
+        console.error("Error", error.message);
+    }
+    
+  }
   
 
 
   useEffect(() => {
 
-    async function getList() {
-
-        let tempData = []
-        let promises = []
     
-            
-       try {
-        
-        promises.push(getStocksData(props.name).then(res =>{
-            tempData.push({name: props.name, info: res.data})
-        }))
-        
-        Promise.all(promises).then(()=>{
-          setStocksData(tempData);
-        })
-        
-        }catch(error){
-            console.error("Error", error.message);
-        }
-        
-      }
 
     
 
     getList(); 
 
     //setNameData(props.name)
-
-    console.log(stocksData)
-    
-
+  
 
   }, [props.name]);  
 
@@ -69,6 +68,7 @@ const RecommendationStatsComp = (props) => {
 
   function dataGrabber(){
     let data = []
+    try{
     if (stocksData.length > 0){
         data = [
             {
@@ -105,8 +105,13 @@ const RecommendationStatsComp = (props) => {
             },
           ];
     }
+    
     return data
+  }catch(error){
+    console('Error fetching data', error.message)
   }
+  }
+
 
   
 
@@ -138,10 +143,10 @@ const RecommendationStatsComp = (props) => {
           </BarChart>
   );
 
-
   return (
-    <><h1 style={{ color: "white" }}>{props.name}</h1>
-      {Object.keys(stocksData).length > 0 ? <><BarChartComp dataVals={dataGrabber()}/></>:"Nothing"}
+    <>
+    <h1 style={{ color: "white" }}>{props.name}</h1>
+      {Object.keys(stocksData).length > 0 && Object.keys(stocksData[0].info).length !== 0 ? <><BarChartComp dataVals={dataGrabber()}/></>:<h4 style={{ color: "red" }}>Error Occurred Fetching Data</h4> }
       </>
   );
 };

@@ -102,7 +102,7 @@ const ChangeSettingsComp = () => {
 
   return (
     <Card className="loginCard">
-      <Card.Header><h2 class="text-white">Change Settings</h2></Card.Header>
+      <Card.Header><h2 className="text-white">Change Settings</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput

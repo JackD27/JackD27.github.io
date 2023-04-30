@@ -8,6 +8,7 @@ import {Col, Row, Button, Card} from 'react-bootstrap';
 import LandingPage from "./Landingpage";
 import AlertFunction from './AlertMessage';
 import "./loginPage.css"
+import "./formInput.css";
 
 const url = "http://localhost:8085/login";
 
@@ -72,6 +73,8 @@ const Login2 = () => {
   ];
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     try {
       const { data: res } = await axios.post(url, values);
       const { accessToken } = res;
@@ -102,7 +105,7 @@ const Login2 = () => {
       </Col>
       <Col>
     <Card className="loginCard">
-      <Card.Header><h2 class="text-white">Log In</h2></Card.Header>
+      <Card.Header><h2 className="text-white">Log In</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput
@@ -115,7 +118,7 @@ const Login2 = () => {
         ))}
         </Card.Body>
         <Card.Footer>
-        <Button variant="success" onClick={handleSubmit}>Log In</Button>
+        <Button variant="success" type="submit" value='Submit' onClick={handleSubmit}>Log In</Button>
         <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/register")}>Create Account?</Button>
         {footMessage()}
         </Card.Footer>

@@ -50,8 +50,8 @@ const RecommendationCard = () => {
             <Card.Header>
               <h2 style={{ color: "#14A44D" }}>Stock Recommendations</h2>
               <select style={{marginTop: "5px"}} name="stockName"onChange={onChange}>
-                {list.map((input) =>(
-                <option>{input.stockTicker}</option>
+                {list.map((input, i) =>(
+                <option key={i}>{input.stockTicker}</option>
           ))}
         </select>
             </Card.Header>

@@ -26,7 +26,7 @@ export default function NavbarFunction() {
 
   if(user){
   return (
-    <Navbar collapseOnSelectexpand="lg"bg="dark"variant="dark"className="mb-4">
+    <Navbar bg="dark"variant="dark"className="mb-4">
       <Container>
       <Navbar.Brand as={Link} to="/" className="mx-3"> MoneyPad</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -36,7 +36,7 @@ export default function NavbarFunction() {
           <Nav.Link as={Link} to="/stocks">Stocks</Nav.Link>
         </Nav>
         <Nav>
-          <NavDropdown inline className="mx-3" title={userName()} id="collasible-nav-dropdown">
+          <NavDropdown className="mx-3" title={userName()} id="collasible-nav-dropdown">
             <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item>{authButton()}</NavDropdown.Item>

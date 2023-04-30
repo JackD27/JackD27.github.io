@@ -140,7 +140,7 @@ export default function Home() {
       </Col>
       <Col>
     <Card className="loginCard">
-      <Card.Header><h2 class="text-white">Register</h2></Card.Header>
+      <Card.Header><h2 className="text-white">Register</h2></Card.Header>
       <Card.Body>
         {inputs.map((input) => (
           <FormInput
