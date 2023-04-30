@@ -38,6 +38,7 @@ export default function NavbarFunction() {
         <Nav>
           <NavDropdown className="mx-3" title={userName()} id="collasible-nav-dropdown">
             <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
+            {user.user_id === 374 ? <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item> : null}
             <NavDropdown.Divider />
             <NavDropdown.Item>{authButton()}</NavDropdown.Item>
           </NavDropdown>

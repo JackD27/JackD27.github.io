@@ -11,6 +11,7 @@ import ErrorPage from "./components/misc/errorPage";
 import Login from "./components/register/loginPage";
 import Register from "./components/register/registerPage";
 import Settings from "./components/misc/editUserPage";
+import Admin from "./components/misc/adminPage";
 import AddTransaction from "./components/homepage/addTransactionComp";
 import AddStockItem from "./components/stockpage/addPortfolioComp";
 import AddWatchlistItem from "./components/stockpage/addWatchlistComp";
@@ -64,6 +65,7 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           {user && <>
+          <Route exact path="/admin" element={<Admin />} />
           <Route exact path="/" element={<Dashboard />} />
           <Route exact path="/addTransaction" element={<AddTransaction />} />
           <Route exact path="/addStock" element={<AddStockItem />} />
@@ -76,7 +78,7 @@ const App = () => {
           </>}
         </Routes>
       </UserContext.Provider>
-      <Footer style={{paddingTop: '1rem'}}/>
+      <Footer/>
     </>
   );
 };

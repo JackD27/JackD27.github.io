@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
-import {Col, Row, Button, Card} from 'react-bootstrap';
+import {Col, Row, Button, Card, Form} from 'react-bootstrap';
 import LandingPage from "./Landingpage";
 import AlertFunction from './AlertMessage';
 
@@ -31,8 +31,7 @@ export default function Home() {
 
   useEffect(() => {
 
-    const obj = getUserInfo(user)
-    setUser(obj)
+    setUser(getUserInfo())
     footMessage()
 
   }, []);
@@ -42,50 +41,10 @@ export default function Home() {
     return
   }
 
-  const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      handleSubmit()
-    }
-  }
-
-  const inputs = [
-    {
-      id: 1,
-      name: "username",
-      type: "text",
-      placeholder: "Username",
-      label: "Enter a Username",
-      pattern: "^[A-Za-z0-9]{5,15}$",
-      required: true,
-    },
-    {
-      id: 2,
-      name: "email",
-      type: "email",
-      placeholder: "Email",
-      label: "What's your Email?",
-      required: true,
-    },
-    {
-      id: 3,
-      name: "income",
-      type: "number",
-      placeholder: "Income",
-      label: "What's your Income?",
-      min: "0",
-      required: true,
-    },
-    {
-      id: 4,
-      name: "password",
-      type: "password",
-      label: "Enter a Password",
-      placeholder: "Password",
-      required: true,
-    },
-  ];
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     try {
       const { data: res } = await axios.post(url, values);
       setSuccess(2);
@@ -113,8 +72,12 @@ export default function Home() {
     }
   };
 
-  const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+  const onChange = ({currentTarget: input}) => {
+    setValues({ ...values, [input.name]: input.value });
+  };
+
+  const onChangeNumber = ({currentTarget: input}) => {
+    setValues({ ...values, [input.name]: input.valueAsNumber });
   };
 
   const footMessage = () => {
@@ -142,21 +105,28 @@ export default function Home() {
     <Card className="loginCard">
       <Card.Header><h2 className="text-white">Register</h2></Card.Header>
       <Card.Body>
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-            onKeyPress={handleKeyPress}
-          />
-        ))}
-        </Card.Body>
-        <Card.Footer>
-        <Button variant="success"onClick={handleSubmit}>Register</Button>
-        <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/login")}>Already have an account?</Button>
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicUsername">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Username</Form.Label>
+        <Form.Control required={true} type="text" placeholder="Enter Username" pattern="^[A-Za-z0-9]{5,15}$" name="username"onChange={onChange} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>What's your Email?</Form.Label>
+        <Form.Control required={true} type="email" placeholder="Enter Email"name="email"onChange={onChange} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicIncome">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>What's your Income?</Form.Label>
+        <Form.Control required={true} type="number" placeholder="Enter Income" name="income"onChange={onChangeNumber} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Password</Form.Label>
+        <Form.Control required={true} type="password" placeholder="Enter Password" name="password"onChange={onChange} />
+      </Form.Group>
+      <Button variant="success" type="submit" onClick={handleSubmit}>Register</Button>
+      <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/login")}>Already have an account?</Button>
         {footMessage()}
-        </Card.Footer>
+      </Form>
+      </Card.Body>
     </Card>
     </Col>
       </Row>
