@@ -40,7 +40,6 @@ on stocks and put them into based on the investor’s strategy.
 ```
 
 * Server
-```sh
     - `cd server` To access Server folder
     - `npm i` install all server dependencies
     - `npm start` Start the server
