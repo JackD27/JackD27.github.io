@@ -62,3 +62,10 @@ on stocks and put them into based on the investor’s strategy.
 ```
 **Disclaimer:** I didn't push the .env file into the server folder. You will have to make your own database. I used PostgreSQL from Heroku.
 You will also need a Secret Access Token in the .env as well for JWT.
+
+### Example Pictures
+#### Dashboard Page
+![DashboardPageCapstone](https://user-images.githubusercontent.com/103354115/235334003-81909ba2-e0b4-46f5-adc2-2ee84c5bd8be.png)
+
+#### Stock Page
+![StockPageCapstone](https://user-images.githubusercontent.com/103354115/235334009-c4b67c9b-6d29-4e63-9912-6a548f5254db.png)
