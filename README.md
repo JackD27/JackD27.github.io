@@ -42,14 +42,22 @@ on stocks and put them into based on the investor’s strategy.
 #### Server
 ```sh
     cd server
+```
+```sh
     npm i
+```
+```sh    
     npm start
 ```
 
 #### Client
 ```sh
     cd client
+```    
+```sh
     npm i
+```    
+```sh
     npm start
 ```
 **Disclaimer:** I didn't push the .env file into the server folder. You will have to make your own database. I used PostgreSQL from Heroku.
