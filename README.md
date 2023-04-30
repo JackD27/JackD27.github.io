@@ -39,27 +39,18 @@ on stocks and put them into based on the investor’s strategy.
     git clone https://github.com/JackD27/CapstoneProject.git
 ```
 
-#### Server
+* Server
 ```sh
-    cd server
-```
-```sh
-    npm i
-```
-```sh    
-    npm start
-```
+    - `cd server` To access Server folder
+    - `npm i` install all server dependencies
+    - `npm start` Start the server
 
-#### Client
-```sh
-    cd client
-```    
-```sh
-    npm i
-```    
-```sh
-    npm start
-```
+
+* Client
+    - `cd client` To access Client folder  
+    - `npm i` install all dependencies
+    - `npm start` Start the front-end
+    
 **Disclaimer:** I didn't push the .env file into the server folder. You will have to make your own database. I used PostgreSQL from Heroku.
 You will also need a Secret Access Token in the .env as well for JWT.
 
