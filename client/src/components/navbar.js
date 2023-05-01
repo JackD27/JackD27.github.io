@@ -10,7 +10,6 @@ export default function NavbarFunction() {
 
   const handleLogout = async () => {
     localStorage.clear();
-    navigate("/login");
     window.location.reload();
   };
 
