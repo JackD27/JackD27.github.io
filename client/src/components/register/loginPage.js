@@ -10,6 +10,7 @@ import AlertFunction from './AlertMessage';
 import "./loginPage.css"
 import "./formInput.css";
 
+const newUrl = "https://moneypad-capstone.herokuapp.com/login"
 const url = "http://localhost:8085/login";
 
 const Login2 = () => {
@@ -45,7 +46,7 @@ const Login2 = () => {
     e.preventDefault();
     e.stopPropagation();
     try {
-      const { data: res } = await axios.post(url, values);
+      const { data: res } = await axios.post(newUrl, values);
       const { accessToken } = res;
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
