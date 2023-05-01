@@ -10,7 +10,7 @@ import AlertFunction from './AlertMessage';
 import "./loginPage.css"
 import "./formInput.css";
 
-const newUrl = "https://moneypad-capstone.herokuapp.com/login"
+const newUrl = `${process.env.API_POINT}/login`
 const url = "http://localhost:8085/login";
 
 const Login2 = () => {
