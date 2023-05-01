@@ -23,7 +23,7 @@
     "deploy" : "gh-pages -d build",
     "build": "react-scripts build",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
-    "start": "node server/server.js",
+    "start": "react-scripts start",
     "start:dev": "nodemon server.js"
   },
   "name": "server",
