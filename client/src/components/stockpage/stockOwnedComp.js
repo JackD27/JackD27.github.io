@@ -4,6 +4,7 @@ import getUserInfo from '../../utilities/decodeJwt';
 import { key }from '../../utilities/api';
 import { Table} from 'react-bootstrap';
 import ListComp from './listComp'
+import {link2} from '../../utilities/api';
 import "../register/loginPage.css"
 
 const BASE_URL = "https://finnhub.io/api/v1/quote?symbol=";
@@ -31,7 +32,7 @@ const StockedOwnedComp = (props) => {
     let promises = []
 
         
-    const response = await fetch(`http://localhost:8085/portfolioUser/${getUserInfo().user_id.toString()}`);
+    const response = await fetch(`${link2}/portfolioUser/${getUserInfo().user_id.toString()}`);
     
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
@@ -96,7 +97,7 @@ const StockedOwnedComp = (props) => {
     const deletePortfolioItem = {
         portfolioitem_id: targetId,
       }
-    const url = "http://localhost:8085/deletePortfolioItem";
+    const url = `${link2}/deletePortfolioItem`;
 
     await axios.delete(url, {
         data: deletePortfolioItem,

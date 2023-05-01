@@ -12,7 +12,6 @@ const KEY_URL = `&token=${key}`;
 const RecommendationStatsComp = (props) => {
     
   const [stocksData, setStocksData] = useState({});
-  const [isError, setError] = useState(false);
 
   async function getStocksData(stock){
     return await axios

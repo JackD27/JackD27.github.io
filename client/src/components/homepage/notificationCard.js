@@ -4,6 +4,7 @@ import taxCalculation from '../../utilities/taxCalculator';
 import axios from "axios";
 import AlertFunction from '../register/AlertMessage';
 import { Card, Badge } from 'react-bootstrap';
+import { link2 } from '../../utilities/api';
 import "../register/loginPage.css"
 
 
@@ -12,7 +13,7 @@ const NotificationCard = () => {
 
   const [notiArray, setNotiArray] = useState([])
 
-  const url = `http://localhost:8085/getCurrentYearTotals/${getUserInfo().user_id}`;
+  const url = `${link2}/getCurrentYearTotals/${getUserInfo().user_id}`;
 
   useEffect(  () => {
      axios.get(url).then(({ data }) => {      

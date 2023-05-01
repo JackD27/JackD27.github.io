@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Card} from 'react-bootstrap';
 import "../register/loginPage.css"
+import {link2} from '../../utilities/api';
 import getUserInfo from '../../utilities/decodeJwt';
 import RecommendationStatsComp from "./recommendationStatsComp";
 
@@ -9,7 +10,7 @@ const RecommendationCard = () => {
 
     async function getList() {
             
-        const response = await fetch(`http://localhost:8085/watchlistUser/${getUserInfo().user_id.toString()}`);
+        const response = await fetch(`${link2}/watchlistUser/${getUserInfo().user_id.toString()}`);
         
         if (!response.ok) {
           const message = `An error occurred: ${response.statusText}`;

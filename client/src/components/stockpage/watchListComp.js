@@ -4,6 +4,7 @@ import getUserInfo from '../../utilities/decodeJwt';
 import { key }from '../../utilities/api';
 import { Table} from 'react-bootstrap';
 import ListComp from './listComp'
+import {link2} from '../../utilities/api';
 import "../register/loginPage.css"
 
 const BASE_URL = "https://finnhub.io/api/v1/quote?symbol=";
@@ -29,7 +30,7 @@ const WatchlistComp = (props) => {
     let promises = []
 
         
-    const response = await fetch(`http://localhost:8085/watchlistUser/${getUserInfo().user_id.toString()}`);
+    const response = await fetch(`${link2}/watchlistUser/${getUserInfo().user_id.toString()}`);
     
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
@@ -69,7 +70,7 @@ const WatchlistComp = (props) => {
     const deleteWatchlistItem = {
         watchlistitem_id: targetId,
       }
-    const url = "http://localhost:8085/deleteWatchlistItem";
+    const url = `${link2}/deleteWatchlistItem`;
 
     await axios.delete(url, {
         data: deleteWatchlistItem,

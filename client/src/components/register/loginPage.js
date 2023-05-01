@@ -1,4 +1,3 @@
-import FormInput from "./FormInput";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -12,7 +11,6 @@ import "./loginPage.css"
 import "./formInput.css";
 
 const newUrl = `${link2}/login`
-const url = "http://localhost:8085/login";
 
 const Login2 = () => {
 

@@ -3,12 +3,13 @@ import getUserInfo from '../../utilities/decodeJwt';
 import { Button} from 'react-bootstrap'
 import axios from "axios";
 import { Table, Modal} from 'react-bootstrap';
+import {link2} from '../../utilities/api';
 import "../register/loginPage.css"
 
 // Here, we display our Navbar
 export default function AdminPage() {
 
-  const url = 'http://localhost:8085/users';
+  const url = `${link2}/users`;
   
 
   const [user, setUser] = useState({})
@@ -20,7 +21,7 @@ export default function AdminPage() {
       userId: userInfo.user_id,
       tradingType: 1,
     }
-    const url = "http://localhost:8085/updateUserTradingInfo";
+    const url = `${link2}/updateUserTradingInfo`;
 
     const res = await axios.post(url, addAdmin)
     getUsers()
@@ -34,7 +35,7 @@ export default function AdminPage() {
       userId: userInfo.user_id,
       tradingType: 0,
     }
-    const url = "http://localhost:8085/updateUserTradingInfo";
+    const url = `${link2}/updateUserTradingInfo`;
 
     const res = await axios.post(url, unAdmin)
     
@@ -76,7 +77,7 @@ export default function AdminPage() {
     const deleteWatchlistItem = {
         userId: targetId,
       }
-    const url = "http://localhost:8085/deleteUser";
+    const url = `${link2}/deleteUser`;
 
     await axios.delete(url, {
         data: deleteWatchlistItem,

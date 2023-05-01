@@ -3,6 +3,7 @@ import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Table} from 'react-bootstrap';
 import TransactionComp from './transactionComp'
+import {link2} from '../../utilities/api';
 import "../register/loginPage.css"
 
 const RecurringTransactionListComp = (props) => {
@@ -11,7 +12,7 @@ const RecurringTransactionListComp = (props) => {
 
   async function getList() {
         
-    const response = await fetch(`http://localhost:8085/recurringExpenses/${getUserInfo().user_id.toString()}`);
+    const response = await fetch(`${link2}/recurringExpenses/${getUserInfo().user_id.toString()}`);
     
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
@@ -31,7 +32,7 @@ const RecurringTransactionListComp = (props) => {
 
   async function getList2() {
       
-    const response = await fetch(`http://localhost:8085/transactionUser/${getUserInfo().user_id.toString()}`);
+    const response = await fetch(`${link2}/transactionUser/${getUserInfo().user_id.toString()}`);
     
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
@@ -59,7 +60,7 @@ const RecurringTransactionListComp = (props) => {
 
   const [number, setNumber] = useState(0)
 
-  const url = `http://localhost:8085/recurringExpenses/${getUserInfo().user_id}`;
+  const url = `${link2}/recurringExpenses/${getUserInfo().user_id}`;
 
   async function getNumber() {
     axios
@@ -77,7 +78,7 @@ const RecurringTransactionListComp = (props) => {
 
   const [number2, setNumber2] = useState(0)
 
-  const url2 = `http://localhost:8085/getCurrentYearTotals/${getUserInfo().user_id}`;
+  const url2 = `${link2}/getCurrentYearTotals/${getUserInfo().user_id}`;
 
   async function getNumber2() {
       const data = await axios.get(url2);
@@ -111,7 +112,7 @@ const RecurringTransactionListComp = (props) => {
     const deleteTransaction = {
         transactionId: targetId,
       }
-    const url = "http://localhost:8085/deleteTransaction";
+    const url = `${link2}/deleteTransaction`;
 
     await axios.delete(url, {
         data: deleteTransaction,

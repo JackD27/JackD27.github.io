@@ -6,11 +6,12 @@ import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
 import {Col, Row, Button, Card, Form} from 'react-bootstrap';
+import {link2} from '../../utilities/api';
 import LandingPage from "./Landingpage";
 import AlertFunction from './AlertMessage';
 
-const url = "http://localhost:8085/signup";
-const url2 = "http://localhost:8085/login";
+const url = `${link2}/signup`;
+const url2 = `${link2}/login`;
 
 // Edit Component
 export default function Home() {

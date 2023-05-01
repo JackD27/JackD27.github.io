@@ -4,9 +4,10 @@ import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Button, Card, Form} from 'react-bootstrap';
 import AlertFunction from '../register/AlertMessage';
+import {link2} from '../../utilities/api';
 import "../register/loginPage.css"
 
-const url = "http://localhost:8085/addWatchlistItem";
+const url = `${link2}/addWatchlistItem`;
 
 const AddWatchlistComp = () => {
 
