@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/JackD27.github.io/static/css/main.4ca2aa05.css",
+    "main.js": "/JackD27.github.io/static/js/main.4039e614.js",
+    "index.html": "/JackD27.github.io/index.html",
+    "main.4ca2aa05.css.map": "/JackD27.github.io/static/css/main.4ca2aa05.css.map",
+    "main.4039e614.js.map": "/JackD27.github.io/static/js/main.4039e614.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4ca2aa05.css",
+    "static/js/main.4039e614.js"
+  ]
+}
