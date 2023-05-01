@@ -1,40 +1,54 @@
 {
-  "homepage": "https://jackd27.github.io",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "axios": "^1.3.4",
-    "bcrypt": "^5.1.0",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "fs": "^0.0.1-security",
-    "jsonwebtoken": "^9.0.0",
-    "mysql": "^2.18.1",
-    "mysql2": "^2.3.3",
-    "path": "^0.12.7",
-    "pg": "^8.8.0",
-    "pg-hstore": "^2.3.4",
-    "process": "^0.11.10",
-    "sequelize": "^6.28.0",
-    "zod": "^3.21.4"
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.2.1",
+    "bootstrap": "^5.2.2",
+    "data": "^0.6.1",
+    "i": "^0.3.7",
+    "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.6.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
+    "recharts": "^2.4.3",
+    "table": "^6.8.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start": "react-scripts start",
     "predeploy" : "npm run build",
     "deploy" : "gh-pages -d build",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
-    "start": "react-scripts start",
-    "start:dev": "nodemon server.js"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "server.js",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "gh-pages": "^5.0.0",
-    "nodemon": "^2.0.22",
-    "sequelize-cli": "^6.5.2"
-  },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+    "gh-pages": "^5.0.0"
+  }
 }
