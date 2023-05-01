@@ -7,10 +7,11 @@ import Container from 'react-bootstrap/Container';
 import {Col, Row, Button, Card, Form} from 'react-bootstrap';
 import LandingPage from "./Landingpage";
 import AlertFunction from './AlertMessage';
+import {link2} from '../../utilities/api';
 import "./loginPage.css"
 import "./formInput.css";
 
-const newUrl = `${process.env.API_POINT}/login`
+const newUrl = `${link2}/login`
 const url = "http://localhost:8085/login";
 
 const Login2 = () => {
