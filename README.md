@@ -57,5 +57,5 @@ You will also need a Secret Access Token in the .env as well for JWT.
 #### Dashboard Page
 ![DashboardPageCapstone](https://user-images.githubusercontent.com/103354115/235334003-81909ba2-e0b4-46f5-adc2-2ee84c5bd8be.png)
 
-#### Stock Page
+#### Stock Pag
 ![StockPageCapstone](https://user-images.githubusercontent.com/103354115/235334009-c4b67c9b-6d29-4e63-9912-6a548f5254db.png)
