@@ -5,6 +5,7 @@ const userController = require('../controllers/userController')
 userRoutes.route('/signup').post(userAuthController.userSignup)
 userRoutes.route('/login').post(userAuthController.userLogin)
 userRoutes.route('/editUser').post(userController.editUser)
+userRoutes.route('/updateUserTradingInfo').post(userController.updateUserTradingInfo)
 
 userRoutes.route('/deleteAll').delete(userController.deleteAllUsers)
 userRoutes.route('/deleteUser').delete(userController.deleteUserById)

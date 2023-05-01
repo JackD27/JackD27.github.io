@@ -84,12 +84,31 @@ const editUser = async (req, res) => {
     }).catch((err) => res.status(409).send(err));
 }
 
+const updateUserTradingInfo = async (req, res) => {
+  // store new user information
+const { userId, tradingType } = req.body;
+
+const user = await userModel.findOne({where: { user_id: userId}});
+if(!user) return res.status(409).send({ message: "User doesn't exist." });
+
+
+// find and update user using stored information
+const newUser = userModel.update({
+      tradingType: tradingType,
+    },
+    { where: { user_id: userId } }
+  ).then((result) => {
+    res.status(200).send(result)
+  }).catch((err) => res.status(409).send(err));
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
     deleteUserById,
     deleteAllUsers,
     editUser,
+    updateUserTradingInfo,
 }
 
 
