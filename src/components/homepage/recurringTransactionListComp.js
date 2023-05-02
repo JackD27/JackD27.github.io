@@ -95,13 +95,6 @@ const RecurringTransactionListComp = (props) => {
         console.log(Object.keys(number2).length)
     }, [number.length]);  
 
-  //   useEffect(() => {
-
-  //     getNumber2() 
-  //     // eslint-disable-next-line 
-  //     console.log(number2)
-  // }, [number2.length]); 
-
   useEffect(() => {
     
     getList();   

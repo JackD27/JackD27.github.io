@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import getUserInfo from '../utilities/decodeJwt';
 import { Navbar, Nav, NavDropdown,Container, Button} from 'react-bootstrap'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { GoMarkGithub } from "react-icons/go";
 import { GrLinkedin } from "react-icons/gr";
 import { BsTrello } from "react-icons/bs";
 
 // Here, we display our Navbar
 export default function NavbarFunction() {
-  const navigate = useNavigate()
   const [user, setUser] = useState({})
 
   const handleLogout = async () => {

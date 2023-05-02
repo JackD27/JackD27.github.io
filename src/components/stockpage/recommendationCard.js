@@ -22,7 +22,7 @@ const RecommendationCard = () => {
         const fetchedList = await response.json();
         
     
-        setList(fetchedList);  // update state.  when state changes, we automatically re-render.
+        setList(fetchedList);  
         
         }catch(error){
           

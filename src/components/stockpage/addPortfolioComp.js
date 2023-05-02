@@ -2,7 +2,7 @@ import FormInput from "../register/FormInput";
 import React, { useState } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
-import {Button, Card, Form} from 'react-bootstrap';
+import {Button, Card } from 'react-bootstrap';
 import AlertFunction from '../register/AlertMessage';
 import {link2} from '../../utilities/api';
 import "../register/loginPage.css"

@@ -10,8 +10,6 @@ import "../register/loginPage.css"
 const BASE_URL = "https://finnhub.io/api/v1/quote?symbol=";
 const KEY_URL = `&token=${key}`;
 
-
-
 const WatchlistComp = (props) => {
   const [list, setList] = useState([])
   const [stocksData, setStocksData] = useState([]);
@@ -76,14 +74,9 @@ const WatchlistComp = (props) => {
         data: deleteWatchlistItem,
       })
 
-      const newList = list.filter((el) => el.id !== el.id); // This causes a re-render because we change state. Helps cause a re-render.
+      const newList = list.filter((el) => el.watchlistitem_id !== targetId); // This causes a re-render because we change state. Helps cause a re-render.
       setList(newList);  // This causes a re-render because we change state.
-      
-
 }
-
-
-
 
   function watchlistList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {

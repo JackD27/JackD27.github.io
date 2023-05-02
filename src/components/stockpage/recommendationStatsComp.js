@@ -10,7 +10,6 @@ const KEY_URL = `&token=${key}`;
 
 
 const RecommendationStatsComp = (props) => {
-    
   const [stocksData, setStocksData] = useState({});
 
   async function getStocksData(stock){
@@ -21,17 +20,11 @@ const RecommendationStatsComp = (props) => {
       });
   };
 
-  
   async function getList() {
-
     let tempData = []
     let promises = []
-
-    
         
    try {
-
-    
     promises.push(getStocksData(props.name).then(res =>{
         tempData.push({name: props.name, info: res.data})
     }))
@@ -40,27 +33,14 @@ const RecommendationStatsComp = (props) => {
       setStocksData(tempData);
     })
     
-
-    
     }catch(error){
         console.error("Error", error.message);
     }
     
   }
-  
-
 
   useEffect(() => {
-
-    
-
-    
-
     getList(); 
-
-    //setNameData(props.name)
-  
-
   }, [props.name]);  
 
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
@@ -111,13 +91,7 @@ const RecommendationStatsComp = (props) => {
   }
   }
 
-
-  
-
- 
-
   const BarChartComp = ({dataVals}) => (
-    
     <BarChart
             width={550}
             height={300}
@@ -141,7 +115,6 @@ const RecommendationStatsComp = (props) => {
             <Bar dataKey="StrongBuy" stackId="c" fill="#2D8E5D" />
           </BarChart>
   );
-
   return (
     <>
     <h1 style={{ color: "white" }}>{props.name}</h1>

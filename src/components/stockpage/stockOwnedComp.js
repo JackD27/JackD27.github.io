@@ -64,9 +64,7 @@ const StockedOwnedComp = (props) => {
     })
     
     }catch(error){
-      
     }
-    
   }
 
   async function getNumber() {
@@ -79,7 +77,6 @@ const StockedOwnedComp = (props) => {
       }else{
         currPriceBought = watchlistItem.priceWhenBought
       }
-      
       const profit = (watchlistItem.info.c * watchlistItem.shares) - (currPriceBought * watchlistItem.shares)
       sum += parseFloat(profit);
       setTotalprofit(Number(sum).toFixed(2))
@@ -88,12 +85,7 @@ const StockedOwnedComp = (props) => {
 
 
   useEffect(() => {
-    
     getList();
-
-     
-    
-
   }, [list.length]);  
 
   useEffect(() => {
@@ -110,10 +102,8 @@ const StockedOwnedComp = (props) => {
         data: deletePortfolioItem,
       })
       
-    
-    const newList = list.filter((el) => el.id !== el.id); // This causes a re-render because we change state. Helps cause a re-render.
+    const newList = list.filter((el) => el.portfolioitem_id !== targetId); // This causes a re-render because we change state. Helps cause a re-render.
     setList(newList);  // This causes a re-render because we change state.
-    
 }
   function stockPortfolioList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
@@ -136,7 +126,6 @@ const StockedOwnedComp = (props) => {
           profit={Number(profit).toFixed(2)}
           onDeleteClickHandler={() => deleteStockPortfolioItem(watchlistItem.id)}
           key={watchlistItem.id}
-          
         />
       );
     });
