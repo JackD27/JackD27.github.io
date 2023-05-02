@@ -50,8 +50,7 @@ const Login2 = () => {
       const { accessToken } = res;
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
-      navigate('/dashboard');
-      window.location.reload();
+      window.location= '/dashboard'
       
     } catch (error) {
       if (
