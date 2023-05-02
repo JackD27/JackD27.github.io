@@ -1,5 +1,4 @@
 
-import FormInput from "./FormInput";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -38,8 +37,7 @@ export default function Home() {
   }, []);
 
   if(user) {
-    navigate('/')
-    return
+    navigate('/dashboard')
   }
 
 
@@ -124,7 +122,7 @@ export default function Home() {
         <Form.Control required={true} type="password" placeholder="Enter Password" name="password"onChange={onChange} />
       </Form.Group>
       <Button variant="success" type="submit" onClick={handleSubmit}>Register</Button>
-      <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/login")}>Already have an account?</Button>
+      <Button variant="outline-success" style={{marginLeft: 250, color: "white"}} onClick={() => navigate("/")}>Already have an account?</Button>
         {footMessage()}
       </Form>
       </Card.Body>

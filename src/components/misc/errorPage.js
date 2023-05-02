@@ -9,7 +9,7 @@ export default function NavbarFunction() {
   const [user, setUser] = useState({})
 
   const handleLogin = async () => {
-    navigate("/login");
+    navigate("/");
   };
 
   const handleRegister = async () => {

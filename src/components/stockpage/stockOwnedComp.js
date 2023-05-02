@@ -73,7 +73,14 @@ const StockedOwnedComp = (props) => {
     let sum = 0
 
     stocksData.slice(0, props.length).map((watchlistItem) => {
-      const profit = (watchlistItem.info.c * watchlistItem.shares) - (watchlistItem.priceWhenBought * watchlistItem.shares)
+      let currPriceBought;
+      if (watchlistItem.info.c === undefined || watchlistItem.info.c === null || watchlistItem.info.c === 0) {
+        currPriceBought = 0
+      }else{
+        currPriceBought = watchlistItem.priceWhenBought
+      }
+      
+      const profit = (watchlistItem.info.c * watchlistItem.shares) - (currPriceBought * watchlistItem.shares)
       sum += parseFloat(profit);
       setTotalprofit(Number(sum).toFixed(2))
     })};
@@ -110,7 +117,13 @@ const StockedOwnedComp = (props) => {
 }
   function stockPortfolioList() {
     return stocksData.slice(0, props.length).map((watchlistItem) => {
-      const profit = (watchlistItem.info.c * watchlistItem.shares) - (watchlistItem.priceWhenBought * watchlistItem.shares)
+      let currPriceBought;
+      if (watchlistItem.info.c === undefined || watchlistItem.info.c === null || watchlistItem.info.c === 0) {
+        currPriceBought = 0
+      }else{
+        currPriceBought = watchlistItem.priceWhenBought
+      }
+      const profit = (watchlistItem.info.c * watchlistItem.shares) - (currPriceBought * watchlistItem.shares)
       return (
         <ListComp show={props.show}
           stockTicker={watchlistItem.name}

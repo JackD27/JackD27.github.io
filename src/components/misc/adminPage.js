@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 import getUserInfo from '../../utilities/decodeJwt';
 import { Button} from 'react-bootstrap'
 import axios from "axios";
-import { Table, Modal} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import {link2} from '../../utilities/api';
+import { useNavigate } from 'react-router-dom'
 import "../register/loginPage.css"
 
 // Here, we display our Navbar
 export default function AdminPage() {
+
+  const navigate = useNavigate()
 
   const url = `${link2}/users`;
   
 
   const [user, setUser] = useState({})
   const [listUsers, setListUsers] = useState([])
+  const [refresh, setRefresh] = useState(false)
 
   async function adminUser(userInfo) {
 
@@ -50,6 +54,7 @@ export default function AdminPage() {
 
   async function getUsers() {
     try{
+    
     const data = await axios.get(url);
     const info = data.data;
     setListUsers(info);
@@ -60,18 +65,18 @@ export default function AdminPage() {
 }
 
   useEffect(() => {
+    if(user && user.tradingType === 1){
 
-    getUsers(); 
-
-
-  }, [listUsers.length]);  
-
-  useEffect(() => {
-
-    getUsers(); 
+      getUsers(); 
+    }
 
 
-  }, [listUsers.tradingType]);  
+  }, [refresh]);  
+
+
+  if (user.tradingType !== 1){
+    navigate('/dashboard')
+  }
 
   async function deleteWatchlistItem(targetId) {
     const deleteWatchlistItem = {
@@ -109,7 +114,9 @@ export default function AdminPage() {
 
   if(user && user.tradingType === 1){
     return (<>
-    <h3 style={{textAlign: 'center'}}>{listUsers.length} Users have signed up.</h3>
+    <div style={{textAlign: 'center'}}>
+    <h3 >{listUsers.length} Users have signed up.</h3><Button onClick={() => setRefresh(!refresh)}>Refresh</Button>
+    </div>
     <Table bordered hover style={{background: "rgb(50,58,69)",color: "white", textAlign:"center"}} size="sm">
         <thead>
         <tr style={{color: "#14A44D"}}>

@@ -23,6 +23,7 @@ const Login2 = () => {
   const [user, setUser] = useState(null)
   const [error, setError] = useState("");
 
+
   useEffect(() => {
 
     setUser(getUserInfo())
@@ -30,9 +31,9 @@ const Login2 = () => {
 
   }, []);
 
+
   if(user) {
-    navigate('/')
-    return
+    navigate('/dashboard')
   }
 
   const footMessage = () => {
@@ -49,8 +50,11 @@ const Login2 = () => {
       const { accessToken } = res;
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
-      navigate("/");
+
+    
+      navigate('/dashboard');
       window.location.reload();
+      
     } catch (error) {
       if (
         error.response &&

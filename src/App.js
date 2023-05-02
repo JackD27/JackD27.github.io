@@ -3,10 +3,11 @@ import React from "react";
 import { Route, Routes, useLocation} from "react-router-dom";
 import { createContext, useState, useEffect } from "react";
 
+import PrivateRoute from "./utilities/PrivateRoute";
+
 
 import Navbar from "./components/navbar";
-import Footer from "./components/footer";
-import ErrorPage from "./components/misc/errorPage";
+
 
 import Login from "./components/register/loginPage";
 import Register from "./components/register/registerPage";
@@ -42,7 +43,7 @@ const App = () => {
   }, []);
 
   function locationPlace(){
-    if(location.pathname === '/login' || location.pathname === '/register')
+    if(location.pathname === '/' || location.pathname === '/register')
     {
       return false
     }
@@ -53,32 +54,29 @@ const App = () => {
   }
   
 
-  if(!user && locationPlace()){
-    return(<ErrorPage></ErrorPage>) 
-  }
+  // if(!user && locationPlace()){
+  //    return(<ErrorPage></ErrorPage>) 
+  // }
 
   return (
     <>
       <Navbar/>
       <UserContext.Provider value={user}>
         <Routes>
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
-          {user && <>
-          <Route exact path="/admin" element={<Admin />} />
-          <Route exact path="/" element={<Dashboard />} />
-          <Route exact path="/addTransaction" element={<AddTransaction />} />
-          <Route exact path="/addStock" element={<AddStockItem />} />
-          <Route exact path="/addWatchlist" element={<AddWatchlistItem />} />
-          <Route exact path="/stocks" element={<InvestingPage />} />
-          <Route exact path="/allStocks" element={<StockPage />} />
-          <Route exact path="/allWatchlist" element={<WatchlistPage />} />
-          <Route exact path="/transactions" element={<RecurringExpenses />} />
-          <Route exact path="/settings" element={<Settings />} />
-          </>}
+          <Route exact path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>} />
+          <Route exact path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
+          <Route exact path="/addTransaction" element={<PrivateRoute><AddTransaction /></PrivateRoute>} />
+          <Route exact path="/addStock" element={<PrivateRoute><AddStockItem /></PrivateRoute>} />
+          <Route exact path="/addWatchlist" element={<PrivateRoute><AddWatchlistItem /></PrivateRoute>} />
+          <Route exact path="/stocks" element={<PrivateRoute><InvestingPage /></PrivateRoute>} />
+          <Route exact path="/allStocks" element={<PrivateRoute><StockPage /></PrivateRoute>} />
+          <Route exact path="/allWatchlist" element={<PrivateRoute><WatchlistPage /></PrivateRoute>} />
+          <Route exact path="/transactions" element={<PrivateRoute><RecurringExpenses /></PrivateRoute>} />
+          <Route exact path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
         </Routes>
       </UserContext.Provider>
-      <Footer/>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import FormInput from "../register/FormInput";
-import React, { useState, } from "react";
+import React, { useEffect, useState, } from "react";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import {Button, Card, Form} from 'react-bootstrap';
@@ -12,7 +12,14 @@ const url = `${link2}/createTransaction`;
 const TransactionComp = () => {
 
   const [error, setError] = useState("");
-  const [isRecurring, setRecurring] = useState(null);
+  const [user, setUser] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [price, setPrice] = useState("");
+  const [category, setCategory] = useState("");
+  const [category2, setCategory2] = useState("");
+  const [isRecurring, setRecurring] = useState(false);
   const [isSuccess, setSuccess] = useState(null);
 
 
@@ -25,133 +32,39 @@ const TransactionComp = () => {
     }
   };
 
-  const handleKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      handleSubmit()
-    }
-  }
 
-
-  const [values, setValues] = useState({
-    name: "",
-    description: "",
-    date: "",
-    price: "",
-    category: "",
-    category2: "",
-    description: "",
-    recurring: 0,
-    userId: getUserInfo().user_id,
-  });
-
-  const handleChange= async (e)=>{
-    let updatedValue = {};
-    updatedValue = {recurring:e.target.checked};
-    setValues(values => ({
-      ...values,
-      ...updatedValue
-    }))};
-
-  const inputs = [
-    {
-      id: 1,
-      name: "name",
-      type: "text",
-      placeholder: "Name",
-      label: "Name",
-      required: true,
-    },
-    {
-      id: 2,
-      name: "description",
-      type: "text",
-      label: "Description",
-      placeholder: "Description",
-      required: false,
-    },
-    {
-        id: 3,
-        name: "date",
-        type: "date",
-        label: "Date",
-        placeholder: "Date",
-        required: true,
-    },
-    {
-        id: 4,
-        name: "price",
-        type: "number",
-        min: "0",
-        label: "Price",
-        step: "0.01",
-        placeholder: "Price",
-        required: true,
-      },
-  ];
-
-  const category1 = [
-    {
-      id: 1,
-      value: "",
-    },
-    {
-      id: 2,
-      value: "Wants",
-    },
-    {
-      id: 3,
-      value: "Needs",
-    },
-    {
-      id: 4,
-      value: "Savings",
-    },
-  ];
-
-  const category2 = [
-    {
-      id: 1,
-      value: "",
-    },
-    {
-      id: 2,
-      value: "Entertainment",
-    },
-    {
-      id: 3,
-      value: "Transportation",
-    },
-    {
-      id: 4,
-      value: "Food",
-    },
-    {
-      id: 5,
-      value: "Housing",
-    },
-    {
-      id: 6,
-      value: "Misc",
-    },
-  ];
+  useEffect(() => {
+    setUser(getUserInfo());
+  }, []);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     try {
-      const { data: res } = await axios.post(url, values);
+
+    const { data: res } = await axios.post(url, {
+        name: name,
+        description: description,
+        date: String(date),
+        price: Number(price),
+        category: category,
+        category2: category2,
+        recurring: isRecurring,
+        userId: user.user_id,
+      }, {headers: {'Content-Type': 'application/json'}});
+
+      console.log(res)
+
       
-      setValues({
-        name: "",
-        description: "",
-        date: "",
-        price: "",
-        category: "",
-        category2: "",
-        description: "",
-        recurring: 0,
-        userId: getUserInfo().user_id,
-      });
-      setError(false)
-      setSuccess(true)
+      setError(0)
+      setSuccess(1);
+
+      setDescription("");
+      setDate("");
+      setPrice("");
+      setCategory("");
+      setCategory2("");
+      setName("");
     } catch (error) {
       if (
         error.response &&
@@ -159,47 +72,65 @@ const TransactionComp = () => {
         error.response.status <= 500
       ) {
         setError(error.response.data.message);
+        setSuccess(0);
+        console.log(error)
       }
     }
-  };
-
-
-  const onChange = async (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   return (
     <Card className="loginCard">
       <Card.Header><h2 className="text-white">Add Transaction</h2></Card.Header>
       <Card.Body>
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
-            onKeyPress={handleKeyPress}
-          />
-        ))}
-        <div style={{color: "rgb(151, 151, 151)", fontSize: "12px", marginTop: "5px"}}>Main Category</div>
-        <select style={{marginTop: "5px"}} name="category"onChange={onChange}>
-          {category1.map((input, i) =>(
-            <option key={i}>{input.value}</option>
-          ))}
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Name</Form.Label>
+        <Form.Control value={name} type="text" placeholder="Enter Name of Transaction" name="name"onChange={(e)=> setName(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicDescription">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Description</Form.Label>
+        <Form.Control value={description} type="text" placeholder="Enter Description of Transaction"name="description"onChange={(e)=> setDescription(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicDate">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Date of Transaction</Form.Label>
+        <Form.Control value={date} type="date" placeholder="Date of Transaction" name="date"onChange={(e)=> setDate(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPrice">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Price of Transaction</Form.Label>
+        <Form.Control value={price} min={0} step={0.01} type="number" placeholder="Price of Transaction" name="price"onChange={(e)=> setPrice(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCategory1">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Main Category</Form.Label>
+        <div>
+        <select onChange={(e)=> setCategory(e.target.value)} value={category}>
+          <option></option>
+          <option>Wants</option>
+          <option>Needs</option>
+          <option>Savings</option>
         </select>
-        <div style={{color: "rgb(151, 151, 151)", fontSize: "12px", marginTop: "5px"}}>Secondary Category</div>
-        <select style={{marginTop: "5px"}} name="category2" onChange={onChange}>
-        {category2.map((input, i) =>(
-            <option key={i}>{input.value}</option>
-          ))}
+        </div>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCategory2">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Second Category</Form.Label>
+        <div>
+        <select onChange={(e)=> setCategory2(e.target.value)} value={category2}>
+          <option></option>
+          <option>Entertainment</option>
+          <option>Transportation</option>
+          <option>Food</option>
+          <option>Housing</option>
+          <option>Misc</option>
         </select>
-        <Form.Check type="checkbox" name="recurring" defaultChecked={isRecurring} style={{fontSize: "30px", color:"rgb(151, 151, 151)"}} value={values.recurring}
-            onChange={handleChange} label="Recurring?"/>
-        </Card.Body>
-        <Card.Footer>
-        <Button variant="success" onClick={handleSubmit}>Submit</Button>
+        </div>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Label style={{color: "rgb(151, 151, 151)"}}>Recurring Transaction?</Form.Label>
+        <Form.Check type="checkbox" name="recurring" onChange={(e)=> setRecurring(e.target.checked)} />
+      </Form.Group>
+      <Button variant="success" type="submit" onClick={handleSubmit}>Submit</Button>
         {footMessage()}
-        </Card.Footer>
+      </Form>
+      </Card.Body>
     </Card>
   );
 };
