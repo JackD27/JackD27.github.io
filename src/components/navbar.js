@@ -39,11 +39,11 @@ export default function NavbarFunction() {
         <Nav>
           <NavDropdown className="mx-3" title={userName()} id="collasible-nav-dropdown">
             <NavDropdown.Item as={Link} to="/settings">Settings</NavDropdown.Item>
-            {user.user_id === 374 ? <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item> : null}
+            {user.tradingType === 1 ? <NavDropdown.Item as={Link} to="/admin">Admin</NavDropdown.Item> : null}
             <NavDropdown.Divider />
-            <NavDropdown.Item><Link to={`https://www.linkedin.com/in/jackson-davis-3696a9258/`} style={{ textDecoration: 'none', color: 'black'}}><GrLinkedin size={20} color="#0077B5"/> LinkedIn</Link></NavDropdown.Item>
-            <NavDropdown.Item><Link to={`https://github.com/JackD27/CapstoneProject`} style={{ textDecoration: 'none', color: 'black'}}><GoMarkGithub size={20} color="#333"/> Github</Link></NavDropdown.Item>
-            <NavDropdown.Item><Link to={`https://trello.com/b/cE22K4xL/jacksons-capstone-project`} style={{ textDecoration: 'none', color: 'black'}}><BsTrello size={20} color="#0079BF"/> Trello</Link></NavDropdown.Item>
+            <NavDropdown.Item as={Link} to={`https://www.linkedin.com/in/jackson-davis-3696a9258/`} style={{ textDecoration: 'none', color: 'black'}}><GrLinkedin size={20} color="#0077B5"/> LinkedIn</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to={`https://github.com/JackD27/CapstoneProject`} style={{ textDecoration: 'none', color: 'black'}}><GoMarkGithub size={20} color="#333"/> Github</NavDropdown.Item>
+            <NavDropdown.Item as={Link} to={`https://trello.com/b/cE22K4xL/jacksons-capstone-project`} style={{ textDecoration: 'none', color: 'black'}}><BsTrello size={20} color="#0079BF"/> Trello</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item>{authButton()}</NavDropdown.Item>
           </NavDropdown>
