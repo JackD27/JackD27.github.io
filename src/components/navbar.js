@@ -25,7 +25,7 @@ export default function NavbarFunction() {
     setUser(getUserInfo())
   }, [])
 
-  if(user){
+
   return (
     <Navbar bg="dark"variant="dark"className="mb-4">
       <Container>
@@ -52,4 +52,4 @@ export default function NavbarFunction() {
       </Container>
     </Navbar>
   )
-}}
+}

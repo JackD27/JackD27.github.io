@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation} from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Route, Routes, useLocation, BrowserRouter, Switch} from "react-router-dom";
 
 //Private Routes 
 import PrivateRoute from "./utilities/PrivateRoute";
@@ -13,8 +12,9 @@ import Navbar from "./components/navbar";
 import Login from "./components/register/loginPage";
 import Register from "./components/register/registerPage";
 
-//Settings Page
+//Utilities Page
 import Settings from "./components/misc/editUserPage";
+import ErrorPage from "./components/misc/errorPage";
 
 //Dashboard Page
 import AddTransaction from "./components/homepage/addTransactionComp";
@@ -35,12 +35,7 @@ document.body.style = 'background: rgb(234,237,242)';
 
 
 const App = () => {
-  const [user, setUser] = useState();
 
-  useEffect(() => {
-    setUser(getUserInfo());
-
-  }, []);
 
   // function locationPlace(){
   //   if(location.pathname === '/' || location.pathname === '/register')
@@ -56,25 +51,28 @@ const App = () => {
   // if(!user && locationPlace()){
   //    return(<ErrorPage></ErrorPage>) 
   // }
+  
+ 
 
   return (
     <>
-      <Navbar/>
+        {getUserInfo() ? <Navbar /> : null}
         <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>} />
-          <Route exact path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
-          <Route exact path="/addTransaction" element={<PrivateRoute><AddTransaction /></PrivateRoute>} />
-          <Route exact path="/addStock" element={<PrivateRoute><AddStockItem /></PrivateRoute>} />
-          <Route exact path="/addWatchlist" element={<PrivateRoute><AddWatchlistItem /></PrivateRoute>} />
-          <Route exact path="/stocks" element={<PrivateRoute><InvestingPage /></PrivateRoute>} />
-          <Route exact path="/allStocks" element={<PrivateRoute><StockPage /></PrivateRoute>} />
-          <Route exact path="/allWatchlist" element={<PrivateRoute><WatchlistPage /></PrivateRoute>} />
-          <Route exact path="/transactions" element={<PrivateRoute><RecurringExpenses /></PrivateRoute>} />
-          <Route exact path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+            <Route exact path="/" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/admin" element={<PrivateRoute><Admin/></PrivateRoute>} />
+            <Route exact path="/dashboard" element={<PrivateRoute><Dashboard/></PrivateRoute>} />
+            <Route exact path="/addTransaction" element={<PrivateRoute><AddTransaction /></PrivateRoute>} />
+            <Route exact path="/addStock" element={<PrivateRoute><AddStockItem /></PrivateRoute>} />
+            <Route exact path="/addWatchlist" element={<PrivateRoute><AddWatchlistItem /></PrivateRoute>} />
+            <Route exact path="/stocks" element={<PrivateRoute><InvestingPage /></PrivateRoute>} />
+            <Route exact path="/allStocks" element={<PrivateRoute><StockPage /></PrivateRoute>} />
+            <Route exact path="/allWatchlist" element={<PrivateRoute><WatchlistPage /></PrivateRoute>} />
+            <Route exact path="/transactions" element={<PrivateRoute><RecurringExpenses /></PrivateRoute>} />
+            <Route exact path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
+            <Route exact path="*" element={<ErrorPage />} />
         </Routes>
-    </>
+        </>
   );
 };
 

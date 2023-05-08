@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import getUserInfo from '../../utilities/decodeJwt';
 import Container from 'react-bootstrap/Container';
@@ -51,6 +51,7 @@ const Login2 = () => {
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
       window.location.replace("/dashboard")
+      
       
     } catch (error) {
       if (

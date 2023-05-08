@@ -25,7 +25,11 @@ export default function NavbarFunction() {
     <h3>You are not authorized to view this page, or an error has occurred. Please try to Login or Register with the buttons below.</h3>
     <Button variant="success" size="lg" style={{marginRight:"10px"}} onClick={handleLogin}>Login</Button>
     <Button variant="success" size="lg" style={{marginLeft:"10px"}}onClick={handleRegister}>Register</Button>
-    
     </div>
   );
-}}
+}else
+  {
+  return(<div style={{textAlign: "center", position:"flex", marginTop:"300px", fontSize: "60px"}}>
+  <h3>Page doesn't exist or an error has occurred. Error 404</h3>
+  </div>
+)}}
