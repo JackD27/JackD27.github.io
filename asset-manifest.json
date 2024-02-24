@@ -1,20 +1,22 @@
 {
   "files": {
     "main.css": "/static/css/main.08c2427d.css",
-    "main.js": "/static/js/main.eab0998b.js",
+    "main.js": "/static/js/main.1ffbb7f7.js",
     "static/js/592.bf6ca574.chunk.js": "/static/js/592.bf6ca574.chunk.js",
-    "static/media/Frogger.png": "/static/media/Frogger.b78ec480f56732336713.png",
-    "static/media/PiCar.png": "/static/media/PiCar.c2412cc34bcd12cf2889.png",
+    "static/media/NewPiCar.png": "/static/media/NewPiCar.16873abeb30f5183ac26.png",
+    "static/media/Frogger.png": "/static/media/Frogger.0a2fc44579ab6406cecc.png",
     "static/media/JackFacePic.jpg": "/static/media/JackFacePic.8c31950e44a03e812470.jpg",
     "static/media/SignInPageFinance.png": "/static/media/SignInPageFinance.68b4c0d630457d0442f6.png",
-    "static/media/Stats.png": "/static/media/Stats.7c231f70c0b4d2a234f9.png",
+    "static/media/PetApp.png": "/static/media/PetApp.965c5bc0ac9e7eb86431.png",
+    "static/media/PersonalFinanceAppPic.png": "/static/media/PersonalFinanceAppPic.529bc8330888488e7dd2.png",
+    "static/media/Stats.png": "/static/media/Stats.c4a920b42113cf2800fe.png",
     "index.html": "/index.html",
     "main.08c2427d.css.map": "/static/css/main.08c2427d.css.map",
-    "main.eab0998b.js.map": "/static/js/main.eab0998b.js.map",
+    "main.1ffbb7f7.js.map": "/static/js/main.1ffbb7f7.js.map",
     "592.bf6ca574.chunk.js.map": "/static/js/592.bf6ca574.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.08c2427d.css",
-    "static/js/main.eab0998b.js"
+    "static/js/main.1ffbb7f7.js"
   ]
 }
