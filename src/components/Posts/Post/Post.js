@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActions, Modal, Box, Stack, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import LanguageIcon from '@mui/icons-material/Language';
 import { useState} from 'react';
 import { Link } from 'react-router-dom';
 
@@ -32,11 +32,12 @@ export default function Post(props) {
 
   return (
     <>
-    <Card sx={{margin: props.hi, border: '1px solid', borderRadius: '10px', borderColor: 'divider'}}>
+    <Card sx={{border: '1px solid', position:'relative', borderRadius: '10px', borderColor: 'divider'}}>
       
         {props.frontPic ? <CardMedia
           component="img"
-          height={300}
+          height='inherit'
+          zIndex={1}
           src={props.frontPic}
           alt='No Image Found'
         /> : null}
@@ -54,8 +55,9 @@ export default function Post(props) {
         <Button onClick={handleOpen} size="small" color="primary">
           Read More
         </Button>
-          <IconButton size='small' component={Link} to={props.url}><GitHubIcon/></IconButton>
-          {props.websiteLink ? <IconButton size='small' component={Link} to={props.websiteLink}><SportsEsportsIcon/></IconButton> : null}
+          {props.websiteLink ? <IconButton size='small' component={Link} to={props.websiteLink}><LanguageIcon/></IconButton> : null}
+          {props.gameLink ? <IconButton size='small' component={Link} to={props.gameLink}><SportsEsportsIcon/></IconButton> : null}
+          <IconButton size='small' component={Link} to={props.githubUrl}><GitHubIcon/></IconButton>
         </Stack>
       </CardActions>
     </Card>

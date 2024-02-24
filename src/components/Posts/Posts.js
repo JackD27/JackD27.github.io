@@ -1,10 +1,8 @@
-import * as React from 'react';
 import Post from './Post/Post';
 import Container from '@mui/material/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import { projects }from '../../constants';
 
 
@@ -15,22 +13,22 @@ function Posts() {
      <Box sx={{backgroundColor: '#fafafa', width: '100%', pt: { xs: 7}, pb: { xs: 7}, borderBottom: '1px solid', borderColor: 'divider'}}>
       <Container>
         <Typography variant="h2" borderBottom='2px solid' borderColor='rgb(85, 166, 246)' component="h2" margin={2} align='center' gutterBottom>Projects</Typography>
-        
-        <Row className='justify-content-md-center'>
+        <Grid container spacing={6}>
           {projects.map((value, i) => (
-            <Col lg={6} md={6} sm={12} key={i}>
+            <Grid item md={6} xs={12} key={i} >
               <Post hi={4} 
               title={value.title} 
-              url={value.url} 
+              githubUrl={value.githubUrl} 
               headline={value.headline} 
-              websiteLink={value.link} 
+              gameLink={value.gameLink} 
               frontPic={value.frontPic} 
+              websiteLink={value.websiteLink}
               />
-            </Col>
+            </Grid>
            
           ))}
-          </Row>
-    </Container>
+      </Grid>
+      </Container>
     </Box>
     </>
       

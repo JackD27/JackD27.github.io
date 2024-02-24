@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Container from '@mui/material/Container';
 import '../styles.css';
 import { Link } from 'react-router-dom';
