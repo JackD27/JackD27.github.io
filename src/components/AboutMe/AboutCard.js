@@ -5,9 +5,6 @@ import { alpha } from '@mui/material/styles';
 import Image from 'react-bootstrap/Image';
 import logo from '../../images/JackFacePic.jpg';
 
-
-
-
 export default function AboutCard() {
   return (
     <Card sx={{ margin: 2, border: '2px solid', borderColor: 'rgb(85, 166, 246)', borderRadius: '20px', boxShadow: `0 0 24px 12px ${alpha('#033363', 0.15)}`}}>
@@ -32,18 +29,15 @@ export default function AboutCard() {
           Frontend
         </Typography>
         <Typography sx={{ fontSize: 22 }}  align='center'color="text.secondary" gutterBottom>
-            I build my apps mostly with React. I've also built applications with using plain HTML, CSS, and JavaScript. I've made applications with JavaFX, Electron, and Tkinter.
+            I build my apps mostly with React. I've made applications with JavaFX, Electron, and Tkinter. I'm very familiar with Material-UI, Bootstrap, HTML and CSS.
         </Typography>
         <Typography  variant='h4' align='center'color="text.secondary" gutterBottom>
           Languages
         </Typography>
         <Typography sx={{ fontSize: 22 }}  align='center'color="text.secondary" gutterBottom>
-            I love Python and JavaScript. They are my favorite languages. I use C# and Java if I need to. Java was the first and main language I used for a long time. Python and JavaScript just have too many good libraries and frameworks to not use them.
+            I like Python and JavaScript. They are my most used languages. I use C# and Java depending on the project. I have used a lot of SQL and NoSQL databases on some of my projects.
         </Typography>
-        
-       
       </CardContent>
-      
     </Card>
   );
 }
