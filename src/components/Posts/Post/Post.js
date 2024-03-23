@@ -31,8 +31,8 @@ export default function Post(props) {
 
   function handleClick(link) {
     ReactGA.event({
-      category: 'Button',
-      action: 'Clicked',
+      category: 'User',
+      action: 'Clicked Button',
       label: link
     })
     window.location.href = link
