@@ -3,7 +3,7 @@ import * as React from 'react';
 import Footer from './components/Footer';
 import './styles.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { Route, Routes } from "react-router-dom";
 import MainPage from './components/MainPage';
 

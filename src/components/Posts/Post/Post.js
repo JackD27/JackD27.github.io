@@ -6,7 +6,7 @@ import { Button, CardActions, Modal, Box, Stack, IconButton } from '@mui/materia
 import GitHubIcon from '@mui/icons-material/GitHub';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import LanguageIcon from '@mui/icons-material/Language';
-import ReactGA from 'react-ga';
+import ReactGA from 'react-ga4';
 import { useState} from 'react';
 
 
@@ -33,7 +33,7 @@ export default function Post(props) {
     ReactGA.event({
       category: 'User',
       action: 'Clicked Button',
-      label: link
+      label: link.toString()
     })
     window.location.href = link
     console.log('clicked');
