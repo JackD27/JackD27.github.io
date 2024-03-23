@@ -6,8 +6,8 @@ import { Button, CardActions, Modal, Box, Stack, IconButton } from '@mui/materia
 import GitHubIcon from '@mui/icons-material/GitHub';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import LanguageIcon from '@mui/icons-material/Language';
+import ReactGA from 'react-ga';
 import { useState} from 'react';
-import { Link } from 'react-router-dom';
 
 
 export default function Post(props) {
@@ -28,6 +28,16 @@ export default function Post(props) {
     boxShadow: 24,
     p: 4,
   };
+
+  function handleClick(link) {
+    ReactGA.event({
+      category: 'Button',
+      action: 'Clicked',
+      label: link
+    })
+    window.location.href = link
+    console.log('clicked');
+  }
   
 
   return (
@@ -55,9 +65,9 @@ export default function Post(props) {
         <Button onClick={handleOpen} size="small" color="primary">
           Read More
         </Button>
-          {props.websiteLink ? <IconButton size='small' component={Link} to={props.websiteLink}><LanguageIcon/></IconButton> : null}
-          {props.gameLink ? <IconButton size='small' component={Link} to={props.gameLink}><SportsEsportsIcon/></IconButton> : null}
-          <IconButton size='small' component={Link} to={props.githubUrl}><GitHubIcon/></IconButton>
+          {props.websiteLink ? <IconButton size='small' onClick={() => handleClick(props.websiteLink)}><LanguageIcon/></IconButton> : null}
+          {props.gameLink ? <IconButton size='small' onClick={() => handleClick(props.gameLink)}><SportsEsportsIcon/></IconButton> : null}
+          <IconButton size='small' onClick={() => handleClick(props.githubUrl)}><GitHubIcon/></IconButton>
         </Stack>
       </CardActions>
     </Card>
