@@ -9,8 +9,12 @@ import LanguageIcon from '@mui/icons-material/Language';
 import ReactGA from 'react-ga4';
 import { useState} from 'react';
 
+const trackingId = "G-FDMQ8XNGRM";
+ReactGA.initialize(trackingId);
 
 export default function Post(props) {
+
+
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -32,11 +36,12 @@ export default function Post(props) {
   function handleClick(link) {
     ReactGA.event({
       category: 'User',
-      action: 'Clicked Button',
+      action: 'Clicked Link in Post',
       label: link.toString()
     })
+
+    
     window.location.href = link
-    console.log('clicked');
   }
   
 
