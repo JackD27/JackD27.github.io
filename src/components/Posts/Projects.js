@@ -103,6 +103,7 @@ function SwipeableTextMobileStepper() {
           </div>
         ))}
       </AutoPlaySwipeableViews>
+      <Box sx={{display: 'flex', justifyContent: 'center'}}>
       <MobileStepper
         steps={maxSteps}
         position="static"
@@ -112,6 +113,7 @@ function SwipeableTextMobileStepper() {
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
+            sx={{ ml: 3}}
           >
             Next
             {theme.direction === 'rtl' ? (
@@ -122,7 +124,7 @@ function SwipeableTextMobileStepper() {
           </Button>
         }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}  sx={{ mr: 3}}>
             {theme.direction === 'rtl' ? (
               <KeyboardArrowRight />
             ) : (
@@ -132,6 +134,7 @@ function SwipeableTextMobileStepper() {
           </Button>
         }
       />
+      </Box>
     </Box>
     </Paper>
     </Box>
