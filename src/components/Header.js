@@ -12,6 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import { iconArray }from '../constants';
 import ReactGA from 'react-ga4';
+import { Link } from 'react-router-dom';
 
 // import Image from 'react-bootstrap/Image';
 // import logo from '../images/JackFacePic.jpg';
@@ -35,15 +36,12 @@ function Header() {
   };
 
   
-  function handleClick(link, name) {
+  function handleClick(name) {
     ReactGA.event({
       category: 'User',
       action: 'Clicked Button in Header',
       label: name.toString()
     })
-
-    
-    window.location.href = link
   }
   
 
@@ -61,7 +59,7 @@ function Header() {
       <List>
         {iconArray.map((text, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => handleClick(text.link, text.name)}>
+            <ListItemButton component={Link} to={text.link} onClick={() => handleClick(text.name)}>
               <ListItemIcon>
                 {text.icon}
               </ListItemIcon>

@@ -16,6 +16,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import ReactGA from 'react-ga4';
+import { Link } from 'react-router-dom';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -30,10 +31,20 @@ function SwipeableTextMobileStepper() {
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    ReactGA.event({
+      category: 'User',
+      action: 'Clicked Next in Projects',
+      label: 'Next Button in Projects'
+    })
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    ReactGA.event({
+      category: 'User',
+      action: 'Clicked Back in Projects',
+      label: 'Back Button in Projects'
+    })
   };
 
   const handleStepChange = (step) => {
@@ -46,9 +57,6 @@ function SwipeableTextMobileStepper() {
       action: 'Clicked Link in Post',
       label: link.toString()
     })
-
-    
-    window.location.href = link
   }
 
   return (
@@ -92,9 +100,9 @@ function SwipeableTextMobileStepper() {
                 ))}
                 <Typography variant='h5'>Links</Typography>
                 <Stack direction="row" spacing={2}>
-                    {step.websiteLink ? <IconButton size='small' onClick={() => handleClick(step.websiteLink)}><LanguageIcon/></IconButton> : null}
-                    {step.gameLink ? <IconButton size='small' onClick={() => handleClick(step.gameLink)}><SportsEsportsIcon/></IconButton> : null}
-                    <IconButton size='small' onClick={() => handleClick(step.githubUrl)}><GitHubIcon/></IconButton>
+                    {step.websiteLink ? <IconButton size='small' component={Link} to={step.websiteLink} onClick={() => handleClick(step.websiteLink)}><LanguageIcon/></IconButton> : null}
+                    {step.gameLink ? <IconButton size='small' component={Link} to={step.gameLink} onClick={() => handleClick(step.gameLink)}><SportsEsportsIcon/></IconButton> : null}
+                    <IconButton size='small' component={Link} to={step.githubUrl} onClick={() => handleClick(step.githubUrl)}><GitHubIcon/></IconButton>
                 </Stack>
                 </Box>
             </Grid>
